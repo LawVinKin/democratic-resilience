@@ -249,3 +249,4 @@ uv.lock
  
 # Quarto files 
 /.quarto/
+data/01-raw_data/V-Dem-CY-Full+Others-v15.csv
