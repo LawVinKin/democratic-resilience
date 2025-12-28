@@ -63,13 +63,6 @@ The repo is structured as follows:
 - `ethnic_frac` - Ethnic fractionalization
 - `monarchy` - Constitutional monarchy indicator
 
-## Statement on LLM usage
-
-This project was developed with the assistance of LLMs (GitHub Copilot) for:
-- Code debugging and error messaging
-- Documentation and commenting
-- Table formatting for publication
-
 ## Pre-requisites
 
 ### R Packages Required:
@@ -87,7 +80,3 @@ install.packages(c(
 - **DPI 2020**: Database of Political Institutions (World Bank)
 - **QOG**: Quality of Government Standard Dataset (https://qog.pol.gu.se)
 - **World Bank WDI**: GDP per capita indicators
-
-## Acknowledgements
-
-[Add acknowledgements here]
