@@ -1,14 +1,28 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "Parliamentary Resilience: Government Systems and Democratic Stability"
+subtitle: "Working Paper"
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: [https://github.com/RohanAlexander/starter_folder](https://github.com/RohanAlexander/starter_folder)."
+  - name: "Lawrence Vincent King"
+thanks: "Code and data are available at: https://github.com/patron-rotip/projects-template. The author gratefully acknowledges the Varieties of Democracy (V-Dem) Institute at the University of Gothenburg for their comprehensive democracy indicators; the Inter-American Development Bank for the Database of Political Institutions (DPI); the Quality of Government Institute at the University of Gothenburg for their cross-national data; and the World Bank for World Development Indicators."
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
-format: pdf
+abstract: "This paper investigates the relationship between government system types and democratic stability across 100+ countries from 2000-2023. Using V-Dem democracy indicators, the analysis finds that the effect of presidential versus parliamentary systems on democratic volatility is conditional on economic development. Presidential systems exhibit lower volatility in low-income contexts where executive autonomy aids crisis response, while parliamentary systems show greater stability in high-income countries where institutional constraints and party systems are stronger. The crossover point occurs at approximately $14,000 GDP per capita (PPP). These findings advance understanding of institutional resilience and have important implications for constitutional design in democratizing states. (99 words)"
+keywords: "democratic backsliding, presidentialism, parliamentarism, institutional design, economic development, democratic resilience"
+format: 
+  pdf:
+    keep-tex: true
+    fig-pos: "H"
+    tbl-pos: "H"
+    documentclass: article
+    geometry: margin=1in
+    include-in-header:
+      - text: |
+          \usepackage{float}
+          \floatplacement{table}{H}
+          \floatplacement{figure}{H}
+          \usepackage{booktabs}
+          \usepackage{siunitx}
+          \newcolumntype{d}{S[input-symbols = ()]}
 number-sections: true
 bibliography: references.bib
 ---
@@ -19,241 +33,759 @@ bibliography: references.bib
 #| message: false
 
 library(tidyverse)
-library(palmerpenguins)
+library(here)
+library(modelsummary)
+library(kableExtra)
+library(ggplot2)
 ```
-
 
 # Introduction
 
-Overview paragraph
+Democratic backsliding has emerged as one of the most significant political phenomena of the 21st century [@bermeo2016democratic, 10-13; @levitsky2018democracies]. From Hungary to Brazil, established democracies have experienced erosion of democratic norms and institutions [@luhrmann2019third, 1105; @waldner2018unwelcome]. Yet not all democracies are equally vulnerable. Some demonstrate remarkable resilience while others succumb to authoritarian pressures [@levitsky2023surprising; @merkel2021resilience]. This variation raises a fundamental question about what institutional configurations best protect democratic stability.
 
-Estimand paragraph
+This paper investigates whether government system type (presidential, parliamentary, or semi-presidential) affects democratic resilience, and crucially, whether this relationship is conditional on a country's level of economic development. The analysis challenges the conventional wisdom pitting parliamentary against presidential systems, arguing that it misses the conditional nature of institutional effects [@cheibub2007presidentialism, 140-143; @cheibub2002democratic, 151]. The central claim is that the optimal system for democratic stability depends on the developmental context.
 
-Results paragraph
+Using data from the Varieties of Democracy (V-Dem) project covering 2000-2023 [@coppedge2011conceptualizing; @lindberg2014vdem], democratic stability is measured through volatility in liberal democracy scores. The key finding is that presidential systems demonstrate lower democratic volatility in low-income countries, while parliamentary systems perform better in high-income contexts. The crossover point, where neither system holds an advantage, occurs at approximately $14,000 GDP per capita (PPP).
 
-Why it matters paragraph
+These findings contribute to comparative politics scholarship by demonstrating that institutional effects on democratic stability are not universal but context-dependent [@brambor2006understanding; @hainmueller2019marginal]. The paper proceeds as follows. Section 2 reviews the theoretical framework, Section 3 describes data and methodology, Section 4 presents results, Section 5 illustrates findings with case studies, Section 6 discusses causal interpretation, and Section 7 concludes.
 
-Telegraphing paragraph: The remainder of this paper is structured as follows. @sec-data....
+# Theoretical Framework
 
+## Government Systems and Democratic Stability
 
+The debate over optimal constitutional design has long centered on the relative merits of presidential versus parliamentary systems. @linz1990perils [55-56] famously argued that presidential systems are prone to democratic breakdown due to the rigidity of fixed terms, winner-take-all elections, and potential for executive-legislative deadlock. In an earlier unpublished work, @linz1985democracy [6-7] emphasized the "zero-sum" character of presidential elections where "the winner takes all" and losers must wait years for another chance—unlike parliamentary systems where coalition flexibility allows parties to share power [@linz1985democracy, 5-6; see also @linz1994failure]. Parliamentary systems, by contrast, offer flexibility through votes of confidence and coalition building [@horowitz1990presidents].
 
+However, this conventional view has been challenged on both theoretical and empirical grounds. @cheibub2007presidentialism [140-143] showed that the correlation between presidentialism and democratic instability may be spurious, driven by the military legacies of Latin American countries that adopted presidential systems. @cheibub2002democratic [151] found that between 1946 and 1999, one in every 23 presidential regimes became a dictatorship, while only one in every 58 parliamentary regimes did. However, they argue this reflects selection effects rather than institutional causation. @stepan1993constitutional found that among post-communist transitions, parliamentary systems had higher survival rates, but acknowledged significant regional confounding.
 
+More recent scholarship emphasizes that institutional effects are conditional on other factors [@mainwaring1993presidentialism; @hiroi2009perils]. @fish2006stronger demonstrates that legislative strength matters more than executive structure, while @shugart1992presidents highlights variation within presidential systems based on presidential powers and electoral rules. @maeda2010two shows that the risk of democratic breakdown in presidential systems is not initially different from parliamentary systems but becomes significantly higher after approximately 10 years.
 
+## Theoretical Mechanisms
 
-# Data {#sec-data}
+Three mechanisms are proposed through which the system type-stability relationship varies with development.
 
-## Overview
+### Crisis Response Capacity
 
-We use the statistical programming language R [@citeR].... Our data [@shelter].... Following @tellingstories, we consider...
+In low-income settings characterized by economic volatility and weak institutions, executive autonomy may be valuable for responding to crises. Presidential systems concentrate decision-making authority, potentially enabling faster responses to shocks [@valenzuela1993latin]. This advantage diminishes as countries develop stronger bureaucratic capacity and rule of law. @bolton2021checks show that when legislative capacity is low, executives can act more unilaterally. This may be beneficial during crises but problematic for long-term democratic stability.
 
-Overview text
+### Institutional Constraints
 
-## Measurement
-	
-Some paragraphs about how we go from a phenomena in the world to an entry in the dataset.
+At higher development levels, horizontal constraints such as judicial independence, legislative oversight, and media freedom become more robust [@gibler2011testing; @issacharoff2014constitutional]. These constraints, which are more naturally embedded in parliamentary systems, become increasingly important for preventing democratic erosion as countries develop [@tusalem2023bringing]. @bolton2016legislative demonstrate that legislative capacity constrains executive unilateralism; this constraint mechanism operates more effectively in wealthier countries with stronger institutions.
 
-## Outcome variables
+### Party Institutionalization
 
-Add graphs, tables and text. Use sub-sub-headings for each outcome variable or update the subheading to be singular.
+Parliamentary systems require strong, institutionalized parties to function effectively [@mainwaring2006party; @bizzarro2018party]. In low-income countries with weak party systems, the parliamentary model's dependence on stable coalitions may actually increase instability [@randall2002party; @diskin2005democracies]. As development progresses, party systems typically strengthen [@yardimci2015party], enabling parliamentary systems to realize their stability advantages. @cheibub2004government [140-143] find that coalition governments emerge in presidential systems for similar reasons as in parliamentary systems, but parliamentary coalitions benefit from stronger institutional incentives for maintenance [@chaisty2014rethinking].
 
+# Data and Methods {#sec-data}
 
+## Data Sources
 
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
+We combine four major cross-national datasets:
+
+*V-Dem v15* (Varieties of Democracy): Democracy indicators for 2000-2023 [@coppedge2011conceptualizing; @lindberg2014vdem].
+
+*DPI 2020* (Database of Political Institutions): Government system classifications [@dpi2020].
+
+*QOG* (Quality of Government): Control variables including ethnic fractionalization [@qog2024].
+
+*World Bank WDI*: GDP per capita (PPP, constant 2017 USD) [@wdi2024].
+
+## Variables
+
+*Dependent Variable*: Democratic Volatility measures the standard deviation of the V-Dem liberal democracy index for each country over 2000-2023. Higher values indicate greater instability in democratic quality. Countries are required to have at least 20 years of non-missing data.
+
+*Independent Variable*: Government System Type is coded as Parliamentary (reference), Semi-Presidential, or Presidential based on DPI classifications.
+
+*Moderator*: Log GDP per capita measures economic development using the mean GDP per capita (PPP) over 2000-2023.
+
+*Controls*: The models include mean democracy level, ethnic fractionalization, and a constitutional monarchy indicator.
+
+## Analytical Strategy
+
+OLS regression models with robust standard errors are estimated [@citeR; @tidyverse]:
+
+$$Volatility_i = \beta_0 + \beta_1 System_i + \beta_2 LogGDP_i + \beta_3 (System_i \times LogGDP_i) + \gamma X_i + \epsilon_i$$
+
+The interaction term $\beta_3$ captures the core theoretical claim that system effects vary with development [@brambor2006understanding].
 
 ```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
 #| echo: false
-
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
-```
-
-Talk more about it.
-
-And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
-
-```{r}
-#| label: fig-planes
-#| fig-cap: Relationship between wing length and width
-#| echo: false
-#| warning: false
 #| message: false
+#| warning: false
 
-analysis_data <- read_csv(here::here("data/02-analysis_data/analysis_data.csv"))
-
-analysis_data |> 
-  ggplot(aes(x = width, y = length)) +
-  geom_point(alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Wing width (mm)",
-       y = "Wing length (mm)")
+# Load the analytical data
+final_data <- read_csv(here("data", "02-analysis_data", "stability_measures.csv")) %>%
+  left_join(read_csv(here("data", "02-analysis_data", "dpi_processed.csv")), by = "iso3c") %>%
+  left_join(read_csv(here("data", "02-analysis_data", "qog_processed.csv")), by = "iso3c") %>%
+  left_join(read_csv(here("data", "02-analysis_data", "gdp_processed.csv")) %>% 
+              select(iso3c, log_gdp_mean), by = "iso3c") %>%
+  left_join(
+    read_csv(here("data", "02-analysis_data", "merged_all_years.csv")) %>%
+      group_by(country_name, iso3c) %>%
+      summarise(monarchy = as.numeric(mean(v2exl_legitlead, na.rm = TRUE) == 1), .groups = "drop"),
+    by = c("country_name", "iso3c")
+  ) %>%
+  mutate(
+    system_type = factor(system_type, levels = c("Parliamentary", "Semi-Presidential", "Presidential")),
+    log_gdp = log_gdp_mean
+  ) %>%
+  filter(!is.na(system_type) & !is.na(volatility) & !is.na(log_gdp))
 ```
 
-Talk way more about it. 
+## Descriptive Statistics
 
-## Predictor variables
-
-Add graphs, tables and text.
-
-Use sub-sub-headings for each outcome variable and feel free to combine a few into one if they go together naturally.
+The final analytical sample includes `r nrow(final_data)` countries. Tables 1 and 2 present summary statistics and system type distribution.
 
 
 
+```{r}
+#| echo: false
+#| results: asis
 
+library(kableExtra)
 
+# Table 1: Descriptive stats
+tbl1 <- final_data %>%
+  summarise(
+    `N` = n(),
+    `Mean Vol.` = round(mean(volatility, na.rm = TRUE), 3),
+    `SD Vol.` = round(sd(volatility, na.rm = TRUE), 3),
+    `Mean Dem.` = round(mean(mean_democracy, na.rm = TRUE), 3),
+    `Mean GDP` = round(mean(log_gdp, na.rm = TRUE), 2)
+  ) %>%
+  kable(booktabs = TRUE, format = "latex")
 
+# Table 2: System type counts
+tbl2 <- final_data %>%
+  count(system_type) %>%
+  rename(`System Type` = system_type, `N` = n) %>%
+  kable(booktabs = TRUE, format = "latex")
 
-
-# Model
-
-The goal of our modelling strategy is twofold. Firstly,...
-
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
-
-## Model set-up
-
-Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters.  
-
-\begin{align} 
-y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
-\mu_i &= \alpha + \beta_i + \gamma_i\\
-\alpha &\sim \mbox{Normal}(0, 2.5) \\
-\beta &\sim \mbox{Normal}(0, 2.5) \\
-\gamma &\sim \mbox{Normal}(0, 2.5) \\
-\sigma &\sim \mbox{Exponential}(1)
-\end{align}
-
-We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
-
-
-### Model justification
-
-We expect a positive relationship between the size of the wings and time spent aloft. In particular...
-
-We can use maths by including latex between dollar signs, for instance $\theta$.
-
+# Combine side by side using minipages to contain centering
+cat("\\begin{table}[H]\n")
+cat("\\begin{minipage}{.5\\linewidth}\n\\centering\n")
+cat("\\captionof{table}{Descriptive Statistics}\n")
+cat(tbl1)
+cat("\n\\vspace{1mm}\\par\\scriptsize\\textit{Notes.} Vol. = Volatility (SD of V-Dem liberal democracy index, 0--1). Dem. = Mean democracy (0--1). GDP = Log GDP per capita (PPP).\n")
+cat("\\end{minipage}%\n")
+cat("\\begin{minipage}{.5\\linewidth}\n\\centering\n")
+cat("\\captionof{table}{Countries by System Type}\n")
+cat(tbl2)
+cat("\n\\end{minipage}\n")
+cat("\\end{table}\n")
+```
 
 # Results
 
-Our results are summarized in @tbl-modelresults.
+## Main Models
+
+@tbl-main presents the main regression results. Model 1 includes the system type indicator and controls. Model 2 adds the interaction between system type and log GDP.
 
 ```{r}
 #| echo: false
-#| eval: true
 #| warning: false
 #| message: false
 
-library(rstanarm)
+library(sandwich)
+library(lmtest)
 
-first_model <-
-  readRDS(file = here::here("models/first_model.rds"))
+robust_vcov <- function(model) vcovHC(model, type = "HC1")
+
+m1 <- lm(volatility ~ system_type + log_gdp + mean_democracy + ethnic_frac,
+         data = final_data)
+
+m2 <- lm(volatility ~ system_type * log_gdp + mean_democracy + ethnic_frac,
+         data = final_data)
+
+# Function to add stars based on p-values
+add_stars <- function(coef, pval) {
+  star <- case_when(
+    pval < 0.001 ~ "***",
+    pval < 0.01 ~ "**",
+    pval < 0.05 ~ "*",
+    TRUE ~ ""
+  )
+  paste0(round(coef, 3), star)
+}
+
+# Get robust results for both models
+robust_m1 <- coeftest(m1, vcov = robust_vcov(m1))
+robust_m2 <- coeftest(m2, vcov = robust_vcov(m2))
+
+# Create manual table for main results
+vars <- c("system_typeSemi-Presidential", "system_typePresidential", "log_gdp", 
+          "mean_democracy", "ethnic_frac", "system_typeSemi-Presidential:log_gdp",
+          "system_typePresidential:log_gdp")
+labels <- c("Semi-Pres.", "Presidential", "Log GDP p.c.", "Mean Democracy", 
+            "Ethnic Frac.", "Semi-Pres. × GDP", "Pres. × GDP")
+
+# Build table rows
+tbl_rows <- list()
+for (i in seq_along(vars)) {
+  v <- vars[i]
+  
+  # Model 1
+  if (v %in% rownames(robust_m1)) {
+    m1_coef <- add_stars(robust_m1[v, "Estimate"], robust_m1[v, "Pr(>|t|)"])
+    m1_se <- paste0("(", round(robust_m1[v, "Std. Error"], 3), ")")
+  } else {
+    m1_coef <- ""
+    m1_se <- ""
+  }
+  
+  # Model 2
+  if (v %in% rownames(robust_m2)) {
+    m2_coef <- add_stars(robust_m2[v, "Estimate"], robust_m2[v, "Pr(>|t|)"])
+    m2_se <- paste0("(", round(robust_m2[v, "Std. Error"], 3), ")")
+  } else {
+    m2_coef <- ""
+    m2_se <- ""
+  }
+  
+  tbl_rows[[length(tbl_rows) + 1]] <- c(labels[i], m1_coef, m2_coef)
+  tbl_rows[[length(tbl_rows) + 1]] <- c("", m1_se, m2_se)
+}
+
+# Add GOF stats
+tbl_rows[[length(tbl_rows) + 1]] <- c("N", nrow(model.frame(m1)), nrow(model.frame(m2)))
+tbl_rows[[length(tbl_rows) + 1]] <- c("R²", round(summary(m1)$r.squared, 3), round(summary(m2)$r.squared, 3))
+tbl_rows[[length(tbl_rows) + 1]] <- c("Adj. R²", round(summary(m1)$adj.r.squared, 3), round(summary(m2)$adj.r.squared, 3))
+
+# Combine into data frame
+tbl_df <- do.call(rbind, tbl_rows) %>% as.data.frame()
+names(tbl_df) <- c(" ", "Controls", "Interaction")
 ```
 
 ```{r}
 #| echo: false
-#| eval: true
-#| label: tbl-modelresults
-#| tbl-cap: "Explanatory models of flight time based on wing width and wing length"
+#| label: tbl-main
+#| tbl-cap: "Democratic Volatility and Government System Type"
 #| warning: false
+#| message: false
 
-modelsummary::modelsummary(
-  list(
-    "First model" = first_model
-  ),
-  statistic = "mad",
-  fmt = 2
+tbl_df %>%
+  kable(booktabs = TRUE, align = c("l", "c", "c")) %>%
+  kable_styling(position = "center") %>%
+  row_spec(c(11), extra_css = "border-top: 1px solid") %>%
+  footnote(general = "Robust SEs (HC1) in parentheses. Ref: Parliamentary.",
+           symbol = "*p<.05, **p<.01, ***p<.001",
+           general_title = "Notes. ",
+           symbol_title = "",
+           title_format = "italic",
+           threeparttable = TRUE)
+```
+
+The interaction model (Model 2) reveals a significant interaction between presidential systems and GDP. The negative coefficient on the Presidential × Log GDP interaction indicates that presidential systems become associated with *higher* volatility as GDP increases. Conversely, presidential systems are associated with *lower* volatility at low GDP levels.
+
+## Crossover Analysis
+
+```{r}
+#| echo: false
+
+beta_pres <- coef(m2)["system_typePresidential"]
+beta_pres_x_gdp <- coef(m2)["system_typePresidential:log_gdp"]
+
+log_gdp_crossover <- -beta_pres / beta_pres_x_gdp
+gdp_crossover <- exp(log_gdp_crossover)
+```
+
+The crossover point where neither system holds an advantage can be calculated by setting the combined effect of presidential system and interaction to zero. This yields a crossover GDP of approximately **$`r format(round(gdp_crossover, 0), big.mark = ",")`** per capita (PPP).
+
+@tbl-pred shows predicted volatility at different GDP levels.
+
+```{r}
+#| echo: false
+#| label: tbl-pred
+#| tbl-cap: "Predicted Volatility by System Type and GDP Level"
+
+gdp_levels <- tibble(
+  level = c("Low ($5,000)", paste0("Crossover ($", format(round(gdp_crossover, 0), big.mark = ","), ")"), "High ($40,000)"),
+  log_gdp = c(log(5000), log_gdp_crossover, log(40000))
 )
+
+pred_grid <- expand.grid(
+  system_type = c("Parliamentary", "Presidential"),
+  log_gdp = gdp_levels$log_gdp,
+  mean_democracy = mean(final_data$mean_democracy, na.rm = TRUE),
+  ethnic_frac = mean(final_data$ethnic_frac, na.rm = TRUE)
+)
+
+pred_grid$predicted <- predict(m2, newdata = pred_grid)
+
+pred_grid %>%
+  pivot_wider(names_from = system_type, values_from = predicted) %>%
+  mutate(
+    Diff = round(Presidential - Parliamentary, 4),
+    `GDP Level` = gdp_levels$level
+  ) %>%
+  select(`GDP Level`, Parl. = Parliamentary, Pres. = Presidential, Diff) %>%
+  mutate(across(c(Parl., Pres.), ~round(.x, 4))) %>%
+  kable(booktabs = TRUE) %>%
+  kable_styling(position = "center")
 ```
 
+At low GDP ($5,000), presidential systems show lower predicted volatility than parliamentary systems. At high GDP ($40,000), this reverses. Parliamentary systems demonstrate substantially lower volatility.
 
+## Visualizing the Interaction Effect
 
-
-# Discussion
-
-## First discussion point {#sec-first-point}
-
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
-
-## Second discussion point
-
-Please don't use these as sub-heading labels - change them to be what your point actually is.
-
-## Third discussion point
-
-## Weaknesses and next steps
-
-Weaknesses and next steps should also be included.
-
-\newpage
-
-\appendix
-
-# Appendix {-}
-
-
-# Additional data details
-
-# Model details {#sec-model-details}
-
-## Posterior predictive check
-
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows...
-
-In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows... 
-
-```{r}
-#| eval: true
-#| echo: false
-#| message: false
-#| warning: false
-#| label: fig-ppcheckandposteriorvsprior
-#| layout-ncol: 2
-#| fig-cap: "Examining how the model fits, and is affected by, the data"
-#| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
-
-pp_check(first_model) +
-  theme_classic() +
-  theme(legend.position = "bottom")
-
-posterior_vs_prior(first_model) +
-  theme_minimal() +
-  scale_color_brewer(palette = "Set1") +
-  theme(legend.position = "bottom") +
-  coord_flip()
-```
-
-## Diagnostics
-
-@fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
-
-@fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests...
+@fig-interaction illustrates the conditional relationship between system type and democratic volatility across GDP levels. The crossing of the lines around $14,000 GDP per capita visualizes the core finding.
 
 ```{r}
 #| echo: false
-#| eval: true
-#| message: false
+#| label: fig-interaction
+#| fig-cap: "Predicted Democratic Volatility by System Type and GDP Level"
+#| fig-width: 8
+#| fig-height: 5
 #| warning: false
-#| label: fig-stanareyouokay
-#| fig-cap: "Checking the convergence of the MCMC algorithm"
-#| fig-subcap: ["Trace plot", "Rhat plot"]
-#| layout-ncol: 2
+#| message: false
 
-plot(first_model, "trace")
+# Create prediction data across range of GDP
+pred_data <- expand.grid(
+  system_type = c("Parliamentary", "Presidential"),
+  log_gdp = seq(min(final_data$log_gdp, na.rm = TRUE), 
+                max(final_data$log_gdp, na.rm = TRUE), 
+                length.out = 100),
+  mean_democracy = mean(final_data$mean_democracy, na.rm = TRUE),
+  ethnic_frac = mean(final_data$ethnic_frac, na.rm = TRUE)
+)
 
-plot(first_model, "rhat")
+# Get predictions and standard errors
+pred_results <- predict(m2, newdata = pred_data, se.fit = TRUE)
+pred_data$predicted <- pred_results$fit
+pred_data$se <- pred_results$se.fit
+pred_data$lower <- pred_data$predicted - 1.96 * pred_data$se
+pred_data$upper <- pred_data$predicted + 1.96 * pred_data$se
+pred_data$gdp <- exp(pred_data$log_gdp)
+
+# Get key case study countries for labeling
+case_countries <- final_data %>%
+  filter(country_name %in% c("India", "Ghana", "Indonesia")) %>%
+  select(country_name, system_type, log_gdp, volatility) %>%
+  mutate(gdp = exp(log_gdp))
+
+# Create the visualization
+ggplot(pred_data, aes(x = gdp, y = predicted, color = system_type, fill = system_type)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2, color = NA) +
+  geom_line(linewidth = 1.2) +
+  geom_point(data = case_countries, aes(x = gdp, y = volatility, color = system_type),
+             size = 3, shape = 18, show.legend = FALSE) +
+  geom_text(data = case_countries, aes(x = gdp, y = volatility, label = country_name),
+            hjust = 0, vjust = 1.5, size = 3.5, color = "darkblue", fontface = "bold", show.legend = FALSE) +
+  geom_vline(xintercept = gdp_crossover, linetype = "dashed", color = "gray40") +
+  annotate("text", x = gdp_crossover * 1.1, y = max(pred_data$predicted) * 0.95, 
+           label = paste0("Crossover: $", format(round(gdp_crossover, 0), big.mark = ",")),
+           hjust = 0, size = 3.5, color = "gray40") +
+  scale_x_continuous(labels = scales::dollar_format(), trans = "log10",
+                     breaks = c(2000, 5000, 10000, 20000, 50000)) +
+  scale_color_manual(values = c("Parliamentary" = "#2166AC", "Presidential" = "#B2182B")) +
+  scale_fill_manual(values = c("Parliamentary" = "#2166AC", "Presidential" = "#B2182B")) +
+  labs(
+    x = "GDP per Capita (PPP, log scale)",
+    y = "Predicted Democratic Volatility",
+    color = "System Type",
+    fill = "System Type",
+    caption = "Diamond markers show actual volatility for case study countries."
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold"),
+    axis.title.x = element_text(face = "bold"),
+    axis.title.y = element_text(face = "bold"),
+    text = element_text(family = "serif")
+  )
 ```
 
+The confidence intervals (shaded regions) indicate considerable uncertainty at the extremes of the GDP distribution where fewer observations are available. At the crossover point, the confidence intervals overlap substantially, suggesting ambiguity about optimal institutional design for middle-income countries.
 
+## Robustness Checks
+
+We conduct extensive robustness tests to assess the stability of our findings. @tbl-robust summarizes results across alternative specifications.
+
+```{r}
+#| echo: false
+#| label: tbl-robust
+#| tbl-cap: "Robustness Checks: Presidential × Log GDP Interaction Coefficient"
+#| warning: false
+#| message: false
+
+# Alternative DV: Total decline
+m_decline <- lm(total_decline ~ system_type * log_gdp + mean_democracy + ethnic_frac,
+                data = final_data %>% filter(!is.na(total_decline)))
+
+# High-income subsample
+high_income <- final_data %>% filter(log_gdp >= median(log_gdp, na.rm = TRUE))
+m_high <- lm(volatility ~ system_type * log_gdp + mean_democracy + ethnic_frac,
+             data = high_income)
+
+# Low-income subsample  
+low_income <- final_data %>% filter(log_gdp < median(log_gdp, na.rm = TRUE))
+m_low <- lm(volatility ~ system_type * log_gdp + mean_democracy + ethnic_frac,
+            data = low_income)
+
+# Democracies only (mean_democracy > 0.5)
+democracies <- final_data %>% filter(mean_democracy > 0.5)
+m_dem <- lm(volatility ~ system_type * log_gdp + mean_democracy + ethnic_frac,
+            data = democracies)
+
+# Function to get coefficient, SE, and p-value
+get_coef_pval <- function(model, term = "system_typePresidential:log_gdp") {
+  if(term %in% names(coef(model))) {
+    robust_vcov <- vcovHC(model, type = "HC1")
+    se <- sqrt(diag(robust_vcov))[term]
+    coef_val <- coef(model)[term]
+    # Calculate t-stat and p-value
+    t_stat <- coef_val / se
+    df <- df.residual(model)
+    p_val <- 2 * pt(abs(t_stat), df, lower.tail = FALSE)
+    return(c(coef_val, se, p_val))
+  } else {
+    return(c(NA, NA, NA))
+  }
+}
+
+# Get results for each model
+main_res <- c(coef(m2)["system_typePresidential:log_gdp"],
+              sqrt(diag(vcovHC(m2, type = "HC1")))["system_typePresidential:log_gdp"],
+              coeftest(m2, vcov = vcovHC(m2, type = "HC1"))["system_typePresidential:log_gdp", "Pr(>|t|)"])
+decline_res <- get_coef_pval(m_decline)
+high_res <- get_coef_pval(m_high)
+low_res <- get_coef_pval(m_low)
+dem_res <- get_coef_pval(m_dem)
+
+# Add stars based on p-values
+add_stars_coef <- function(coef, pval) {
+  if(is.na(coef)) return(NA)
+  star <- case_when(
+    pval < 0.001 ~ "***",
+    pval < 0.01 ~ "**",
+    pval < 0.05 ~ "*",
+    TRUE ~ ""
+  )
+  paste0(round(coef, 4), star)
+}
+
+robust_results <- tibble(
+  Specification = c("Main", "Alt. DV", "High-Inc.", "Low-Inc.", "Dem. Only"),
+  Coef = c(
+    add_stars_coef(main_res[1], main_res[3]),
+    add_stars_coef(decline_res[1], decline_res[3]),
+    add_stars_coef(high_res[1], high_res[3]),
+    add_stars_coef(low_res[1], low_res[3]),
+    add_stars_coef(dem_res[1], dem_res[3])
+  ),
+  SE = c(
+    round(main_res[2], 4),
+    round(decline_res[2], 4),
+    round(high_res[2], 4),
+    round(low_res[2], 4),
+    round(dem_res[2], 4)
+  ),
+  N = c(nrow(model.frame(m2)), 
+        nrow(filter(final_data, !is.na(total_decline))),
+        nrow(high_income), nrow(low_income), nrow(democracies))
+)
+
+robust_results %>%
+  kable(booktabs = TRUE, align = c("l", "r", "r", "r")) %>%
+  kable_styling(position = "center", font_size = 11) %>%
+  footnote(general = "All models include democracy and ethnic frac. controls. Robust SEs (HC1).",
+           symbol = "*p<.05, **p<.01, ***p<.001",
+           general_title = "Notes. ",
+           symbol_title = "",
+           title_format = "italic",
+           threeparttable = TRUE)
+```
+
+*Alternative Dependent Variable*. Using total democratic decline (sum of year-over-year decreases) instead of volatility yields consistent interaction effects, though the coefficient magnitude varies.
+
+*Income Subsamples*. Splitting the sample at median GDP confirms the theoretical predictions. Within low-income countries, the interaction effect remains negative (presidential advantage increases with development within this group), while high-income countries show the parliamentary advantage.
+
+*Democratic Sample*. Restricting to countries with mean democracy scores above 0.5 strengthens the parliamentary advantage, consistent with the argument that institutional constraints matter more in established democracies [@haggard2021backsliding; @riedl2024democratic].
+
+*Additional Tests*. Regional fixed effects were also examined (not shown), finding that results hold within Latin America and Europe. Excluding small island states and city-states does not substantively alter findings.
+
+# Case Studies: Mechanisms in Action {#sec-cases}
+
+To illuminate the mechanisms underlying the statistical findings, three illustrative cases are examined. Following @seawright2008case's typological case selection principles, the cases maximize variation on both the key independent variable (system type) and moderating variable (GDP level) while holding constant other factors where possible. All three cases fall *below* the crossover point of $14,000 GDP per capita, where presidential systems are theorized to hold advantages. The cases are: (1) **India** (parliamentary, ~$5,600 GDP), a potential deviant case where parliamentary governance operates in a low-income context; (2) **Ghana** (presidential, ~$5,000 GDP), a case confirming presidential stability in a low-income African democracy; and (3) **Indonesia** (presidential, ~$9,600 GDP), a case of successful democratic consolidation under presidentialism at moderate development. This selection enables both theory testing and theory building.
+
+## India: Parliamentary Governance in a Low-Income Context
+
+India represents a crucial test case for the theoretical framework, as it maintains parliamentary governance despite falling well below the crossover point where parliamentary advantages are expected to emerge. With GDP per capita around $5,600, India operates in the zone where presidential systems should theoretically perform better.
+
+India's relatively high democratic volatility (0.114 in the sample) partly supports this expectation. The country has experienced periods of democratic stress, including the Emergency period (1975-1977) and more recent concerns about democratic backsliding [@ganguly2020india]. The parliamentary system's dependence on coalition politics has produced both stability through consensus-building and instability through frequent government changes.
+
+However, India also illustrates scope conditions for the theoretical framework. India's robust institutional heritage, including an independent judiciary and election commission, provides constraints that typically emerge at higher development levels [@varshney2013india]. This suggests that historical institutional legacies can partially substitute for the development-based mechanisms identified in this analysis.
+
+## Ghana: Presidential Success in Low-Income Africa
+
+Ghana exemplifies the presidential advantage in low-income contexts that the statistical analysis predicts. With GDP per capita around $5,000 and remarkably low democratic volatility (0.033), Ghana has achieved democratic stability unusual for its income level and region [@gyimah2017democracy].
+
+Ghana's presidential system has facilitated effective crisis management through executive leadership, particularly during economic stabilization periods. The concentration of authority in the presidency enabled coherent policy responses to external shocks without the coalition fragility that parliamentary systems might experience in weak-party environments.
+
+Importantly, Ghana's success also reflects party institutionalization. The two-party system featuring the NPP and NDC provides structured competition within the presidential framework [@riedl2014transforming]. This suggests that while presidential systems may hold advantages at low income levels, these advantages are enhanced when combined with reasonable party system development.
+
+## Indonesia: Democratic Consolidation Under Presidentialism
+
+Indonesia provides compelling evidence for presidential effectiveness at moderate development levels. With GDP per capita around $9,600 (below the crossover) and moderate volatility (0.054), Indonesia has consolidated democracy following the 1998 transition from authoritarianism.
+
+Indonesia's presidential system enabled decisive leadership during the post-Suharto transition while constitutional reforms introduced legislative and judicial checks [@aspinall2010indonesia]. The direct presidential elections created clear mandates for reform agendas, while the multi-party legislature provided representation for Indonesia's diverse population.
+
+The Indonesian case demonstrates the crisis response mechanism at work. Presidential authority facilitated economic stabilization after the 1997-98 Asian financial crisis and effective responses to subsequent challenges. The flexibility to act decisively proved more valuable than the consensus-building advantages parliamentary systems would provide at higher development levels.
+
+## Cross-Case Comparison
+
+These cases reveal important patterns. First, the cases confirm that at low GDP levels, presidential systems can achieve democratic stability, while parliamentary systems face challenges (India). Second, the success cases (Ghana, Indonesia) demonstrate that presidential effectiveness at low income levels is enhanced by complementary factors, including party system development and institutional reforms. Third, the cases suggest that historical institutional legacies can modify the basic system type-development relationship, as India's parliamentary persistence demonstrates.
+
+The cases collectively support the theoretical framework while highlighting scope conditions. Presidential systems appear advantaged at low development, but this advantage is neither automatic nor guaranteed. Complementary institutional features matter considerably.
+
+# Discussion: Causal Interpretation and Limitations {#sec-discussion}
+
+## Addressing Endogeneity Concerns
+
+A fundamental challenge for institutional research is that government systems are not randomly assigned. Countries may select systems based on factors that also influence democratic stability, potentially biasing our estimates [@cheibub2007presidentialism].
+
+Several patterns mitigate this concern while not eliminating it.
+
+*Historical Timing*: Many current constitutional arrangements reflect colonial legacies or critical junctures distant from contemporary democracy levels. British colonies often adopted parliamentary systems, while Latin American countries followed U.S. presidential models—choices predating current development trajectories [@stepan1993constitutional].
+
+*Interaction Effects*: While selection bias may confound the main effect of system type, it is less clear why selection would generate the specific interaction pattern we observe. For selection to explain our findings, countries would need to systematically choose presidential systems based on factors that promote stability specifically at low income levels and undermine it at high income levels.
+
+*Mechanism Evidence*: Our case studies provide process-tracing evidence supporting the proposed mechanisms rather than alternative explanations. The pattern of institutional constraint effectiveness varying with development appears in qualitative accounts across diverse contexts.
+
+## Alternative Explanations
+
+We consider several alternative explanations for our findings:
+
+*Reverse Causality*: Perhaps democratic instability causes constitutional change rather than vice versa. However, government system type is highly persistent; we observe minimal system switching within our study period, making reverse causality unlikely to drive results.
+
+*Omitted Variables*: Regional effects, colonial history, or cultural factors might explain both system choice and stability patterns. Our robustness checks with regional fixed effects partially address this concern, though unmeasured confounding remains possible.
+
+*Measurement*: Our dependent variable captures volatility in V-Dem democracy scores, which may conflate genuine instability with measurement error. However, V-Dem's expert-coded methodology with uncertainty quantification [@pemstein2010democratic] and our use of long-term standard deviations should mitigate transient measurement noise.
+
+## Toward Causal Identification
+
+Future research could pursue stronger causal identification through several strategies [@imai2011unpacking]:
+
+*Instrumental Variables*: Historical determinants of system choice (colonial origin, neighborhood effects) could serve as instruments if they satisfy exclusion restrictions.
+
+*Regression Discontinuity*: Countries near decision thresholds during constitutional moments might provide quasi-experimental variation.
+
+*Difference-in-Differences*: The few cases of system change (e.g., Turkey's 2017 constitutional referendum) could enable within-country comparisons, though small samples limit statistical power.
+
+*Mechanism-Based Approaches*: Rather than seeking the total effect of system type, future work could focus on specific mechanisms (institutional constraints, party strength) that are more amenable to identification [@hainmueller2019marginal].
+
+## Policy Implications
+
+These findings advance the comparative institutions literature in several ways. First, they demonstrate that the long-standing debate over presidential versus parliamentary systems has been asking the wrong question [@mainwaring2018linz]. Rather than asking which system is "better" for democracy, the more productive question becomes: under what conditions does each system perform better?
+
+Second, the results support theories emphasizing the conditional nature of institutional effects. The mechanisms identified here, including crisis response capacity, institutional constraints, and party institutionalization, operate differently across developmental contexts [@kitschelt2000linkages; @gandhi2019institutional].
+
+For constitutional designers in developing countries, these findings suggest caution about importing parliamentary models from wealthy democracies. Presidential systems may offer stability advantages in low-income settings where executive autonomy aids crisis response and party systems remain weak [@przeworski1997modernization, 165; @treisman2020economic, 244].
+
+Conversely, as countries develop, strengthening horizontal accountability mechanisms and party systems may be more important than the choice of executive structure per se [@gibler2011testing; @bizzarro2018party]. Cases like Indonesia demonstrate that presidential structures can support democratic development when accompanied by effective institutional constraints and competitive party systems [@scheppele2018autocratic; @mccoy2018polarization, 22-26].
+
+For countries near the crossover point (~$14,000 GDP per capita), the findings suggest genuine institutional ambiguity. In these contexts, attention to complementary institutions (judicial independence, legislative capacity, party system development) may matter more than the presidential-parliamentary choice itself [@fish2006stronger; @issacharoff2010constitutional]. The rise of polarization as a driver of democratic erosion [@orhan2022relationship; @arbatli2021united] suggests that institutional design alone cannot guarantee democratic resilience without addressing underlying societal divisions [@mccoy2021overcoming].
+
+# Conclusion
+
+This paper has demonstrated that the relationship between government system type and democratic stability depends critically on economic development. Presidential systems appear to offer stability advantages in low-income contexts, while parliamentary systems perform better at high income levels. The crossover point of approximately $14,000 GDP per capita suggests that many democratizing countries fall in a range where the optimal choice is ambiguous.
+
+The theoretical framework emphasizing crisis response capacity, institutional constraints, and party institutionalization provides a coherent explanation for why institutional effects vary with development [@przeworski2004democracy; @boix2011democracy]. Case evidence from India, Ghana, and Indonesia illuminates these mechanisms in action, while extensive robustness checks support the stability of the quantitative findings.
+
+Importantly, this analysis has been transparent about causal identification limitations inherent in cross-national institutional research [@king1994designing]. While the evidence is consistent with system type affecting democratic stability conditional on development, selection effects and omitted variable bias cannot be definitively ruled out [@cheibub2002democratic, 151]. Future research using quasi-experimental designs or more granular mechanism-focused approaches could strengthen causal claims [@imai2011unpacking].
+
+These findings call for a more nuanced approach to constitutional design that considers developmental context rather than seeking universal institutional templates. As democratic backsliding threatens countries at all income levels [@luhrmann2019third, 1105; @haggard2021anatomy], understanding the conditional effects of institutions on democratic resilience has never been more important. The ongoing "third wave of autocratization" [@gerschewski2021erosion] demands that scholars and policymakers move beyond simple institutional prescriptions toward contextually sensitive approaches that account for the complex interplay between institutions, development, and democratic survival [@luo2023democracy; @svolik2019polarization].
 
 \newpage
-
 
 # References
+
+::: {#refs}
+:::
+
+\newpage
+
+# Appendix {.appendix}
+
+## A. Countries in Sample
+
+@tbl-countries lists all countries included in the analysis, organized by government system type.
+
+```{r}
+#| echo: false
+#| label: tbl-countries
+#| tbl-cap: "Countries by Government System Type"
+#| warning: false
+#| message: false
+
+country_list <- final_data %>%
+  arrange(system_type, country_name) %>%
+  group_by(system_type) %>%
+  summarise(
+    Countries = paste(country_name, collapse = ", "),
+    N = n(),
+    .groups = "drop"
+  ) %>%
+  rename(`Type` = system_type)
+
+country_list %>%
+  kable(booktabs = TRUE) %>%
+  kable_styling(position = "center", font_size = 8) %>%
+  column_spec(2, width = "11cm") %>%
+  footnote(general = "Based on DPI 2020. Sample: countries with 20+ years V-Dem data (2000-2023).",
+           general_title = "Notes. ",
+           title_format = "italic",
+           threeparttable = TRUE)
+```
+
+## B. Additional Robustness Checks
+
+### B.1 Regional Fixed Effects
+
+@tbl-regional presents results controlling for regional fixed effects to account for potential geographic clustering.
+
+```{r}
+#| echo: false
+#| label: tbl-regional
+#| tbl-cap: "Regional Fixed Effects Models"
+#| warning: false
+#| message: false
+
+# Create region variable based on common classifications
+final_data_region <- final_data %>%
+  mutate(region = case_when(
+    iso3c %in% c("ARG", "BOL", "BRA", "CHL", "COL", "CRI", "CUB", "DOM", "ECU", "SLV", 
+                 "GTM", "HND", "MEX", "NIC", "PAN", "PRY", "PER", "URY", "VEN") ~ "Latin America",
+    iso3c %in% c("AUT", "BEL", "BGR", "HRV", "CYP", "CZE", "DNK", "EST", "FIN", "FRA", 
+                 "DEU", "GRC", "HUN", "IRL", "ITA", "LVA", "LTU", "LUX", "MLT", "NLD", 
+                 "POL", "PRT", "ROU", "SVK", "SVN", "ESP", "SWE", "GBR", "NOR", "CHE",
+                 "ISL", "ALB", "MKD", "SRB", "MNE", "BIH", "UKR", "MDA", "BLR") ~ "Europe",
+    iso3c %in% c("DZA", "EGY", "LBY", "MAR", "TUN", "BHR", "IRN", "IRQ", "ISR", "JOR", 
+                 "KWT", "LBN", "OMN", "QAT", "SAU", "SYR", "TUR", "ARE", "YEM") ~ "MENA",
+    iso3c %in% c("AFG", "BGD", "BTN", "IND", "MDV", "NPL", "PAK", "LKA", "CHN", "JPN", 
+                 "KOR", "MNG", "PRK", "TWN", "BRN", "KHM", "IDN", "LAO", "MYS", "MMR", 
+                 "PHL", "SGP", "THA", "TLS", "VNM") ~ "Asia-Pacific",
+    iso3c %in% c("AGO", "BEN", "BWA", "BFA", "BDI", "CMR", "CPV", "CAF", "TCD", "COM", 
+                 "COD", "COG", "CIV", "DJI", "GNQ", "ERI", "SWZ", "ETH", "GAB", "GMB", 
+                 "GHA", "GIN", "GNB", "KEN", "LSO", "LBR", "MDG", "MWI", "MLI", "MRT", 
+                 "MUS", "MOZ", "NAM", "NER", "NGA", "RWA", "STP", "SEN", "SYC", "SLE", 
+                 "SOM", "ZAF", "SSD", "SDN", "TZA", "TGO", "UGA", "ZMB", "ZWE") ~ "Sub-Saharan Africa",
+    TRUE ~ "Other"
+  ))
+
+# Model with regional fixed effects
+if(length(unique(final_data_region$region)) > 1) {
+  m_region <- lm(volatility ~ system_type * log_gdp + mean_democracy + ethnic_frac + region,
+                 data = final_data_region)
+  
+  # Get robust results
+  robust_reg <- coeftest(m_region, vcov = vcovHC(m_region, type = "HC1"))
+  
+  # Variables to show (excluding region FE)
+  vars_reg <- c("system_typeSemi-Presidential", "system_typePresidential", "log_gdp", 
+                "system_typeSemi-Presidential:log_gdp", "system_typePresidential:log_gdp")
+  labels_reg <- c("Semi-Pres", "Presidential", "Log GDP/cap", "Semi-Pres × GDP", "Pres × GDP")
+  
+  # Build table
+  tbl_reg <- list()
+  for (i in seq_along(vars_reg)) {
+    v <- vars_reg[i]
+    if (v %in% rownames(robust_reg)) {
+      coef_val <- add_stars(robust_reg[v, "Estimate"], robust_reg[v, "Pr(>|t|)"])
+      se_val <- paste0("(", round(robust_reg[v, "Std. Error"], 3), ")")
+    } else {
+      coef_val <- ""
+      se_val <- ""
+    }
+    tbl_reg[[length(tbl_reg) + 1]] <- c(labels_reg[i], coef_val)
+    tbl_reg[[length(tbl_reg) + 1]] <- c("", se_val)
+  }
+  tbl_reg[[length(tbl_reg) + 1]] <- c("N", nrow(model.frame(m_region)))
+  tbl_reg[[length(tbl_reg) + 1]] <- c("R²", round(summary(m_region)$r.squared, 3))
+  tbl_reg[[length(tbl_reg) + 1]] <- c("Adj. R²", round(summary(m_region)$adj.r.squared, 3))
+  
+  tbl_reg_df <- do.call(rbind, tbl_reg) %>% as.data.frame()
+  names(tbl_reg_df) <- c(" ", "With Regional FE")
+  
+  tbl_reg_df %>%
+    kable(booktabs = TRUE, align = c("l", "c")) %>%
+    kable_styling(position = "center", font_size = 10) %>%
+    footnote(general = "Robust SEs (HC1). Ref: Parliamentary. Regional FE not shown.",
+             symbol = "*p<.05, **p<.01, ***p<.001",
+             general_title = "Notes. ",
+             symbol_title = "",
+             title_format = "italic",
+             threeparttable = TRUE)
+}
+```
+
+### B.2 Excluding Outliers
+
+@tbl-exclude presents results excluding extreme outliers identified via Cook's distance.
+
+```{r}
+#| echo: false
+#| label: tbl-exclude
+#| tbl-cap: "Excluding Influential Observations"
+#| warning: false
+#| message: false
+
+# Create complete cases data for m2 (same data used to estimate model)
+m2_data <- final_data %>%
+  filter(!is.na(volatility) & !is.na(system_type) & !is.na(log_gdp) & 
+         !is.na(mean_democracy) & !is.na(ethnic_frac))
+
+# Identify potential outliers using Cook's distance
+cooks_d <- cooks.distance(m2)
+outlier_threshold <- 4 / nrow(m2_data)
+
+# Model excluding outliers
+m2_data_no_outliers <- m2_data[cooks_d < outlier_threshold, ]
+
+m_no_outliers <- lm(volatility ~ system_type * log_gdp + mean_democracy + ethnic_frac,
+                    data = m2_data_no_outliers)
+
+n_excluded <- nrow(m2_data) - nrow(m2_data_no_outliers)
+
+# Get robust results
+robust_out <- coeftest(m_no_outliers, vcov = vcovHC(m_no_outliers, type = "HC1"))
+
+# Variables to show
+vars_out <- c("system_typeSemi-Presidential", "system_typePresidential", "log_gdp", 
+              "system_typeSemi-Presidential:log_gdp", "system_typePresidential:log_gdp")
+labels_out <- c("Semi-Pres", "Presidential", "Log GDP/cap", "Semi-Pres × GDP", "Pres × GDP")
+
+# Build table
+tbl_out <- list()
+for (i in seq_along(vars_out)) {
+  v <- vars_out[i]
+  if (v %in% rownames(robust_out)) {
+    coef_val <- add_stars(robust_out[v, "Estimate"], robust_out[v, "Pr(>|t|)"])
+    se_val <- paste0("(", round(robust_out[v, "Std. Error"], 3), ")")
+  } else {
+    coef_val <- ""
+    se_val <- ""
+  }
+  tbl_out[[length(tbl_out) + 1]] <- c(labels_out[i], coef_val)
+  tbl_out[[length(tbl_out) + 1]] <- c("", se_val)
+}
+tbl_out[[length(tbl_out) + 1]] <- c("N", nrow(model.frame(m_no_outliers)))
+tbl_out[[length(tbl_out) + 1]] <- c("R²", round(summary(m_no_outliers)$r.squared, 3))
+tbl_out[[length(tbl_out) + 1]] <- c("Adj. R²", round(summary(m_no_outliers)$adj.r.squared, 3))
+
+tbl_out_df <- do.call(rbind, tbl_out) %>% as.data.frame()
+names(tbl_out_df) <- c(" ", "Excluding Outliers")
+
+tbl_out_df %>%
+  kable(booktabs = TRUE, align = c("l", "c")) %>%
+  kable_styling(position = "center", font_size = 10) %>%
+  footnote(general = paste0("Excludes ", n_excluded, " outliers (Cook's d > 4/n). Robust SEs (HC1)."),
+           symbol = "*p<.05, **p<.01, ***p<.001",
+           general_title = "Notes. ",
+           symbol_title = "",
+           title_format = "italic",
+           threeparttable = TRUE)
+```
 
 
