@@ -823,4 +823,17 @@ cat(paste(readLines(here("output","robustness","crossover_summary.txt")), collap
 knitr::include_graphics(here("output","robustness","crossover_ci.png"))
 ```
 
+### B.5 Placebo / Permutation Test
+
+To further probe whether the observed Presidential × log(GDP) interaction could arise from random assignment of system types across countries, we implement a permutation (placebo) test that randomly shuffles `system_type` across countries in the country-level sample and re-estimates the full model. The permutation distribution of the focal interaction coefficient is saved in `output/robustness/placebo_permutation_distribution.csv` and summarized in `output/robustness/placebo_permutation_summary.csv`. The histogram below visualizes the permutation distribution and the observed coefficient (red vertical line). A zero empirical p-value indicates that the observed coefficient is larger in magnitude than any coefficient in 2,000 random permutations.
+
+```{r}
+#| echo: false
+#| results: asis
+library(here)
+cat("**Placebo permutation summary (see output/robustness/placebo_permutation_summary.csv):**\n\n")
+cat(paste(readLines(here("output","robustness","placebo_permutation_summary.csv")), collapse = "\n"))
+knitr::include_graphics(here("output","robustness","placebo_permutation_hist.png"))
+```
+
 
