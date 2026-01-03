@@ -10,7 +10,16 @@ if(!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
 
 # Load processed final data (country-level)
 final_data <- read_csv(here::here("data","02-analysis_data","stability_measures.csv")) %>%
-  left_join(read_csv(here::here("data","02-analysis_data","gdp_processed.csv")) %>% select(iso3c, log_gdp_mean), by = "iso3c") %>%
+  # join DPI system type (ensure unique keys)
+  left_join(
+    read_csv(here::here("data","02-analysis_data","dpi_processed.csv")) %>% distinct(iso3c, .keep_all = TRUE),
+    by = c("iso3c")
+  ) %>%
+  # join GDP
+  left_join(
+    read_csv(here::here("data","02-analysis_data","gdp_processed.csv")) %>% distinct(iso3c, .keep_all = TRUE) %>% select(iso3c, log_gdp_mean),
+    by = "iso3c"
+  ) %>%
   mutate(log_gdp = log_gdp_mean) %>%
   filter(!is.na(volatility) & !is.na(system_type) & !is.na(log_gdp))
 
@@ -18,7 +27,12 @@ final_data <- read_csv(here::here("data","02-analysis_data","stability_measures.
 # Baseline: system_type + log_gdp + interaction
 mod_formula_base <- as.formula("volatility ~ system_type + log_gdp + system_type:log_gdp")
 # Full: add standard controls
-mod_formula_full <- as.formula("volatility ~ system_type + log_gdp + system_type:log_gdp + mean_democracy + ethnic_frac + monarchy")
+# join QOG for ethnic fractionalization
+final_data <- final_data %>%
+  left_join(read_csv(here::here("data","02-analysis_data","qog_processed.csv")) %>% distinct(iso3c, .keep_all = TRUE), by = "iso3c")
+
+# Full model: include mean_democracy and ethnic fractionalization
+mod_formula_full <- as.formula("volatility ~ system_type + log_gdp + system_type:log_gdp + mean_democracy + ethnic_frac")
 
 mod_base <- lm(mod_formula_base, data = final_data)
 mod_full <- lm(mod_formula_full, data = final_data)
