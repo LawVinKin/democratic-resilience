@@ -793,3 +793,34 @@ tbl_out_df %>%
 ```
 
 
+### B.3 Sensitivity Checks: Oster bounds & Leave-One-Out
+
+We conduct two additional sensitivity checks to assess the robustness of the focal Presidential × Log GDP interaction: (1) an Oster-style bounding calculation that assesses how large selection on unobservables would need to be to overturn the estimated interaction; and (2) a leave-one-out influence analysis that recomputes the full model while dropping one country at a time to identify influential observations. Results and plots are saved in `output/robustness/`.
+
+```{r}
+#| echo: false
+#| results: asis
+library(here)
+# Print Oster result
+oster_txt <- readLines(here("output","robustness","oster_result.txt"))
+cat("**Oster (2019) approximate result (printed below):**\n\n")
+cat(paste(oster_txt, collapse = "\n"))
+
+# Display leave-one-out plot
+knitr::include_graphics(here("output","robustness","leave_one_out_plot.png"))
+```
+
+### B.4 Crossover Uncertainty (Bootstrap)
+
+We compute bootstrap confidence intervals for the GDP crossover — the level of GDP per capita (PPP) at which the estimated advantage of Presidential over Parliamentary systems changes sign. A bootstrap distribution and 95% CI are reported below; full results and code are available in `output/robustness/`.
+
+```{r}
+#| echo: false
+#| results: asis
+library(here)
+cat("**Bootstrap crossover summary (see output/robustness/crossover_summary.txt):**\n\n")
+cat(paste(readLines(here("output","robustness","crossover_summary.txt")), collapse = "\n"))
+knitr::include_graphics(here("output","robustness","crossover_ci.png"))
+```
+
+
