@@ -587,6 +587,10 @@ Conversely, as countries develop, strengthening horizontal accountability mechan
 
 For countries near the crossover point (~$14,000 GDP per capita), the findings suggest genuine institutional ambiguity. In these contexts, attention to complementary institutions (judicial independence, legislative capacity, party system development) may matter more than the presidential-parliamentary choice itself [@fish2006stronger; @issacharoff2010constitutional]. The rise of polarization as a driver of democratic erosion [@orhan2022relationship; @arbatli2021united] suggests that institutional design alone cannot guarantee democratic resilience without addressing underlying societal divisions [@mccoy2021overcoming].
 
+## Data Availability
+
+Processed analysis-ready data used in this paper are included in the repository under `data/02-analysis_data/`. The full raw V-Dem v15 dataset is not redistributed here due to V-Dem licensing and file size; users should obtain the original V-Dem dataset from https://www.v-dem.net/en/data/data/v-dem-dataset-v15/ and follow the instructions in `DATA_README.md` to reproduce the processing steps. A `CODEBOOK.md` describing key variables and `DATA_README.md` with reproduction steps are provided at the repository root.
+
 # Conclusion
 
 This paper has demonstrated that the relationship between government system type and democratic stability depends critically on economic development. Presidential systems appear to offer stability advantages in low-income contexts, while parliamentary systems perform better at high income levels. The crossover point of approximately $14,000 GDP per capita suggests that many democratizing countries fall in a range where the optimal choice is ambiguous.
