@@ -290,6 +290,8 @@ gdp_crossover <- exp(log_gdp_crossover)
 
 The crossover point where neither system holds an advantage can be calculated by setting the combined effect of presidential system and interaction to zero. This yields a crossover GDP of approximately **$`r format(round(gdp_crossover, 0), big.mark = ",")`** per capita (PPP).
 
+Bootstrap results indicate substantial uncertainty around this estimate: the 95% bootstrap confidence interval for the crossover is wide, so the exact GDP level where the relative advantage shifts between systems should be interpreted cautiously.
+
 @tbl-pred shows predicted volatility at different GDP levels.
 
 ```{r}
@@ -807,7 +809,7 @@ cat("**Oster (2019) approximate result (printed below):**\n\n")
 cat(paste(oster_txt, collapse = "\n"))
 
 # Display leave-one-out plot
-knitr::include_graphics(here("output","robustness","leave_one_out_plot.png"))
+knitr::include_graphics(here("output","robustness","leave_one_out_plot_v2.png"))
 ```
 
 ### B.4 Crossover Uncertainty (Bootstrap)
@@ -820,7 +822,7 @@ We compute bootstrap confidence intervals for the GDP crossover — the level of
 library(here)
 cat("**Bootstrap crossover summary (see output/robustness/crossover_summary.txt):**\n\n")
 cat(paste(readLines(here("output","robustness","crossover_summary.txt")), collapse = "\n"))
-knitr::include_graphics(here("output","robustness","crossover_ci.png"))
+knitr::include_graphics(here("output","robustness","crossover_ci_v2.png"))
 ```
 
 ### B.5 Placebo / Permutation Test
@@ -833,7 +835,7 @@ To further probe whether the observed Presidential × log(GDP) interaction could
 library(here)
 cat("**Placebo permutation summary (see output/robustness/placebo_permutation_summary.csv):**\n\n")
 cat(paste(readLines(here("output","robustness","placebo_permutation_summary.csv")), collapse = "\n"))
-knitr::include_graphics(here("output","robustness","placebo_permutation_hist.png"))
+knitr::include_graphics(here("output","robustness","placebo_permutation_hist_v2.png"))
 ```
 
 

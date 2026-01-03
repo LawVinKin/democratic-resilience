@@ -69,14 +69,15 @@ write_csv(perm_summary, file.path(out_dir, "placebo_permutation_summary.csv"))
 # Plot distribution and observed line
 library(ggplot2)
 plt <- ggplot(tibble(perm = perm_res_valid), aes(x = perm)) +
-  geom_histogram(bins = 50, fill = "#8da0cb", color = "white", alpha = 0.9) +
+  geom_histogram(bins = 50, fill = "#2c7fb8", color = "white", alpha = 0.9) +
   geom_vline(xintercept = obs_coef, color = "red", size = 1) +
   theme_minimal() +
+  theme(axis.title = element_text(face = "bold", size = 11), axis.text = element_text(size = 10)) +
   labs(title = "Placebo permutation distribution: Presidential × log(GDP) interaction",
        subtitle = paste0("Observed coef = ", round(obs_coef,4), "; empirical two-sided p = ", round(p_two_sided,3)),
        x = "Interaction coefficient (permutation)", y = "Count")
 
-ggsave(file.path(out_dir, "placebo_permutation_hist.png"), plt, width = 7, height = 4, dpi = 300)
+ggsave(file.path(out_dir, "placebo_permutation_hist_v2.png"), plt, width = 7, height = 4, dpi = 300)
 
 cat("Placebo permutation complete. Observed coef:", round(obs_coef,4), "empirical p-value:", round(p_two_sided,4), "\n")
 cat("Outputs written to:", out_dir, "(placebo_permutation_distribution.csv, placebo_permutation_summary.csv, placebo_permutation_hist.png)\n")

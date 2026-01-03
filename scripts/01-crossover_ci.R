@@ -82,16 +82,20 @@ left <- ggplot(results, aes(x = crossover_log)) +
 
 # Right: point estimate + 95% CI in USD
 ci_df <- tibble(median = ci_gdp[2], lower = ci_gdp[1], upper = ci_gdp[3])
+label_text <- paste0("Median = $", format(round(ci_gdp[2],0), big.mark = ","),
+                     "\n95% CI = [$", format(round(ci_gdp[1],0), big.mark = ","),
+                     ", $", format(round(ci_gdp[3],0), big.mark = ","), "]")
+
 right <- ggplot(ci_df, aes(y = 1, x = median)) +
   geom_point(size = 3, color = "#2c7fb8") +
   geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2, color = "black") +
+  geom_text(aes(x = median, y = 1.05), label = label_text, vjust = 0, hjust = 0.5, size = 3.5) +
   scale_x_continuous(labels = scales::dollar_format(prefix = "$", accuracy = 1)) +
   theme_minimal() +
-  theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank()) +
+  theme(axis.title.y = element_text(face = "bold", size = 11),
+        axis.title.x = element_text(face = "bold", size = 11),
+        axis.text.y = element_blank(), axis.ticks.y = element_blank()) +
   labs(title = "Crossover estimate (USD)", x = "GDP per capita (PPP, USD)")
 
 combined <- grid.arrange(left, right, ncol = 2, widths = c(2, 1))
-ggsave(file.path(out_dir, "crossover_ci.png"), combined, width = 9, height = 4, dpi = 300)
-
-cat(summary_txt)
-message("Bootstrap crossover complete. Outputs written to: ", out_dir)
+ggsave(file.path(out_dir, "crossover_ci_v2.png"), combined, width = 9, height = 4, dpi = 300)

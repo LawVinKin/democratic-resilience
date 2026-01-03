@@ -74,13 +74,13 @@ write_csv(loo_results, file.path(out_dir, "leave_one_out_interaction.csv"))
 # Quick plot of leave-one-out coefficients
 library(ggplot2)
 plt <- ggplot(loo_results, aes(x = reorder(iso3c, coef), y = coef)) +
-  geom_point() +
+  geom_point(color = "#2c7fb8", size = 2) +
   geom_hline(yintercept = coef(mod_full)["system_typePresidential:log_gdp"], color = "red") +
   coord_flip() +
   theme_minimal() +
+  theme(axis.title = element_text(face = "bold", size = 11),
+        axis.text = element_text(size = 9)) +
   labs(title = "Leave-one-out coefficients for Presidential x LogGDP interaction",
        x = "Country dropped", y = "Interaction coefficient")
 
-ggsave(file.path(out_dir, "leave_one_out_plot.png"), plt, width = 8, height = 6, dpi = 300)
-
-message("Sensitivity checks complete. Outputs saved in: ", out_dir)
+ggsave(file.path(out_dir, "leave_one_out_plot_v2.png"), plt, width = 8, height = 6, dpi = 300)

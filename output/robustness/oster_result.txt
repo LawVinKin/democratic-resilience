@@ -1,0 +1,18 @@
+$beta_un
+system_typePresidential:log_gdp 
+                     0.01490202 
+
+$beta_full
+system_typePresidential:log_gdp 
+                     0.01989213 
+
+$beta_star
+system_typePresidential:log_gdp 
+                      0.2201029 
+
+$r2_un
+[1] 0.1101062
+
+$r2_full
+[1] 0.1317468
+
