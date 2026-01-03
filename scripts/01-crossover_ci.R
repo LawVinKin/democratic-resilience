@@ -70,16 +70,28 @@ write_csv(results, file.path(out_dir, "crossover_bootstrap.csv"))
 
 # Plot distribution and CI
 library(ggplot2)
-plt <- ggplot(results, aes(x = crossover_gdp)) +
-  geom_histogram(bins = 40, fill = "#2c7fb8", color = "white", alpha = 0.8) +
-  geom_vline(xintercept = ci_gdp[c(1,3)], color = "red", linetype = "dashed") +
-  geom_vline(xintercept = ci_gdp[2], color = "black", size = 1) +
+library(gridExtra)
+
+# Left: density on log scale (matches modelling scale)
+left <- ggplot(results, aes(x = crossover_log)) +
+  geom_density(fill = "#2c7fb8", alpha = 0.6) +
+  geom_vline(xintercept = ci_log[2], color = "black", size = 0.8) +
+  geom_vline(xintercept = ci_log[c(1,3)], color = "red", linetype = "dashed") +
+  theme_minimal() +
+  labs(title = "Bootstrap density (log GDP)", x = "log(GDP per capita)", y = "Density")
+
+# Right: point estimate + 95% CI in USD
+ci_df <- tibble(median = ci_gdp[2], lower = ci_gdp[1], upper = ci_gdp[3])
+right <- ggplot(ci_df, aes(y = 1, x = median)) +
+  geom_point(size = 3, color = "#2c7fb8") +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2, color = "black") +
   scale_x_continuous(labels = scales::dollar_format(prefix = "$", accuracy = 1)) +
   theme_minimal() +
-  labs(title = "Bootstrap distribution of GDP crossover (Presidential vs Parliamentary)",
-       x = "GDP per capita (PPP, USD)", y = "Frequency")
+  theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank()) +
+  labs(title = "Crossover estimate (USD)", x = "GDP per capita (PPP, USD)")
 
-ggsave(file.path(out_dir, "crossover_ci.png"), plt, width = 7, height = 4)
+combined <- grid.arrange(left, right, ncol = 2, widths = c(2, 1))
+ggsave(file.path(out_dir, "crossover_ci.png"), combined, width = 9, height = 4, dpi = 300)
 
 cat(summary_txt)
 message("Bootstrap crossover complete. Outputs written to: ", out_dir)
