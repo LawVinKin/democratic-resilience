@@ -1,0 +1,4 @@
+Crossover (log GDP): median = 9.698, 95% CI = [7.965, 10.742]
+Crossover (GDP, PPP): median = $16278, 95% CI = [$2880, $46266]
+Original point estimate (GDP): $15813 (log = 9.669)
+Bootstrap draws (successful): 1000 (out of 1000)

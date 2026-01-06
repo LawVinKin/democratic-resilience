@@ -1,6 +1,6 @@
 ---
-title: "Parliamentary Resilience: Government Systems and Democratic Stability"
-subtitle: "Working Paper"
+title: "**Democratic Resilience in the 21st Century**"
+subtitle: "The Return of Presidential vs. Parliamentary Debate"
 author: 
   - name: "Lawrence Vincent King"
 thanks: "Code and data are available at: https://github.com/LawVinKin/democratic-resilience. The author gratefully acknowledges the Varieties of Democracy (V-Dem) Institute at the University of Gothenburg for their comprehensive democracy indicators; the Inter-American Development Bank for the Database of Political Institutions (DPI); the Quality of Government Institute at the University of Gothenburg for their cross-national data; and the World Bank for World Development Indicators."
@@ -43,7 +43,7 @@ library(ggplot2)
 
 Democratic backsliding has emerged as one of the most significant political phenomena of the 21st century [@bermeo2016democratic, 10-13; @levitsky2018democracies]. From Hungary to Brazil, established democracies have experienced erosion of democratic norms and institutions [@luhrmann2019third, 1105; @waldner2018unwelcome]. Yet not all democracies are equally vulnerable. Some demonstrate remarkable resilience while others succumb to authoritarian pressures [@levitsky2023surprising; @merkel2021resilience]. This variation raises a fundamental question about what institutional configurations best protect democratic stability.
 
-This paper investigates whether government system type (presidential, parliamentary, or semi-presidential) affects democratic resilience, and crucially, whether this relationship is conditional on a country's level of economic development. The analysis challenges the conventional wisdom pitting parliamentary against presidential systems, arguing that it misses the conditional nature of institutional effects [@cheibub2007presidentialism, 140-143; @cheibub2002democratic, 151]. The central claim is that the optimal system for democratic stability depends on the developmental context.
+This paper investigates whether government system type (presidential, parliamentary, or semi-presidential) affects democratic resilience, and crucially, whether this relationship is conditional on a country's level of economic development. The analysis challenges the conventional wisdom pitting parliamentary against presidential systems in the abstract, arguing that it misses the conditional nature of institutional effects [@cheibub2007presidentialism, 140-143; @cheibub2002democratic, 151]. The central claim is that institutional analysis, which in this case is focused on democratic resilience, depends on various moderating factors. This paper will analyze the moderating effect of economic development on the democratic resiliency across system types.
 
 Using data from the Varieties of Democracy (V-Dem) project covering 2000-2023 [@coppedge2011conceptualizing; @lindberg2014vdem], democratic stability is measured through volatility in liberal democracy scores. The key finding is that presidential systems demonstrate lower democratic volatility in low-income countries, while parliamentary systems perform better in high-income contexts. The crossover point, where neither system holds an advantage, occurs at approximately $14,000 GDP per capita (PPP).
 
@@ -82,21 +82,15 @@ Parliamentary systems require strong, institutionalized parties to function effe
 We combine four major cross-national datasets:
 
 *V-Dem v15* (Varieties of Democracy): Democracy indicators for 2000-2023 [@coppedge2011conceptualizing; @lindberg2014vdem].
-
 *DPI 2020* (Database of Political Institutions): Government system classifications [@dpi2020].
-
 *QOG* (Quality of Government): Control variables including ethnic fractionalization [@qog2024].
-
 *World Bank WDI*: GDP per capita (PPP, constant 2017 USD) [@wdi2024].
 
 ## Variables
 
 *Dependent Variable*: Democratic Volatility measures the standard deviation of the V-Dem liberal democracy index for each country over 2000-2023. Higher values indicate greater instability in democratic quality. Countries are required to have at least 20 years of non-missing data.
-
 *Independent Variable*: Government System Type is coded as Parliamentary (reference), Semi-Presidential, or Presidential based on DPI classifications.
-
 *Moderator*: Log GDP per capita measures economic development using the mean GDP per capita (PPP) over 2000-2023.
-
 *Controls*: The models include mean democracy level, ethnic fractionalization, and a constitutional monarchy indicator.
 
 ## Analytical Strategy
@@ -122,8 +116,7 @@ final_data <- read_csv(here("data", "02-analysis_data", "stability_measures.csv"
     read_csv(here("data", "02-analysis_data", "merged_all_years.csv")) %>%
       group_by(country_name, iso3c) %>%
       summarise(monarchy = as.numeric(mean(v2exl_legitlead, na.rm = TRUE) == 1), .groups = "drop"),
-    by = c("country_name", "iso3c")
-  ) %>%
+    by = c("country_name", "iso3c")) %>%
   mutate(
     system_type = factor(system_type, levels = c("Parliamentary", "Semi-Presidential", "Presidential")),
     log_gdp = log_gdp_mean
@@ -160,18 +153,28 @@ tbl2 <- final_data %>%
   rename(`System Type` = system_type, `N` = n) %>%
   kable(booktabs = TRUE, format = "latex")
 
-# Combine side by side using minipages to contain centering
-cat("\\begin{table}[H]\n")
-cat("\\begin{minipage}{.5\\linewidth}\n\\centering\n")
-cat("\\captionof{table}{Descriptive Statistics}\n")
-cat(tbl1)
-cat("\n\\vspace{1mm}\\par\\scriptsize\\textit{Notes.} Vol. = Volatility (SD of V-Dem liberal democracy index, 0--1). Dem. = Mean democracy (0--1). GDP = Log GDP per capita (PPP).\n")
-cat("\\end{minipage}%\n")
-cat("\\begin{minipage}{.5\\linewidth}\n\\centering\n")
-cat("\\captionof{table}{Countries by System Type}\n")
-cat(tbl2)
-cat("\n\\end{minipage}\n")
-cat("\\end{table}\n")
+latex_block <- c(
+  "\\begin{table}[!htbp]",
+  "\\begin{minipage}{.5\\linewidth}",
+  "\\centering",
+  "\\captionof{table}{Descriptive Statistics}",
+  tbl1,
+  "\\vspace{1mm}\\par\\scriptsize\\textit{Notes.} Vol. = Volatility (SD of V-Dem liberal democracy index, 0--1). Dem. = Mean democracy (0--1). GDP = Log GDP per capita (PPP).",
+  "\\end{minipage}%",
+  "\\begin{minipage}{.5\\linewidth}",
+  "\\centering",
+  "\\captionof{table}{Countries by System Type}",
+  tbl2,
+  "\\end{minipage}",
+  "\\end{table}"
+)
+
+dir.create(here::here("paper"), showWarnings = FALSE)
+writeLines(latex_block, con = here::here("paper", "tables-descriptive.tex"))
+
+# Emit raw LaTeX directly into the knitted document (as a fallback)
+knitr::asis_output(paste(latex_block, collapse = "\n"))
+
 ```
 
 # Results
@@ -204,8 +207,7 @@ add_stars <- function(coef, pval) {
     pval < 0.05 ~ "*",
     TRUE ~ ""
   )
-  paste0(round(coef, 3), star)
-}
+  paste0(round(coef, 3), star)}
 
 # Get robust results for both models
 robust_m1 <- coeftest(m1, vcov = robust_vcov(m1))
@@ -235,11 +237,9 @@ for (i in seq_along(vars)) {
   # Model 2
   if (v %in% rownames(robust_m2)) {
     m2_coef <- add_stars(robust_m2[v, "Estimate"], robust_m2[v, "Pr(>|t|)"])
-    m2_se <- paste0("(", round(robust_m2[v, "Std. Error"], 3), ")")
-  } else {
+    m2_se <- paste0("(", round(robust_m2[v, "Std. Error"], 3), ")")} else {
     m2_coef <- ""
-    m2_se <- ""
-  }
+    m2_se <- ""}
   
   tbl_rows[[length(tbl_rows) + 1]] <- c(labels[i], m1_coef, m2_coef)
   tbl_rows[[length(tbl_rows) + 1]] <- c("", m1_se, m2_se)
@@ -290,7 +290,10 @@ gdp_crossover <- exp(log_gdp_crossover)
 
 The crossover point where neither system holds an advantage can be calculated by setting the combined effect of presidential system and interaction to zero. This yields a crossover GDP of approximately **$`r format(round(gdp_crossover, 0), big.mark = ",")`** per capita (PPP).
 
+Bootstrap results indicate substantial uncertainty around this estimate: the 95% bootstrap confidence interval for the crossover is wide, so the exact GDP level where the relative advantage shifts between systems should be interpreted cautiously.
+
 @tbl-pred shows predicted volatility at different GDP levels.
+\newpage
 
 ```{r}
 #| echo: false
@@ -398,9 +401,13 @@ ggplot(pred_data, aes(x = gdp, y = predicted, color = system_type, fill = system
 
 The confidence intervals (shaded regions) indicate considerable uncertainty at the extremes of the GDP distribution where fewer observations are available. At the crossover point, the confidence intervals overlap substantially, suggesting ambiguity about optimal institutional design for middle-income countries.
 
+
+
 ## Robustness Checks
 
 We conduct extensive robustness tests to assess the stability of our findings. @tbl-robust summarizes results across alternative specifications.
+
+\newpage
 
 ```{r}
 #| echo: false
@@ -498,11 +505,8 @@ robust_results %>%
 ```
 
 *Alternative Dependent Variable*. Using total democratic decline (sum of year-over-year decreases) instead of volatility yields consistent interaction effects, though the coefficient magnitude varies.
-
 *Income Subsamples*. Splitting the sample at median GDP confirms the theoretical predictions. Within low-income countries, the interaction effect remains negative (presidential advantage increases with development within this group), while high-income countries show the parliamentary advantage.
-
 *Democratic Sample*. Restricting to countries with mean democracy scores above 0.5 strengthens the parliamentary advantage, consistent with the argument that institutional constraints matter more in established democracies [@haggard2021backsliding; @riedl2024democratic].
-
 *Additional Tests*. Regional fixed effects were also examined (not shown), finding that results hold within Latin America and Europe. Excluding small island states and city-states does not substantively alter findings.
 
 # Case Studies: Mechanisms in Action {#sec-cases}
@@ -568,11 +572,8 @@ We consider several alternative explanations for our findings:
 Future research could pursue stronger causal identification through several strategies [@imai2011unpacking]:
 
 *Instrumental Variables*: Historical determinants of system choice (colonial origin, neighborhood effects) could serve as instruments if they satisfy exclusion restrictions.
-
 *Regression Discontinuity*: Countries near decision thresholds during constitutional moments might provide quasi-experimental variation.
-
 *Difference-in-Differences*: The few cases of system change (e.g., Turkey's 2017 constitutional referendum) could enable within-country comparisons, though small samples limit statistical power.
-
 *Mechanism-Based Approaches*: Rather than seeking the total effect of system type, future work could focus on specific mechanisms (institutional constraints, party strength) that are more amenable to identification [@hainmueller2019marginal].
 
 ## Policy Implications
@@ -787,5 +788,24 @@ tbl_out_df %>%
            title_format = "italic",
            threeparttable = TRUE)
 ```
+
+
+### B.3 Sensitivity Checks: Oster bounds & Leave-One-Out
+
+We conduct two additional sensitivity checks to assess the robustness of the focal Presidential × Log GDP interaction: (1) an Oster-style bounding calculation that assesses how large selection on unobservables would need to be to overturn the estimated interaction; and (2) a leave-one-out influence analysis that recomputes the full model while dropping one country at a time to identify influential observations. Results and plots are saved in `output/robustness/`.
+
+```{r}
+#| echo: false
+#| results: asis
+library(here)
+# Print Oster result
+oster_txt <- readLines(here("output","robustness","oster_result.txt"))
+cat("**Oster (2019) approximate result (printed below):**\n\n")
+cat(paste(oster_txt, collapse = "\n"))
+```
+
+### B.4 Crossover Uncertainty (Bootstrap)
+
+We compute bootstrap confidence intervals for the GDP crossover — the level of GDP per capita (PPP) at which the estimated advantage of Presidential over Parliamentary systems changes sign. A bootstrap distribution and 95% CI are reported below; full results and code are available in `output/robustness/`.
 
 

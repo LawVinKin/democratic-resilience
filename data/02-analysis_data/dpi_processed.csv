@@ -1,176 +1,176 @@
-countryname,system_type,bicameral,federal,iso3c
-Turk Cyprus,Presidential,NA,NA,CYP
-Afghanistan,Presidential,NA,NA,AFG
-Angola,Presidential,NA,NA,AGO
-Albania,Parliamentary,NA,NA,ALB
-UAE,Presidential,NA,NA,ARE
-Argentina,Presidential,NA,NA,ARG
-Armenia,Parliamentary,NA,NA,ARM
-Australia,Parliamentary,NA,NA,AUS
-Austria,Parliamentary,NA,NA,AUT
-Azerbaijan,Presidential,NA,NA,AZE
-Burundi,Presidential,NA,NA,BDI
-Belgium,Parliamentary,NA,NA,BEL
-Benin,Presidential,NA,NA,BEN
-Burkina Faso,Presidential,NA,NA,BFA
-Bangladesh,Parliamentary,NA,NA,BGD
-Bulgaria,Parliamentary,NA,NA,BGR
-Bahrain,Presidential,NA,NA,BHR
-Bahamas,Parliamentary,NA,NA,BHS
-Bosnia-Herz,Parliamentary,NA,NA,BIH
-Belarus,Presidential,NA,NA,BLR
-Belize,Parliamentary,NA,NA,BLZ
-Bolivia,Presidential,NA,NA,BOL
-Brazil,Presidential,NA,NA,BRA
-Barbados,Parliamentary,NA,NA,BRB
-Brunei,Presidential,NA,NA,BRN
-Bhutan,Presidential,NA,NA,BTN
-Botswana,Parliamentary,NA,NA,BWA
-Cent. Af. Rep.,Presidential,NA,NA,CAF
-Canada,Parliamentary,NA,NA,CAN
-Switzerland,Parliamentary,NA,NA,CHE
-Chile,Presidential,NA,NA,CHL
-PRC,Semi-Presidential,NA,NA,CHN
-Cote d'Ivoire,Presidential,NA,NA,CIV
-Cameroon,Presidential,NA,NA,CMR
-Congo,Presidential,NA,NA,COG
-Colombia,Presidential,NA,NA,COL
-Comoro Is.,Presidential,NA,NA,COM
-C. Verde Is.,Presidential,NA,NA,CPV
-Costa Rica,Presidential,NA,NA,CRI
-Cuba,Semi-Presidential,NA,NA,CUB
-Cyprus,Presidential,NA,NA,CYP
-Czech Rep.,Parliamentary,NA,NA,CZE
-FRG/Germany,Parliamentary,NA,NA,DEU
-Djibouti,Presidential,NA,NA,DJI
-Denmark,Parliamentary,NA,NA,DNK
-Dom. Rep.,Presidential,NA,NA,DOM
-Algeria,Presidential,NA,NA,DZA
-Ecuador,Presidential,NA,NA,ECU
-Egypt,Presidential,NA,NA,EGY
-Eritrea,Semi-Presidential,NA,NA,ERI
-Spain,Parliamentary,NA,NA,ESP
-Estonia,Semi-Presidential,NA,NA,EST
-Ethiopia,Parliamentary,NA,NA,ETH
-Finland,Parliamentary,NA,NA,FIN
-Fiji,Parliamentary,NA,NA,FJI
-France,Parliamentary,NA,NA,FRA
-Gabon,Presidential,NA,NA,GAB
-UK,Parliamentary,NA,NA,GBR
-Georgia,Presidential,NA,NA,GEO
-Ghana,Presidential,NA,NA,GHA
-Guinea,Presidential,NA,NA,GIN
-Gambia,Presidential,NA,NA,GMB
-Guinea-Bissau,Presidential,NA,NA,GNB
-Eq. Guinea,Presidential,NA,NA,GNQ
-Greece,Parliamentary,NA,NA,GRC
-Grenada,Parliamentary,NA,NA,GRD
-Guatemala,Presidential,NA,NA,GTM
-Guyana,Semi-Presidential,NA,NA,GUY
-Honduras,Presidential,NA,NA,HND
-Croatia,Parliamentary,NA,NA,HRV
-Haiti,Presidential,NA,NA,HTI
-Hungary,Parliamentary,NA,NA,HUN
-Indonesia,Presidential,NA,NA,IDN
-India,Parliamentary,NA,NA,IND
-Ireland,Parliamentary,NA,NA,IRL
-Iran,Presidential,NA,NA,IRN
-Iraq,Parliamentary,NA,NA,IRQ
-Iceland,Parliamentary,NA,NA,ISL
-Israel,Parliamentary,NA,NA,ISR
-Italy,Parliamentary,NA,NA,ITA
-Jamaica,Parliamentary,NA,NA,JAM
-Jordan,Presidential,NA,NA,JOR
-Japan,Parliamentary,NA,NA,JPN
-Kazakhstan,Presidential,NA,NA,KAZ
-Kenya,Presidential,NA,NA,KEN
-Kyrgyzstan,Presidential,NA,NA,KGZ
-Cambodia,Parliamentary,NA,NA,KHM
-ROK,Presidential,NA,NA,KOR
-Kuwait,Presidential,NA,NA,KWT
-Laos,Semi-Presidential,NA,NA,LAO
-Lebanon,Semi-Presidential,NA,NA,LBN
-Liberia,Presidential,NA,NA,LBR
-Libya,Presidential,NA,NA,LBY
-St. Lucia,Parliamentary,NA,NA,LCA
-Sri Lanka,Presidential,NA,NA,LKA
-Lesotho,Parliamentary,NA,NA,LSO
-Lithuania,Presidential,NA,NA,LTU
-Luxembourg,Parliamentary,NA,NA,LUX
-Latvia,Parliamentary,NA,NA,LVA
-Morocco,Presidential,NA,NA,MAR
-Moldova,Presidential,NA,NA,MDA
-Madagascar,Presidential,NA,NA,MDG
-Maldives,Presidential,NA,NA,MDV
-Mexico,Presidential,NA,NA,MEX
-North Macedonia,Parliamentary,NA,NA,MKD
-Mali,Presidential,NA,NA,MLI
-Malta,Parliamentary,NA,NA,MLT
-Myanmar,Presidential,NA,NA,MMR
-Mongolia,Presidential,NA,NA,MNG
-Mozambique,Presidential,NA,NA,MOZ
-Mauritania,Presidential,NA,NA,MRT
-Mauritius,Parliamentary,NA,NA,MUS
-Malawi,Presidential,NA,NA,MWI
-Malaysia,Parliamentary,NA,NA,MYS
-Namibia,Presidential,NA,NA,NAM
-Niger,Presidential,NA,NA,NER
-Nigeria,Presidential,NA,NA,NGA
-Nicaragua,Presidential,NA,NA,NIC
-Netherlands,Parliamentary,NA,NA,NLD
-Norway,Parliamentary,NA,NA,NOR
-Nepal,Parliamentary,NA,NA,NPL
-New Zealand,Parliamentary,NA,NA,NZL
-Oman,Presidential,NA,NA,OMN
-Pakistan,Semi-Presidential,NA,NA,PAK
-Panama,Presidential,NA,NA,PAN
-Peru,Presidential,NA,NA,PER
-Philippines,Presidential,NA,NA,PHL
-P. N. Guinea,Parliamentary,NA,NA,GIN
-Poland,Presidential,NA,NA,POL
-PRK,Semi-Presidential,NA,NA,PRK
-Portugal,Semi-Presidential,NA,NA,PRT
-Paraguay,Presidential,NA,NA,PRY
-Qatar,Presidential,NA,NA,QAT
-Romania,Presidential,NA,NA,ROU
-Russia,Presidential,NA,NA,RUS
-Rwanda,Presidential,NA,NA,RWA
-Saudi Arabia,Presidential,NA,NA,SAU
-Sudan,Presidential,NA,NA,SDN
-Senegal,Presidential,NA,NA,SEN
-Singapore,Parliamentary,NA,NA,SGP
-Solomon Is.,Parliamentary,NA,NA,SLB
-Sierra Leone,Presidential,NA,NA,SLE
-El Salvador,Presidential,NA,NA,SLV
-Somalia,Presidential,NA,NA,SOM
-South Sudan,Presidential,NA,NA,SSD
-eSwatini,Presidential,NA,NA,SWZ
-Suriname,Parliamentary,NA,NA,SUR
-Slovakia,Parliamentary,NA,NA,SVK
-Slovenia,Parliamentary,NA,NA,SVN
-Sweden,Parliamentary,NA,NA,SWE
-Syria,Presidential,NA,NA,SYR
-Chad,Presidential,NA,NA,TCD
-Togo,Semi-Presidential,NA,NA,TGO
-Thailand,Parliamentary,NA,NA,THA
-Tajikistan,Presidential,NA,NA,TJK
-Turkmenistan,Presidential,NA,NA,TKM
-Timor-Leste,Presidential,NA,NA,TLS
-Trinidad-Tobago,Parliamentary,NA,NA,TTO
-Tunisia,Presidential,NA,NA,TUN
-Turkey,Semi-Presidential,NA,NA,TUR
-Taiwan,Presidential,NA,NA,TWN
-Tanzania,Presidential,NA,NA,TZA
-Uganda,Presidential,NA,NA,UGA
-Ukraine,Presidential,NA,NA,UKR
-Uruguay,Presidential,NA,NA,URY
-USA,Presidential,NA,NA,USA
-Uzbekistan,Presidential,NA,NA,UZB
-Venezuela,Presidential,NA,NA,VEN
-Vietnam,Semi-Presidential,NA,NA,VNM
-Vanuatu,Parliamentary,NA,NA,VUT
-Samoa,Parliamentary,NA,NA,WSM
-S. Africa,Semi-Presidential,NA,NA,ZAF
-Congo (DRC),Presidential,NA,NA,COD
-Zambia,Presidential,NA,NA,ZMB
-Zimbabwe,Presidential,NA,NA,ZWE
+countryname,system_type,iso3c
+Turk Cyprus,Presidential,CYP
+Afghanistan,Presidential,AFG
+Angola,Presidential,AGO
+Albania,Parliamentary,ALB
+UAE,Presidential,ARE
+Argentina,Presidential,ARG
+Armenia,Parliamentary,ARM
+Australia,Parliamentary,AUS
+Austria,Parliamentary,AUT
+Azerbaijan,Presidential,AZE
+Burundi,Presidential,BDI
+Belgium,Parliamentary,BEL
+Benin,Presidential,BEN
+Burkina Faso,Presidential,BFA
+Bangladesh,Parliamentary,BGD
+Bulgaria,Parliamentary,BGR
+Bahrain,Presidential,BHR
+Bahamas,Parliamentary,BHS
+Bosnia-Herz,Parliamentary,BIH
+Belarus,Presidential,BLR
+Belize,Parliamentary,BLZ
+Bolivia,Presidential,BOL
+Brazil,Presidential,BRA
+Barbados,Parliamentary,BRB
+Brunei,Presidential,BRN
+Bhutan,Presidential,BTN
+Botswana,Parliamentary,BWA
+Cent. Af. Rep.,Presidential,CAF
+Canada,Parliamentary,CAN
+Switzerland,Parliamentary,CHE
+Chile,Presidential,CHL
+PRC,Semi-Presidential,CHN
+Cote d'Ivoire,Presidential,CIV
+Cameroon,Presidential,CMR
+Congo,Presidential,COG
+Colombia,Presidential,COL
+Comoro Is.,Presidential,COM
+C. Verde Is.,Presidential,CPV
+Costa Rica,Presidential,CRI
+Cuba,Semi-Presidential,CUB
+Cyprus,Presidential,CYP
+Czech Rep.,Parliamentary,CZE
+FRG/Germany,Parliamentary,DEU
+Djibouti,Presidential,DJI
+Denmark,Parliamentary,DNK
+Dom. Rep.,Presidential,DOM
+Algeria,Presidential,DZA
+Ecuador,Presidential,ECU
+Egypt,Presidential,EGY
+Eritrea,Semi-Presidential,ERI
+Spain,Parliamentary,ESP
+Estonia,Semi-Presidential,EST
+Ethiopia,Parliamentary,ETH
+Finland,Parliamentary,FIN
+Fiji,Parliamentary,FJI
+France,Parliamentary,FRA
+Gabon,Presidential,GAB
+UK,Parliamentary,GBR
+Georgia,Presidential,GEO
+Ghana,Presidential,GHA
+Guinea,Presidential,GIN
+Gambia,Presidential,GMB
+Guinea-Bissau,Presidential,GNB
+Eq. Guinea,Presidential,GNQ
+Greece,Parliamentary,GRC
+Grenada,Parliamentary,GRD
+Guatemala,Presidential,GTM
+Guyana,Semi-Presidential,GUY
+Honduras,Presidential,HND
+Croatia,Parliamentary,HRV
+Haiti,Presidential,HTI
+Hungary,Parliamentary,HUN
+Indonesia,Presidential,IDN
+India,Parliamentary,IND
+Ireland,Parliamentary,IRL
+Iran,Presidential,IRN
+Iraq,Parliamentary,IRQ
+Iceland,Parliamentary,ISL
+Israel,Parliamentary,ISR
+Italy,Parliamentary,ITA
+Jamaica,Parliamentary,JAM
+Jordan,Presidential,JOR
+Japan,Parliamentary,JPN
+Kazakhstan,Presidential,KAZ
+Kenya,Presidential,KEN
+Kyrgyzstan,Presidential,KGZ
+Cambodia,Parliamentary,KHM
+ROK,Presidential,KOR
+Kuwait,Presidential,KWT
+Laos,Semi-Presidential,LAO
+Lebanon,Semi-Presidential,LBN
+Liberia,Presidential,LBR
+Libya,Presidential,LBY
+St. Lucia,Parliamentary,LCA
+Sri Lanka,Presidential,LKA
+Lesotho,Parliamentary,LSO
+Lithuania,Presidential,LTU
+Luxembourg,Parliamentary,LUX
+Latvia,Parliamentary,LVA
+Morocco,Presidential,MAR
+Moldova,Presidential,MDA
+Madagascar,Presidential,MDG
+Maldives,Presidential,MDV
+Mexico,Presidential,MEX
+North Macedonia,Parliamentary,MKD
+Mali,Presidential,MLI
+Malta,Parliamentary,MLT
+Myanmar,Presidential,MMR
+Mongolia,Presidential,MNG
+Mozambique,Presidential,MOZ
+Mauritania,Presidential,MRT
+Mauritius,Parliamentary,MUS
+Malawi,Presidential,MWI
+Malaysia,Parliamentary,MYS
+Namibia,Presidential,NAM
+Niger,Presidential,NER
+Nigeria,Presidential,NGA
+Nicaragua,Presidential,NIC
+Netherlands,Parliamentary,NLD
+Norway,Parliamentary,NOR
+Nepal,Parliamentary,NPL
+New Zealand,Parliamentary,NZL
+Oman,Presidential,OMN
+Pakistan,Semi-Presidential,PAK
+Panama,Presidential,PAN
+Peru,Presidential,PER
+Philippines,Presidential,PHL
+P. N. Guinea,Parliamentary,GIN
+Poland,Presidential,POL
+PRK,Semi-Presidential,PRK
+Portugal,Semi-Presidential,PRT
+Paraguay,Presidential,PRY
+Qatar,Presidential,QAT
+Romania,Presidential,ROU
+Russia,Presidential,RUS
+Rwanda,Presidential,RWA
+Saudi Arabia,Presidential,SAU
+Sudan,Presidential,SDN
+Senegal,Presidential,SEN
+Singapore,Parliamentary,SGP
+Solomon Is.,Parliamentary,SLB
+Sierra Leone,Presidential,SLE
+El Salvador,Presidential,SLV
+Somalia,Presidential,SOM
+South Sudan,Presidential,SSD
+eSwatini,Presidential,SWZ
+Suriname,Parliamentary,SUR
+Slovakia,Parliamentary,SVK
+Slovenia,Parliamentary,SVN
+Sweden,Parliamentary,SWE
+Syria,Presidential,SYR
+Chad,Presidential,TCD
+Togo,Semi-Presidential,TGO
+Thailand,Parliamentary,THA
+Tajikistan,Presidential,TJK
+Turkmenistan,Presidential,TKM
+Timor-Leste,Presidential,TLS
+Trinidad-Tobago,Parliamentary,TTO
+Tunisia,Presidential,TUN
+Turkey,Semi-Presidential,TUR
+Taiwan,Presidential,TWN
+Tanzania,Presidential,TZA
+Uganda,Presidential,UGA
+Ukraine,Presidential,UKR
+Uruguay,Presidential,URY
+USA,Presidential,USA
+Uzbekistan,Presidential,UZB
+Venezuela,Presidential,VEN
+Vietnam,Semi-Presidential,VNM
+Vanuatu,Parliamentary,VUT
+Samoa,Parliamentary,WSM
+S. Africa,Semi-Presidential,ZAF
+Congo (DRC),Presidential,COD
+Zambia,Presidential,ZMB
+Zimbabwe,Presidential,ZWE
