@@ -1,9 +1,8 @@
-```markdown
 # Parliamentary Resilience: Government Systems and Democratic Stability
 
 ## Quick summary
 
-This repository accompanies an analysis of how government system types (Parliamentary, Presidential, Semi‑Presidential) relate to democratic stability across countries (2000–2023). The canonical project documentation (data provenance, full codebook, and run order) has been consolidated into `DOCS.md`; see that file for details.
+This repository accompanies an analysis of how government system types (Parliamentary, Presidential, Semi‑Presidential) relate to democratic stability across countries (2000–2023). The canonical paper examines resilience metrics derived from V-Dem democracy scores.
 
 ## Short repo guide
 
@@ -16,7 +15,7 @@ For a complete run-order and file-level details, see `DOCS.md`.
 
 ## Essential notes
 
-- Key dependent variables include `volatility` (SD of democracy scores) and `total_decline` (sum of year-over-year declines). Exact definitions and preprocessing steps are in `scripts/02-clean_data.R` and `DOCS.md`.
+- Key dependent variables include `volatility` (SD of democracy scores) and `total_decline` (sum of year-over-year declines). Exact definitions and preprocessing steps are in `scripts/02-clean_data.R`.
 - Main independent variable: `system_type` (Parliamentary, Semi‑Presidential, Presidential).
 - Robust standard errors: models use HC1-style robust SEs across tables for consistency.
 
@@ -46,11 +45,6 @@ install.packages(c(
 
 ---
 Last updated: 2026-01-06
-```
-# Parliamentary Resilience: Government Systems and Democratic Stability
 
-## Overview
-
-This project investigates the relationship between government system types (Parliamentary, Presidential, Semi-Presidential) and democratic stability. Using cross-national panel data from 2000-2023, we analyze how different institutional arrangements affect democratic volatility and resilience to backsliding. Key findings suggest that parliamentary systems demonstrate greater stability, with the effect moderated by GDP per capita.
-overnment Standard Dataset (https://qog.pol.gu.se)
-- **World Bank WDI**: GDP per capita indicators
+Current Date and Time (UTC - YYYY-MM-DD HH:MM:SS formatted): 2026-01-06 20:57:37
+Current User's Login: LawVinKin
