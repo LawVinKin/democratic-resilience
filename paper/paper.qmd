@@ -1,5 +1,5 @@
 ---
-title: "Democratic Resilience in the 21st Century"
+title: "**Democratic Resilience in the 21st Century**"
 subtitle: "The Return of Presidential vs. Parliamentary Debate"
 author: 
   - name: "Lawrence Vincent King"
@@ -293,6 +293,7 @@ The crossover point where neither system holds an advantage can be calculated by
 Bootstrap results indicate substantial uncertainty around this estimate: the 95% bootstrap confidence interval for the crossover is wide, so the exact GDP level where the relative advantage shifts between systems should be interpreted cautiously.
 
 @tbl-pred shows predicted volatility at different GDP levels.
+\newpage
 
 ```{r}
 #| echo: false
@@ -400,9 +401,13 @@ ggplot(pred_data, aes(x = gdp, y = predicted, color = system_type, fill = system
 
 The confidence intervals (shaded regions) indicate considerable uncertainty at the extremes of the GDP distribution where fewer observations are available. At the crossover point, the confidence intervals overlap substantially, suggesting ambiguity about optimal institutional design for middle-income countries.
 
+
+
 ## Robustness Checks
 
 We conduct extensive robustness tests to assess the stability of our findings. @tbl-robust summarizes results across alternative specifications.
+
+\newpage
 
 ```{r}
 #| echo: false
