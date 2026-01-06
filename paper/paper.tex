@@ -203,7 +203,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={Parliamentary Resilience: Government Systems and Democratic Stability},
+  pdftitle={Democratic Resilience in the 21st Century},
   pdfauthor={Lawrence Vincent King},
   pdfkeywords={democratic backsliding, presidentialism, parliamentarism,
 institutional design, economic development, democratic resilience},
@@ -215,24 +215,23 @@ institutional design, economic development, democratic resilience},
   pdfcreator={LaTeX via pandoc}}
 
 
-\title{Parliamentary Resilience: Government Systems and Democratic
-Stability\thanks{Code and data are available at:
-https://github.com/LawVinKin/democratic-resilience. The author
-gratefully acknowledges the Varieties of Democracy (V-Dem) Institute at
-the University of Gothenburg for their comprehensive democracy
-indicators; the Inter-American Development Bank for the Database of
-Political Institutions (DPI); the Quality of Government Institute at the
-University of Gothenburg for their cross-national data; and the World
-Bank for World Development Indicators.}}
+\title{Democratic Resilience in the 21st Century\thanks{Code and data
+are available at: https://github.com/LawVinKin/democratic-resilience.
+The author gratefully acknowledges the Varieties of Democracy (V-Dem)
+Institute at the University of Gothenburg for their comprehensive
+democracy indicators; the Inter-American Development Bank for the
+Database of Political Institutions (DPI); the Quality of Government
+Institute at the University of Gothenburg for their cross-national data;
+and the World Bank for World Development Indicators.}}
 \usepackage{etoolbox}
 \makeatletter
 \providecommand{\subtitle}[1]{% add subtitle to \maketitle
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
-\subtitle{Working Paper}
+\subtitle{The Return of Presidential vs.~Parliamentary Debate}
 \author{Lawrence Vincent King}
-\date{January 5, 2026}
+\date{January 6, 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -267,11 +266,13 @@ This paper investigates whether government system type (presidential,
 parliamentary, or semi-presidential) affects democratic resilience, and
 crucially, whether this relationship is conditional on a country's level
 of economic development. The analysis challenges the conventional wisdom
-pitting parliamentary against presidential systems, arguing that it
-misses the conditional nature of institutional effects (Cheibub 2007,
-140--43; Cheibub and Limongi 2002, 151). The central claim is that the
-optimal system for democratic stability depends on the developmental
-context.
+pitting parliamentary against presidential systems in the abstract,
+arguing that it misses the conditional nature of institutional effects
+(Cheibub 2007, 140--43; Cheibub and Limongi 2002, 151). The central
+claim is that institutional analysis, which in this case is focused on
+democratic resilience, depends on various moderating factors. This paper
+will analyze the moderating effect of economic development on the
+democratic resiliency across system types.
 
 Using data from the Varieties of Democracy (V-Dem) project covering
 2000-2023 (Coppedge et al. 2011; Lindberg et al. 2014), democratic
@@ -383,16 +384,12 @@ maintenance (Chaisty, Cheeseman, and Power 2014).
 We combine four major cross-national datasets:
 
 \emph{V-Dem v15} (Varieties of Democracy): Democracy indicators for
-2000-2023 (Coppedge et al. 2011; Lindberg et al. 2014).
-
-\emph{DPI 2020} (Database of Political Institutions): Government system
-classifications (Cruz, Keefer, and Scartascini 2021).
-
-\emph{QOG} (Quality of Government): Control variables including ethnic
-fractionalization (Teorell et al. 2024).
-
-\emph{World Bank WDI}: GDP per capita (PPP, constant 2017 USD) (World
-Bank 2024).
+2000-2023 (Coppedge et al. 2011; Lindberg et al. 2014). \emph{DPI 2020}
+(Database of Political Institutions): Government system classifications
+(Cruz, Keefer, and Scartascini 2021). \emph{QOG} (Quality of
+Government): Control variables including ethnic fractionalization
+(Teorell et al. 2024). \emph{World Bank WDI}: GDP per capita (PPP,
+constant 2017 USD) (World Bank 2024).
 
 \subsection{Variables}\label{variables}
 
@@ -400,15 +397,10 @@ Bank 2024).
 deviation of the V-Dem liberal democracy index for each country over
 2000-2023. Higher values indicate greater instability in democratic
 quality. Countries are required to have at least 20 years of non-missing
-data.
-
-\emph{Independent Variable}: Government System Type is coded as
+data. \emph{Independent Variable}: Government System Type is coded as
 Parliamentary (reference), Semi-Presidential, or Presidential based on
-DPI classifications.
-
-\emph{Moderator}: Log GDP per capita measures economic development using
-the mean GDP per capita (PPP) over 2000-2023.
-
+DPI classifications. \emph{Moderator}: Log GDP per capita measures
+economic development using the mean GDP per capita (PPP) over 2000-2023.
 \emph{Controls}: The models include mean democracy level, ethnic
 fractionalization, and a constitutional monarchy indicator.
 
@@ -425,10 +417,10 @@ that system effects vary with development (Brambor, Clark, and Golder
 
 \subsection{Descriptive Statistics}\label{descriptive-statistics}
 
-The final analytical sample includes 163 countries. Tables 1 and 2
+The final analytical sample includes 162 countries. Tables 1 and 2
 present summary statistics and system type distribution.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \begin{minipage}{.5\linewidth}
 \centering
 \captionof{table}{Descriptive Statistics}
@@ -437,7 +429,7 @@ present summary statistics and system type distribution.
 \toprule
 N & Mean Vol. & SD Vol. & Mean Dem. & Mean GDP\\
 \midrule
-163 & 0.046 & 0.042 & 0.415 & 9.39\\
+162 & 0.046 & 0.042 & 0.418 & 9.39\\
 \bottomrule
 \end{tabular}
 \vspace{1mm}\par\scriptsize\textit{Notes.} Vol. = Volatility (SD of V-Dem liberal democracy index, 0--1). Dem. = Mean democracy (0--1). GDP = Log GDP per capita (PPP).
@@ -452,7 +444,7 @@ System Type & N\\
 \midrule
 Parliamentary & 54\\
 Semi-Presidential & 11\\
-Presidential & 98\\
+Presidential & 97\\
 \bottomrule
 \end{tabular}
 \end{minipage}
@@ -483,26 +475,26 @@ Type}
 \toprule
  & Controls & Interaction\\
 \midrule
-Semi-Pres. & -0.007 & -0.243\\
- & (0.015) & (0.142)\\
+Semi-Pres. & -0.007 & -0.247\\
+ & (0.015) & (0.146)\\
 Presidential & 0.003 & -0.163*\\
- & (0.01) & (0.079)\\
-Log GDP p.c. & -0.013*** & -0.026***\\
+ & (0.01) & (0.08)\\
+Log GDP p.c. & -0.013*** & -0.027***\\
 \addlinespace
  & (0.003) & (0.007)\\
-Mean Democracy & 0.017 & 0.028\\
- & (0.013) & (0.016)\\
+Mean Democracy & 0.017 & 0.027\\
+ & (0.014) & (0.016)\\
 Ethnic Frac. & -0.026 & -0.024\\
  & (0.019) & (0.019)\\
 \addlinespace
-Semi-Pres. × GDP &  & 0.024\\
+Semi-Pres. × GDP &  & 0.025\\
  &  & (0.016)\\
 Pres. × GDP &  & 0.017*\\
  &  & (0.008)\\
-N & 149 & 149\\
+N & 148 & 148\\
 \addlinespace
-R² & 0.083 & 0.122\\
-Adj. R² & 0.051 & 0.078\\
+R² & 0.082 & 0.121\\
+Adj. R² & 0.05 & 0.077\\
 \bottomrule
 \insertTableNotes
 
@@ -522,7 +514,7 @@ volatility at low GDP levels.
 The crossover point where neither system holds an advantage can be
 calculated by setting the combined effect of presidential system and
 interaction to zero. This yields a crossover GDP of approximately
-\textbf{\$14,159} per capita (PPP).
+\textbf{\$14,125} per capita (PPP).
 
 Bootstrap results indicate substantial uncertainty around this estimate:
 the 95\% bootstrap confidence interval for the crossover is wide, so the
@@ -541,9 +533,9 @@ Level}
 \toprule
 GDP Level & Parl. & Pres. & Diff\\
 \midrule
-Low (\$5,000) & 0.0757 & 0.0579 & -0.0178\\
-Crossover (\$14,159) & 0.0481 & 0.0481 & 0.0000\\
-High (\$40,000) & 0.0207 & 0.0384 & 0.0178\\
+Low (\$5,000) & 0.0759 & 0.0582 & -0.0177\\
+Crossover (\$14,125) & 0.0484 & 0.0484 & 0.0000\\
+High (\$40,000) & 0.0208 & 0.0385 & 0.0178\\
 \bottomrule
 
 \end{longtable}
@@ -605,11 +597,11 @@ Interaction Coefficient}
 \toprule
 Specification & Coef & SE & N\\
 \midrule
-Main & 0.0171* & 0.0079 & 149\\
-Alt. DV & 0.0475 & 0.0252 & 163\\
-High-Inc. & 0.0417* & 0.0167 & 82\\
-Low-Inc. & -0.006 & 0.0208 & 81\\
-Dem. Only & 0.0242 & 0.0126 & 59\\
+Main & 0.0171* & 0.0079 & 148\\
+Alt. DV & 0.0475 & 0.0254 & 162\\
+High-Inc. & 0.0419* & 0.0170 & 81\\
+Low-Inc. & -0.0051 & 0.0211 & 81\\
+Dem. Only & 0.0245 & 0.0126 & 59\\
 \bottomrule
 \insertTableNotes
 
@@ -621,22 +613,18 @@ Dem. Only & 0.0242 & 0.0126 & 59\\
 \emph{Alternative Dependent Variable}. Using total democratic decline
 (sum of year-over-year decreases) instead of volatility yields
 consistent interaction effects, though the coefficient magnitude varies.
-
 \emph{Income Subsamples}. Splitting the sample at median GDP confirms
 the theoretical predictions. Within low-income countries, the
 interaction effect remains negative (presidential advantage increases
 with development within this group), while high-income countries show
-the parliamentary advantage.
-
-\emph{Democratic Sample}. Restricting to countries with mean democracy
-scores above 0.5 strengthens the parliamentary advantage, consistent
-with the argument that institutional constraints matter more in
-established democracies (Haggard and Kaufman 2021a; Riedl et al. 2024).
-
-\emph{Additional Tests}. Regional fixed effects were also examined (not
-shown), finding that results hold within Latin America and Europe.
-Excluding small island states and city-states does not substantively
-alter findings.
+the parliamentary advantage. \emph{Democratic Sample}. Restricting to
+countries with mean democracy scores above 0.5 strengthens the
+parliamentary advantage, consistent with the argument that institutional
+constraints matter more in established democracies (Haggard and Kaufman
+2021a; Riedl et al. 2024). \emph{Additional Tests}. Regional fixed
+effects were also examined (not shown), finding that results hold within
+Latin America and Europe. Excluding small island states and city-states
+does not substantively alter findings.
 
 \section{Case Studies: Mechanisms in Action}\label{sec-cases}
 
@@ -806,20 +794,16 @@ several strategies (Imai et al. 2011):
 
 \emph{Instrumental Variables}: Historical determinants of system choice
 (colonial origin, neighborhood effects) could serve as instruments if
-they satisfy exclusion restrictions.
-
-\emph{Regression Discontinuity}: Countries near decision thresholds
-during constitutional moments might provide quasi-experimental
-variation.
-
-\emph{Difference-in-Differences}: The few cases of system change (e.g.,
-Turkey's 2017 constitutional referendum) could enable within-country
-comparisons, though small samples limit statistical power.
-
-\emph{Mechanism-Based Approaches}: Rather than seeking the total effect
-of system type, future work could focus on specific mechanisms
-(institutional constraints, party strength) that are more amenable to
-identification (Hainmueller, Mummolo, and Xu 2019).
+they satisfy exclusion restrictions. \emph{Regression Discontinuity}:
+Countries near decision thresholds during constitutional moments might
+provide quasi-experimental variation. \emph{Difference-in-Differences}:
+The few cases of system change (e.g., Turkey's 2017 constitutional
+referendum) could enable within-country comparisons, though small
+samples limit statistical power. \emph{Mechanism-Based Approaches}:
+Rather than seeking the total effect of system type, future work could
+focus on specific mechanisms (institutional constraints, party strength)
+that are more amenable to identification (Hainmueller, Mummolo, and Xu
+2019).
 
 \subsection{Policy Implications}\label{policy-implications}
 
@@ -860,18 +844,6 @@ Issacharoff 2010). The rise of polarization as a driver of democratic
 erosion (Orhan 2022; Arbatli and Rosenberg 2021) suggests that
 institutional design alone cannot guarantee democratic resilience
 without addressing underlying societal divisions (McCoy and Somer 2021).
-
-\subsection{Data Availability}\label{data-availability}
-
-Processed analysis-ready data used in this paper are included in the
-repository under \texttt{data/02-analysis\_data/}. The full raw V-Dem
-v15 dataset is not redistributed here due to V-Dem licensing and file
-size; users should obtain the original V-Dem dataset from
-https://www.v-dem.net/en/data/data/v-dem-dataset-v15/ and follow the
-instructions in \texttt{DATA\_README.md} to reproduce the processing
-steps. A \texttt{CODEBOOK.md} describing key variables and
-\texttt{DATA\_README.md} with reproduction steps are provided at the
-repository root.
 
 \section{Conclusion}\label{conclusion}
 
@@ -1268,7 +1240,7 @@ Type & Countries & N\\
 \midrule
 Parliamentary & Albania, Armenia, Australia, Austria, Bangladesh, Barbados, Belgium, Bosnia and Herzegovina, Botswana, Bulgaria, Cambodia, Canada, Croatia, Czechia, Denmark, Ethiopia, Fiji, Finland, France, Germany, Greece, Guinea, Hungary, Iceland, India, Iraq, Ireland, Israel, Italy, Jamaica, Japan, Latvia, Lesotho, Luxembourg, Malaysia, Malta, Mauritius, Nepal, Netherlands, New Zealand, North Macedonia, Norway, Singapore, Slovakia, Slovenia, Solomon Islands, Spain, Suriname, Sweden, Switzerland, Thailand, Trinidad and Tobago, United Kingdom, Vanuatu & 54\\
 Semi-Presidential & China, Estonia, Guyana, Laos, Lebanon, Pakistan, Portugal, South Africa, Togo, Türkiye, Vietnam & 11\\
-Presidential & Afghanistan, Algeria, Angola, Argentina, Azerbaijan, Bahrain, Belarus, Benin, Bhutan, Bolivia, Brazil, Burkina Faso, Burma/Myanmar, Burundi, Cameroon, Cape Verde, Central African Republic, Chad, Chile, Colombia, Comoros, Costa Rica, Cyprus, Cyprus, Democratic Republic of the Congo, Djibouti, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eswatini, Gabon, Georgia, Ghana, Guatemala, Guinea, Guinea-Bissau, Haiti, Honduras, Indonesia, Iran, Ivory Coast, Jordan, Kazakhstan, Kenya, Kuwait, Kyrgyzstan, Liberia, Libya, Lithuania, Madagascar, Malawi, Maldives, Mali, Mauritania, Mexico, Moldova, Mongolia, Morocco, Mozambique, Namibia, Nicaragua, Niger, Nigeria, Oman, Panama, Paraguay, Peru, Philippines, Poland, Qatar, Republic of the Congo, Romania, Russia, Rwanda, Saudi Arabia, Senegal, Sierra Leone, Somalia, South Korea, Sri Lanka, Sudan, Syria, Tajikistan, Tanzania, The Gambia, Timor-Leste, Tunisia, Turkmenistan, Uganda, Ukraine, United Arab Emirates, United States of America, Uruguay, Uzbekistan, Zambia, Zimbabwe & 98\\
+Presidential & Afghanistan, Algeria, Angola, Argentina, Azerbaijan, Belarus, Benin, Bhutan, Bolivia, Brazil, Burkina Faso, Burma/Myanmar, Burundi, Cameroon, Cape Verde, Central African Republic, Chad, Chile, Colombia, Comoros, Costa Rica, Cyprus, Cyprus, Democratic Republic of the Congo, Djibouti, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eswatini, Gabon, Georgia, Ghana, Guatemala, Guinea, Guinea-Bissau, Haiti, Honduras, Indonesia, Iran, Ivory Coast, Jordan, Kazakhstan, Kenya, Kuwait, Kyrgyzstan, Liberia, Libya, Lithuania, Madagascar, Malawi, Maldives, Mali, Mauritania, Mexico, Moldova, Mongolia, Morocco, Mozambique, Namibia, Nicaragua, Niger, Nigeria, Oman, Panama, Paraguay, Peru, Philippines, Poland, Qatar, Republic of the Congo, Romania, Russia, Rwanda, Saudi Arabia, Senegal, Sierra Leone, Somalia, South Korea, Sri Lanka, Sudan, Syria, Tajikistan, Tanzania, The Gambia, Timor-Leste, Tunisia, Turkmenistan, Uganda, Ukraine, United Arab Emirates, United States of America, Uruguay, Uzbekistan, Zambia, Zimbabwe & 97\\
 \bottomrule
 \insertTableNotes
 
@@ -1304,21 +1276,21 @@ effects to account for potential geographic clustering.
 \toprule
  & With Regional FE\\
 \midrule
-Semi-Pres & -0.246\\
- & (0.14)\\
+Semi-Pres & -0.25\\
+ & (0.143)\\
 Presidential & -0.115\\
- & (0.069)\\
+ & (0.07)\\
 Log GDP/cap & -0.031***\\
 \addlinespace
  & (0.007)\\
-Semi-Pres × GDP & 0.024\\
- & (0.015)\\
+Semi-Pres × GDP & 0.025\\
+ & (0.016)\\
 Pres × GDP & 0.012\\
  & (0.007)\\
 \addlinespace
-N & 149\\
-R² & 0.186\\
-Adj. R² & 0.114\\
+N & 148\\
+R² & 0.185\\
+Adj. R² & 0.113\\
 \bottomrule
 \insertTableNotes
 
@@ -1350,19 +1322,19 @@ identified via Cook's distance.
 \toprule
  & Excluding Outliers\\
 \midrule
-Semi-Pres & -0.252**\\
- & (0.089)\\
+Semi-Pres & -0.253**\\
+ & (0.09)\\
 Presidential & -0.238***\\
  & (0.066)\\
 Log GDP/cap & -0.033***\\
 \addlinespace
  & (0.006)\\
-Semi-Pres × GDP & 0.023*\\
+Semi-Pres × GDP & 0.024*\\
  & (0.009)\\
 Pres × GDP & 0.024***\\
  & (0.006)\\
 \addlinespace
-N & 138\\
+N & 137\\
 R² & 0.237\\
 Adj. R² & 0.196\\
 \bottomrule
@@ -1395,7 +1367,6 @@ Results and plots are saved in \texttt{output/robustness/}.
 \$r2\_un {[}1{]} 0.1101062
 
 \$r2\_full {[}1{]} 0.1317468
-\includegraphics[width=8in,height=\textheight,keepaspectratio]{../output/robustness/leave_one_out_plot_v2.png}
 
 \subsubsection{B.4 Crossover Uncertainty
 (Bootstrap)}\label{b.4-crossover-uncertainty-bootstrap}
@@ -1405,38 +1376,6 @@ level of GDP per capita (PPP) at which the estimated advantage of
 Presidential over Parliamentary systems changes sign. A bootstrap
 distribution and 95\% CI are reported below; full results and code are
 available in \texttt{output/robustness/}.
-
-\textbf{Bootstrap crossover summary (see
-output/robustness/crossover\_summary.txt):}
-
-Crossover (log GDP): median = 9.698, 95\% CI = {[}7.965, 10.742{]}
-Crossover (GDP, PPP): median = \$16278, 95\% CI = {[}\$2880, \$46266{]}
-Original point estimate (GDP): \$15813 (log = 9.669) Bootstrap draws
-(successful): 1000 (out of
-1000)\includegraphics[width=9in,height=\textheight,keepaspectratio]{../output/robustness/crossover_ci_v2.png}
-
-\subsubsection{B.5 Placebo / Permutation
-Test}\label{b.5-placebo-permutation-test}
-
-To further probe whether the observed Presidential × log(GDP)
-interaction could arise from random assignment of system types across
-countries, we implement a permutation (placebo) test that randomly
-shuffles \texttt{system\_type} across countries in the country-level
-sample and re-estimates the full model. The permutation distribution of
-the focal interaction coefficient is saved in
-\texttt{output/robustness/placebo\_permutation\_distribution.csv} and
-summarized in
-\texttt{output/robustness/placebo\_permutation\_summary.csv}. The
-histogram below visualizes the permutation distribution and the observed
-coefficient (red vertical line). A zero empirical p-value indicates that
-the observed coefficient is larger in magnitude than any coefficient in
-2,000 random permutations.
-
-\textbf{Placebo permutation summary (see
-output/robustness/placebo\_permutation\_summary.csv):}
-
-observed,perm\_median,perm\_mean,perm\_sd,n\_perm,p\_value
-0.0198921283128265,1.1699669418204621e-4,9.387739232983475e-5,0.0054240474484779635,2000,0\includegraphics[width=7in,height=\textheight,keepaspectratio]{../output/robustness/placebo_permutation_hist_v2.png}
 
 
 

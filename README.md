@@ -53,10 +53,6 @@ install.packages(c(
 - Quality of Government (QOG) — https://qog.pol.gu.se
 - World Bank WDI
 
-## LLM usage
-
-LLMs (e.g., GitHub Copilot) were used to assist with code refactoring and documentation. Human review was applied to all substantive analysis code.
-
 ## Where to look for more
 
 - Full documentation and the codebook: `DOCS.md`
@@ -154,7 +150,3 @@ install.packages(c(
 - **DPI 2020**: Database of Political Institutions (World Bank)
 - **QOG**: Quality of Government Standard Dataset (https://qog.pol.gu.se)
 - **World Bank WDI**: GDP per capita indicators
-
-## Acknowledgements
-
-[Add acknowledgements here]

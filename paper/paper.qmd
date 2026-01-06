@@ -153,18 +153,28 @@ tbl2 <- final_data %>%
   rename(`System Type` = system_type, `N` = n) %>%
   kable(booktabs = TRUE, format = "latex")
 
-# Combine side by side using minipages to contain centering. The following code simply pastes information from other places. The language inside is LaTeX.
-cat("\\begin{table}[H]\n")
-cat("\\begin{minipage}{.5\\linewidth}\n\\centering\n")
-cat("\\captionof{table}{Descriptive Statistics}\n")
-cat(tbl1)
-cat("\n\\vspace{1mm}\\par\\scriptsize\\textit{Notes.} Vol. = Volatility (SD of V-Dem liberal democracy index, 0--1). Dem. = Mean democracy (0--1). GDP = Log GDP per capita (PPP).\n")
-cat("\\end{minipage}%\n")
-cat("\\begin{minipage}{.5\\linewidth}\n\\centering\n")
-cat("\\captionof{table}{Countries by System Type}\n")
-cat(tbl2)
-cat("\n\\end{minipage}\n")
-cat("\\end{table}\n")
+latex_block <- c(
+  "\\begin{table}[!htbp]",
+  "\\begin{minipage}{.5\\linewidth}",
+  "\\centering",
+  "\\captionof{table}{Descriptive Statistics}",
+  tbl1,
+  "\\vspace{1mm}\\par\\scriptsize\\textit{Notes.} Vol. = Volatility (SD of V-Dem liberal democracy index, 0--1). Dem. = Mean democracy (0--1). GDP = Log GDP per capita (PPP).",
+  "\\end{minipage}%",
+  "\\begin{minipage}{.5\\linewidth}",
+  "\\centering",
+  "\\captionof{table}{Countries by System Type}",
+  tbl2,
+  "\\end{minipage}",
+  "\\end{table}"
+)
+
+dir.create(here::here("paper"), showWarnings = FALSE)
+writeLines(latex_block, con = here::here("paper", "tables-descriptive.tex"))
+
+# Emit raw LaTeX directly into the knitted document (as a fallback)
+knitr::asis_output(paste(latex_block, collapse = "\n"))
+
 ```
 
 # Results
