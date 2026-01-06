@@ -1,3 +1,4 @@
+```markdown
 Author note (do not include in manuscript body):
 
 Interpretation guidance for Results/Discussion:
@@ -6,3 +7,5 @@ Interpretation guidance for Results/Discussion:
 
 Suggested short insertion point (author decides where to place):
 "Note for authors: Because the bootstrap CI for the crossover is wide, present the crossover as an indicative range rather than a precise threshold; focus policy discussion on directional implications and complementary institutions rather than the exact dollar value."
+
+```

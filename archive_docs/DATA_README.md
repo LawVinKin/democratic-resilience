@@ -1,3 +1,4 @@
+````markdown
 DATA_README for "Parliamentary Resilience: Government Systems and Democratic Stability"
 
 Overview
@@ -42,3 +43,5 @@ Included processed derivatives are provided under CC-BY (unless you request CC-B
 Contact
 -------
 For questions about reproducing results, contact Lawrence Vincent King (email in `paper/paper.qmd`).
+
+````

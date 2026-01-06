@@ -7,8 +7,7 @@ pred_interaction <- expand.grid(
   system_type = c("Parliamentary", "Presidential"),
   log_gdp = seq(6.5, 11, by = 0.05),
   mean_democracy = mean(final_data$mean_democracy, na.rm = TRUE),
-  ethnic_frac = mean(final_data$ethnic_frac, na.rm = TRUE),
-  monarchy = 0  # Fixed: added missing variable
+  ethnic_frac = mean(final_data$ethnic_frac, na.rm = TRUE)
 )
 
 # Get predictions

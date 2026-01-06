@@ -232,7 +232,7 @@ Bank for World Development Indicators.}}
 \makeatother
 \subtitle{Working Paper}
 \author{Lawrence Vincent King}
-\date{December 27, 2025}
+\date{January 5, 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -523,6 +523,11 @@ The crossover point where neither system holds an advantage can be
 calculated by setting the combined effect of presidential system and
 interaction to zero. This yields a crossover GDP of approximately
 \textbf{\$14,159} per capita (PPP).
+
+Bootstrap results indicate substantial uncertainty around this estimate:
+the 95\% bootstrap confidence interval for the crossover is wide, so the
+exact GDP level where the relative advantage shifts between systems
+should be interpreted cautiously.
 
 Table~\ref{tbl-pred} shows predicted volatility at different GDP levels.
 
@@ -855,6 +860,18 @@ Issacharoff 2010). The rise of polarization as a driver of democratic
 erosion (Orhan 2022; Arbatli and Rosenberg 2021) suggests that
 institutional design alone cannot guarantee democratic resilience
 without addressing underlying societal divisions (McCoy and Somer 2021).
+
+\subsection{Data Availability}\label{data-availability}
+
+Processed analysis-ready data used in this paper are included in the
+repository under \texttt{data/02-analysis\_data/}. The full raw V-Dem
+v15 dataset is not redistributed here due to V-Dem licensing and file
+size; users should obtain the original V-Dem dataset from
+https://www.v-dem.net/en/data/data/v-dem-dataset-v15/ and follow the
+instructions in \texttt{DATA\_README.md} to reproduce the processing
+steps. A \texttt{CODEBOOK.md} describing key variables and
+\texttt{DATA\_README.md} with reproduction steps are provided at the
+repository root.
 
 \section{Conclusion}\label{conclusion}
 
@@ -1355,6 +1372,71 @@ Adj. R² & 0.196\\
 
 \end{ThreePartTable}
 \endgroup{}
+
+\subsubsection{B.3 Sensitivity Checks: Oster bounds \&
+Leave-One-Out}\label{b.3-sensitivity-checks-oster-bounds-leave-one-out}
+
+We conduct two additional sensitivity checks to assess the robustness of
+the focal Presidential × Log GDP interaction: (1) an Oster-style
+bounding calculation that assesses how large selection on unobservables
+would need to be to overturn the estimated interaction; and (2) a
+leave-one-out influence analysis that recomputes the full model while
+dropping one country at a time to identify influential observations.
+Results and plots are saved in \texttt{output/robustness/}.
+
+\textbf{Oster (2019) approximate result (printed below):}
+
+\$beta\_un system\_typePresidential:log\_gdp 0.01490202
+
+\$beta\_full system\_typePresidential:log\_gdp 0.01989213
+
+\$beta\_star system\_typePresidential:log\_gdp 0.2201029
+
+\$r2\_un {[}1{]} 0.1101062
+
+\$r2\_full {[}1{]} 0.1317468
+\includegraphics[width=8in,height=\textheight,keepaspectratio]{../output/robustness/leave_one_out_plot_v2.png}
+
+\subsubsection{B.4 Crossover Uncertainty
+(Bootstrap)}\label{b.4-crossover-uncertainty-bootstrap}
+
+We compute bootstrap confidence intervals for the GDP crossover --- the
+level of GDP per capita (PPP) at which the estimated advantage of
+Presidential over Parliamentary systems changes sign. A bootstrap
+distribution and 95\% CI are reported below; full results and code are
+available in \texttt{output/robustness/}.
+
+\textbf{Bootstrap crossover summary (see
+output/robustness/crossover\_summary.txt):}
+
+Crossover (log GDP): median = 9.698, 95\% CI = {[}7.965, 10.742{]}
+Crossover (GDP, PPP): median = \$16278, 95\% CI = {[}\$2880, \$46266{]}
+Original point estimate (GDP): \$15813 (log = 9.669) Bootstrap draws
+(successful): 1000 (out of
+1000)\includegraphics[width=9in,height=\textheight,keepaspectratio]{../output/robustness/crossover_ci_v2.png}
+
+\subsubsection{B.5 Placebo / Permutation
+Test}\label{b.5-placebo-permutation-test}
+
+To further probe whether the observed Presidential × log(GDP)
+interaction could arise from random assignment of system types across
+countries, we implement a permutation (placebo) test that randomly
+shuffles \texttt{system\_type} across countries in the country-level
+sample and re-estimates the full model. The permutation distribution of
+the focal interaction coefficient is saved in
+\texttt{output/robustness/placebo\_permutation\_distribution.csv} and
+summarized in
+\texttt{output/robustness/placebo\_permutation\_summary.csv}. The
+histogram below visualizes the permutation distribution and the observed
+coefficient (red vertical line). A zero empirical p-value indicates that
+the observed coefficient is larger in magnitude than any coefficient in
+2,000 random permutations.
+
+\textbf{Placebo permutation summary (see
+output/robustness/placebo\_permutation\_summary.csv):}
+
+observed,perm\_median,perm\_mean,perm\_sd,n\_perm,p\_value
+0.0198921283128265,1.1699669418204621e-4,9.387739232983475e-5,0.0054240474484779635,2000,0\includegraphics[width=7in,height=\textheight,keepaspectratio]{../output/robustness/placebo_permutation_hist_v2.png}
 
 
 

@@ -1,3 +1,4 @@
+```markdown
 CODEBOOK for "Parliamentary Resilience: Government Systems and Democratic Stability"
 
 This file describes the main variables used in the analysis and where they are stored.
@@ -14,3 +15,5 @@ Key variables (in `data/02-analysis_data/merged_all_years.csv` and `stability_me
 - `ethnic_frac`: Ethnic fractionalization (from QOG/DPI processed file).
 
 Additional variables and transformations are documented in `scripts/03-model_data.R`. If you need a variable not described here, open the script and the specific processing steps are annotated.
+
+```

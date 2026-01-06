@@ -1,6 +1,6 @@
 ---
-title: "Parliamentary Resilience: Government Systems and Democratic Stability"
-subtitle: "Working Paper"
+title: "Democratic Resilience in the 21st Century"
+subtitle: "The Return of Presidential vs. Parliamentary Debate"
 author: 
   - name: "Lawrence Vincent King"
 thanks: "Code and data are available at: https://github.com/LawVinKin/democratic-resilience. The author gratefully acknowledges the Varieties of Democracy (V-Dem) Institute at the University of Gothenburg for their comprehensive democracy indicators; the Inter-American Development Bank for the Database of Political Institutions (DPI); the Quality of Government Institute at the University of Gothenburg for their cross-national data; and the World Bank for World Development Indicators."
@@ -43,7 +43,7 @@ library(ggplot2)
 
 Democratic backsliding has emerged as one of the most significant political phenomena of the 21st century [@bermeo2016democratic, 10-13; @levitsky2018democracies]. From Hungary to Brazil, established democracies have experienced erosion of democratic norms and institutions [@luhrmann2019third, 1105; @waldner2018unwelcome]. Yet not all democracies are equally vulnerable. Some demonstrate remarkable resilience while others succumb to authoritarian pressures [@levitsky2023surprising; @merkel2021resilience]. This variation raises a fundamental question about what institutional configurations best protect democratic stability.
 
-This paper investigates whether government system type (presidential, parliamentary, or semi-presidential) affects democratic resilience, and crucially, whether this relationship is conditional on a country's level of economic development. The analysis challenges the conventional wisdom pitting parliamentary against presidential systems, arguing that it misses the conditional nature of institutional effects [@cheibub2007presidentialism, 140-143; @cheibub2002democratic, 151]. The central claim is that the optimal system for democratic stability depends on the developmental context.
+This paper investigates whether government system type (presidential, parliamentary, or semi-presidential) affects democratic resilience, and crucially, whether this relationship is conditional on a country's level of economic development. The analysis challenges the conventional wisdom pitting parliamentary against presidential systems in the abstract, arguing that it misses the conditional nature of institutional effects [@cheibub2007presidentialism, 140-143; @cheibub2002democratic, 151]. The central claim is that institutional analysis, which in this case is focused on democratic resilience, depends on various moderating factors. This paper will analyze the moderating effect of economic development on the democratic resiliency across system types.
 
 Using data from the Varieties of Democracy (V-Dem) project covering 2000-2023 [@coppedge2011conceptualizing; @lindberg2014vdem], democratic stability is measured through volatility in liberal democracy scores. The key finding is that presidential systems demonstrate lower democratic volatility in low-income countries, while parliamentary systems perform better in high-income contexts. The crossover point, where neither system holds an advantage, occurs at approximately $14,000 GDP per capita (PPP).
 
@@ -82,21 +82,15 @@ Parliamentary systems require strong, institutionalized parties to function effe
 We combine four major cross-national datasets:
 
 *V-Dem v15* (Varieties of Democracy): Democracy indicators for 2000-2023 [@coppedge2011conceptualizing; @lindberg2014vdem].
-
 *DPI 2020* (Database of Political Institutions): Government system classifications [@dpi2020].
-
 *QOG* (Quality of Government): Control variables including ethnic fractionalization [@qog2024].
-
 *World Bank WDI*: GDP per capita (PPP, constant 2017 USD) [@wdi2024].
 
 ## Variables
 
 *Dependent Variable*: Democratic Volatility measures the standard deviation of the V-Dem liberal democracy index for each country over 2000-2023. Higher values indicate greater instability in democratic quality. Countries are required to have at least 20 years of non-missing data.
-
 *Independent Variable*: Government System Type is coded as Parliamentary (reference), Semi-Presidential, or Presidential based on DPI classifications.
-
 *Moderator*: Log GDP per capita measures economic development using the mean GDP per capita (PPP) over 2000-2023.
-
 *Controls*: The models include mean democracy level, ethnic fractionalization, and a constitutional monarchy indicator.
 
 ## Analytical Strategy
@@ -122,8 +116,7 @@ final_data <- read_csv(here("data", "02-analysis_data", "stability_measures.csv"
     read_csv(here("data", "02-analysis_data", "merged_all_years.csv")) %>%
       group_by(country_name, iso3c) %>%
       summarise(monarchy = as.numeric(mean(v2exl_legitlead, na.rm = TRUE) == 1), .groups = "drop"),
-    by = c("country_name", "iso3c")
-  ) %>%
+    by = c("country_name", "iso3c")) %>%
   mutate(
     system_type = factor(system_type, levels = c("Parliamentary", "Semi-Presidential", "Presidential")),
     log_gdp = log_gdp_mean
@@ -160,7 +153,7 @@ tbl2 <- final_data %>%
   rename(`System Type` = system_type, `N` = n) %>%
   kable(booktabs = TRUE, format = "latex")
 
-# Combine side by side using minipages to contain centering
+# Combine side by side using minipages to contain centering. The following code simply pastes information from other places. The language inside is LaTeX.
 cat("\\begin{table}[H]\n")
 cat("\\begin{minipage}{.5\\linewidth}\n\\centering\n")
 cat("\\captionof{table}{Descriptive Statistics}\n")
@@ -204,8 +197,7 @@ add_stars <- function(coef, pval) {
     pval < 0.05 ~ "*",
     TRUE ~ ""
   )
-  paste0(round(coef, 3), star)
-}
+  paste0(round(coef, 3), star)}
 
 # Get robust results for both models
 robust_m1 <- coeftest(m1, vcov = robust_vcov(m1))
@@ -235,11 +227,9 @@ for (i in seq_along(vars)) {
   # Model 2
   if (v %in% rownames(robust_m2)) {
     m2_coef <- add_stars(robust_m2[v, "Estimate"], robust_m2[v, "Pr(>|t|)"])
-    m2_se <- paste0("(", round(robust_m2[v, "Std. Error"], 3), ")")
-  } else {
+    m2_se <- paste0("(", round(robust_m2[v, "Std. Error"], 3), ")")} else {
     m2_coef <- ""
-    m2_se <- ""
-  }
+    m2_se <- ""}
   
   tbl_rows[[length(tbl_rows) + 1]] <- c(labels[i], m1_coef, m2_coef)
   tbl_rows[[length(tbl_rows) + 1]] <- c("", m1_se, m2_se)
@@ -500,11 +490,8 @@ robust_results %>%
 ```
 
 *Alternative Dependent Variable*. Using total democratic decline (sum of year-over-year decreases) instead of volatility yields consistent interaction effects, though the coefficient magnitude varies.
-
 *Income Subsamples*. Splitting the sample at median GDP confirms the theoretical predictions. Within low-income countries, the interaction effect remains negative (presidential advantage increases with development within this group), while high-income countries show the parliamentary advantage.
-
 *Democratic Sample*. Restricting to countries with mean democracy scores above 0.5 strengthens the parliamentary advantage, consistent with the argument that institutional constraints matter more in established democracies [@haggard2021backsliding; @riedl2024democratic].
-
 *Additional Tests*. Regional fixed effects were also examined (not shown), finding that results hold within Latin America and Europe. Excluding small island states and city-states does not substantively alter findings.
 
 # Case Studies: Mechanisms in Action {#sec-cases}
@@ -570,11 +557,8 @@ We consider several alternative explanations for our findings:
 Future research could pursue stronger causal identification through several strategies [@imai2011unpacking]:
 
 *Instrumental Variables*: Historical determinants of system choice (colonial origin, neighborhood effects) could serve as instruments if they satisfy exclusion restrictions.
-
 *Regression Discontinuity*: Countries near decision thresholds during constitutional moments might provide quasi-experimental variation.
-
 *Difference-in-Differences*: The few cases of system change (e.g., Turkey's 2017 constitutional referendum) could enable within-country comparisons, though small samples limit statistical power.
-
 *Mechanism-Based Approaches*: Rather than seeking the total effect of system type, future work could focus on specific mechanisms (institutional constraints, party strength) that are more amenable to identification [@hainmueller2019marginal].
 
 ## Policy Implications
@@ -588,10 +572,6 @@ For constitutional designers in developing countries, these findings suggest cau
 Conversely, as countries develop, strengthening horizontal accountability mechanisms and party systems may be more important than the choice of executive structure per se [@gibler2011testing; @bizzarro2018party]. Cases like Indonesia demonstrate that presidential structures can support democratic development when accompanied by effective institutional constraints and competitive party systems [@scheppele2018autocratic; @mccoy2018polarization, 22-26].
 
 For countries near the crossover point (~$14,000 GDP per capita), the findings suggest genuine institutional ambiguity. In these contexts, attention to complementary institutions (judicial independence, legislative capacity, party system development) may matter more than the presidential-parliamentary choice itself [@fish2006stronger; @issacharoff2010constitutional]. The rise of polarization as a driver of democratic erosion [@orhan2022relationship; @arbatli2021united] suggests that institutional design alone cannot guarantee democratic resilience without addressing underlying societal divisions [@mccoy2021overcoming].
-
-## Data Availability
-
-Processed analysis-ready data used in this paper are included in the repository under `data/02-analysis_data/`. The full raw V-Dem v15 dataset is not redistributed here due to V-Dem licensing and file size; users should obtain the original V-Dem dataset from https://www.v-dem.net/en/data/data/v-dem-dataset-v15/ and follow the instructions in `DATA_README.md` to reproduce the processing steps. A `CODEBOOK.md` describing key variables and `DATA_README.md` with reproduction steps are provided at the repository root.
 
 # Conclusion
 
@@ -807,35 +787,10 @@ library(here)
 oster_txt <- readLines(here("output","robustness","oster_result.txt"))
 cat("**Oster (2019) approximate result (printed below):**\n\n")
 cat(paste(oster_txt, collapse = "\n"))
-
-# Display leave-one-out plot
-knitr::include_graphics(here("output","robustness","leave_one_out_plot_v2.png"))
 ```
 
 ### B.4 Crossover Uncertainty (Bootstrap)
 
 We compute bootstrap confidence intervals for the GDP crossover — the level of GDP per capita (PPP) at which the estimated advantage of Presidential over Parliamentary systems changes sign. A bootstrap distribution and 95% CI are reported below; full results and code are available in `output/robustness/`.
-
-```{r}
-#| echo: false
-#| results: asis
-library(here)
-cat("**Bootstrap crossover summary (see output/robustness/crossover_summary.txt):**\n\n")
-cat(paste(readLines(here("output","robustness","crossover_summary.txt")), collapse = "\n"))
-knitr::include_graphics(here("output","robustness","crossover_ci_v2.png"))
-```
-
-### B.5 Placebo / Permutation Test
-
-To further probe whether the observed Presidential × log(GDP) interaction could arise from random assignment of system types across countries, we implement a permutation (placebo) test that randomly shuffles `system_type` across countries in the country-level sample and re-estimates the full model. The permutation distribution of the focal interaction coefficient is saved in `output/robustness/placebo_permutation_distribution.csv` and summarized in `output/robustness/placebo_permutation_summary.csv`. The histogram below visualizes the permutation distribution and the observed coefficient (red vertical line). A zero empirical p-value indicates that the observed coefficient is larger in magnitude than any coefficient in 2,000 random permutations.
-
-```{r}
-#| echo: false
-#| results: asis
-library(here)
-cat("**Placebo permutation summary (see output/robustness/placebo_permutation_summary.csv):**\n\n")
-cat(paste(readLines(here("output","robustness","placebo_permutation_summary.csv")), collapse = "\n"))
-knitr::include_graphics(here("output","robustness","placebo_permutation_hist_v2.png"))
-```
 
 

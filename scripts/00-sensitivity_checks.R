@@ -1,86 +1,79 @@
-# Sensitivity checks: Oster (2019) and leave-one-out influence
-# Produces small output files under output/robustness/
+# This script will produce sensitivity checks using Oster (2019) and leave-one-out influence
 
 library(tidyverse)
-library(here)
 library(broom)
 
-out_dir <- here::here("output","robustness")
-if(!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
+out_dir <- "/Users/shahin/Documents/GitHub/projects-template/output/robustness"
+dir.create(out_dir, recursive = TRUE)
+setwd(out_dir)
 
-# Load processed final data (country-level)
-final_data <- read_csv(here::here("data","02-analysis_data","stability_measures.csv")) %>%
-  # join DPI system type (ensure unique keys)
-  left_join(
-    read_csv(here::here("data","02-analysis_data","dpi_processed.csv")) %>% distinct(iso3c, .keep_all = TRUE),
-    by = c("iso3c")
-  ) %>%
-  # join GDP
-  left_join(
-    read_csv(here::here("data","02-analysis_data","gdp_processed.csv")) %>% distinct(iso3c, .keep_all = TRUE) %>% select(iso3c, log_gdp_mean),
-    by = "iso3c"
-  ) %>%
+# Cleaning and loading and merging data
+DPI <- "/Users/shahin/Documents/GitHub/projects-template/data/02-analysis_data/dpi_processed.csv"
+GDP <- "/Users/shahin/Documents/GitHub/projects-template/data/02-analysis_data/gdp_processed.csv"
+Stab <- "/Users/shahin/Documents/GitHub/projects-template/data/02-analysis_data/stability_measures.csv"
+
+stability_data <- read_csv(Stab)
+
+dpi_data <- read_csv(DPI) %>%
+  distinct(iso3c, .keep_all = TRUE)
+
+gdp_data <- read_csv(GDP) %>%
+  distinct(iso3c, .keep_all = TRUE) %>%
+  select(iso3c, log_gdp_mean)
+
+final_data <- left_join(stability_data, dpi_data, by = "iso3c")
+
+final_data <- left_join(final_data, gdp_data, by = "iso3c")
+
+final_data <- final_data %>%
   mutate(log_gdp = log_gdp_mean) %>%
   filter(!is.na(volatility) & !is.na(system_type) & !is.na(log_gdp))
 
-# Define baseline and full models
-# Baseline: system_type + log_gdp + interaction
-mod_formula_base <- as.formula("volatility ~ system_type + log_gdp + system_type:log_gdp")
-# Full: add standard controls
-# join QOG for ethnic fractionalization
 final_data <- final_data %>%
-  left_join(read_csv(here::here("data","02-analysis_data","qog_processed.csv")) %>% distinct(iso3c, .keep_all = TRUE), by = "iso3c")
+  left_join(read_csv("/Users/shahin/Documents/GitHub/projects-template/data/02-analysis_data/qog_processed.csv") %>% distinct(iso3c, .keep_all = TRUE), by = "iso3c")
 
-# Full model: include mean_democracy and ethnic fractionalization
-mod_formula_full <- as.formula("volatility ~ system_type + log_gdp + system_type:log_gdp + mean_democracy + ethnic_frac")
+# Defining models
+m1 <- lm(volatility ~ system_type + log_gdp + system_type*log_gdp, data = final_data)
+m2 <- lm(volatility ~ system_type + log_gdp + system_type*log_gdp + mean_democracy + ethnic_frac, data = final_data)
 
-mod_base <- lm(mod_formula_base, data = final_data)
-mod_full <- lm(mod_formula_full, data = final_data)
+# Getting their summaries
+m1_summary <- tidy(m1)
 
-# Save coefficients summary
-write_csv(broom::tidy(mod_base), file = file.path(out_dir, "mod_base_coefs.csv"))
-write_csv(broom::tidy(mod_full), file = file.path(out_dir, "mod_full_coefs.csv"))
+# Save m1 summary to a CSV file
+write_csv(m1_summary, "mod_base_coefs.csv")
 
-# Simple Oster (2019) implementation helper
-# If psacalc is available, use it; otherwise compute approximate delta bounds
-run_oster <- function(mod_un, mod_full, delta = 1, rmax = 1) {
-  # Requires: coef_un (beta_un), R2_un, R2_full, beta_full
-  beta_un <- coef(mod_un)["system_typePresidential:log_gdp"]
-  beta_full <- coef(mod_full)["system_typePresidential:log_gdp"]
-  r2_un <- summary(mod_un)$r.squared
-  r2_full <- summary(mod_full)$r.squared
-  # Oster formula for adjusted estimate
-  # beta* = beta_full - (beta_un - beta_full) * (rmax - r2_full)/(r2_full - r2_un)
-  if(is.na(beta_un) | is.na(beta_full) | (r2_full - r2_un) == 0) return(NA)
-  beta_star <- beta_full - (beta_un - beta_full) * (rmax - r2_full)/(r2_full - r2_un)
-  return(list(beta_un = beta_un, beta_full = beta_full, beta_star = beta_star, r2_un = r2_un, r2_full = r2_full))
-}
+# Get summary of model m2
+m2_summary <- tidy(m2)
 
-oster_res <- run_oster(mod_base, mod_full, delta = 1, rmax = 1)
-writeLines(capture.output(oster_res), file.path(out_dir, "oster_result.txt"))
+# Save m2 summary to a CSV file
+write_csv(m2_summary, "mod_full_coefs.csv")
+
+# Oster calculation
+# Oster (2019) formula: beta* = beta_full - (beta_un - beta_full) * (1 - r2_full) / (r2_full - r2_un)
+beta_un <- coef(m1)["system_typePresidential:log_gdp"]
+beta_full <- coef(m2)["system_typePresidential:log_gdp"]
+r2_un <- summary(m1)$r.squared #to extract r2 from model 1
+r2_full <- summary(m2)$r.squared # Same as above
+numerator <- (beta_un - beta_full) * (1 - r2_full)
+denominator <- r2_full - r2_un
+beta_star <- beta_full - (numerator / denominator)
+oster_res <- list(beta_un = beta_un, beta_full = beta_full, beta_star = beta_star, r2_un = r2_un, r2_full = r2_full)
+
+sink("oster_result.txt")
+print(oster_res)
+sink()
 
 # Leave-one-out influence for the focal interaction term
+# Leave-one-out analysis: Refit model excluding each country
+# to assess influence on the interaction coefficient "system_typePresidential:log_gdp"
 iso_list <- unique(final_data$iso3c)
-loo_results <- map_dfr(iso_list, function(iso) {
+loo_results <- data.frame()
+for (iso in iso_list) {
   df_tmp <- filter(final_data, iso3c != iso)
-  mod_tmp <- lm(mod_formula_full, data = df_tmp)
-  tibble(iso3c = iso,
-         coef = coef(mod_tmp)["system_typePresidential:log_gdp"],
-         se = summary(mod_tmp)$coefficients["system_typePresidential:log_gdp","Std. Error"]) 
-})
+  mod_tmp <- lm(volatility ~ system_type + log_gdp + system_type*log_gdp + mean_democracy + ethnic_frac, data = df_tmp)
+  coef_val <- coef(mod_tmp)["system_typePresidential:log_gdp"]
+  se_val <- summary(mod_tmp)$coefficients["system_typePresidential:log_gdp", "Std. Error"]
+  loo_results <- rbind(loo_results, data.frame(iso3c = iso, coef = coef_val, se = se_val))
+}
 
-write_csv(loo_results, file.path(out_dir, "leave_one_out_interaction.csv"))
-
-# Quick plot of leave-one-out coefficients
-library(ggplot2)
-plt <- ggplot(loo_results, aes(x = reorder(iso3c, coef), y = coef)) +
-  geom_point(color = "#2c7fb8", size = 2) +
-  geom_hline(yintercept = coef(mod_full)["system_typePresidential:log_gdp"], color = "red") +
-  coord_flip() +
-  theme_minimal() +
-  theme(axis.title = element_text(face = "bold", size = 11),
-        axis.text = element_text(size = 9)) +
-  labs(title = "Leave-one-out coefficients for Presidential x LogGDP interaction",
-       x = "Country dropped", y = "Interaction coefficient")
-
-ggsave(file.path(out_dir, "leave_one_out_plot_v2.png"), plt, width = 8, height = 6, dpi = 300)
+write_csv(loo_results, "leave_one_out_interaction.csv")
