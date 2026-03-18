@@ -247,6 +247,15 @@ uv.lock
 
 # requirements.txt
  
-# Quarto files 
+# Quarto files
 /.quarto/
 data/01-raw_data/V-Dem-CY-Full+Others-v15.csv
+
+# RDS files (regenerable from scripts)
+*.rds
+!data/02-analysis_data/analytical_sample.rds
+
+# Generated output (regenerable from scripts)
+output/mediation/
+output/models/
+paper/output/

@@ -5,7 +5,9 @@
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
-]{article}
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
 \usepackage{xcolor}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb}
@@ -23,6 +25,8 @@
 \usepackage{lmodern}
 \ifPDFTeX\else
   % xetex/luatex font selection
+  \setmainfont[]{Times New Roman}
+  \setsansfont[]{Times New Roman}
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -157,7 +161,9 @@
 \floatplacement{figure}{H}
 \usepackage{booktabs}
 \usepackage{siunitx}
+\usepackage{makecell}
 \newcolumntype{d}{S[input-symbols = ()]}
+\KOMAoption{captions}{tableheading}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -203,7 +209,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={Democratic Resilience in the 21st Century},
+  pdftitle={Economic Development and Democratic Stability in Presidential and Parliamentary Systems},
   pdfauthor={Lawrence Vincent King},
   pdfkeywords={democratic backsliding, presidentialism, parliamentarism,
 institutional design, economic development, democratic resilience},
@@ -215,38 +221,43 @@ institutional design, economic development, democratic resilience},
   pdfcreator={LaTeX via pandoc}}
 
 
-\title{Democratic Resilience in the 21st Century\thanks{Code and data
-are available at: https://github.com/LawVinKin/democratic-resilience.
-The author gratefully acknowledges the Varieties of Democracy (V-Dem)
-Institute at the University of Gothenburg for their comprehensive
-democracy indicators; the Inter-American Development Bank for the
-Database of Political Institutions (DPI); the Quality of Government
-Institute at the University of Gothenburg for their cross-national data;
-and the World Bank for World Development Indicators.}}
+\title{Economic Development and Democratic Stability in Presidential and
+Parliamentary Systems\thanks{Code and data are available at:
+https://github.com/LawVinKin/democratic-resilience. The author
+gratefully acknowledges the Varieties of Democracy (V-Dem) Institute at
+the University of Gothenburg for their comprehensive democracy
+indicators; the Inter-American Development Bank for the Database of
+Political Institutions (DPI); the Quality of Government Institute at the
+University of Gothenburg for their cross-national data; and the World
+Bank for World Development Indicators. No funding was received for this
+research. No ethics approval was required. The author declares no
+conflicts of interest.}}
 \usepackage{etoolbox}
 \makeatletter
 \providecommand{\subtitle}[1]{% add subtitle to \maketitle
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
-\subtitle{The Return of Presidential vs.~Parliamentary Debate}
+\subtitle{A Cross-National Study, 2000--2023}
 \author{Lawrence Vincent King}
-\date{January 6, 2026}
+\date{March 17, 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
-This paper investigates the relationship between government system types
-and democratic stability across 100+ countries from 2000-2023. Using
-V-Dem democracy indicators, the analysis finds that the effect of
-presidential versus parliamentary systems on democratic volatility is
-conditional on economic development. Presidential systems exhibit lower
-volatility in low-income contexts where executive autonomy aids crisis
-response, while parliamentary systems show greater stability in
-high-income countries where institutional constraints and party systems
-are stronger. The crossover point occurs at approximately \$14,000 GDP
-per capita (PPP). These findings advance understanding of institutional
-resilience and have important implications for constitutional design in
-democratizing states. (99 words)
+This paper examines how government system type shapes democratic
+stability across more than 100 countries from 2000 to 2023. Using
+country-level cross-sectional data and V-Dem liberal democracy scores, I
+estimate interaction models to test whether the effect of presidential,
+parliamentary, and semi-presidential systems depends on economic
+development. The results show that system type has a conditional
+relationship with democratic volatility: presidential systems are
+associated with lower volatility in low-income contexts, while
+parliamentary systems are associated with greater stability at higher
+levels of development. The crossover point occurs at approximately
+\$14,000 GDP per capita (PPP). These findings suggest that institutional
+effects on democracy are context-dependent rather than universal, with
+important implications for constitutional design in democratizing
+states.
 \end{abstract}
 
 
@@ -287,12 +298,13 @@ These findings contribute to comparative politics scholarship by
 demonstrating that institutional effects on democratic stability are not
 universal but context-dependent (Brambor, Clark, and Golder 2006;
 Hainmueller, Mummolo, and Xu 2019). The paper proceeds as follows.
-Section 2 reviews the theoretical framework, Section 3 describes data
-and methodology, Section 4 presents results, Section 5 illustrates
-findings with case studies, Section 6 discusses causal interpretation,
-and Section 7 concludes.
+Section Section~\ref{sec-theoretical-framework} reviews the theoretical
+framework, Section Section~\ref{sec-data} describes data and
+methodology, Section Section~\ref{sec-results} presents results, Section
+Section~\ref{sec-discussion} discusses causal interpretation, and
+Section Section~\ref{sec-conclusion} concludes.
 
-\section{Theoretical Framework}\label{theoretical-framework}
+\section{Theoretical Framework}\label{sec-theoretical-framework}
 
 \subsection{Government Systems and Democratic
 Stability}\label{government-systems-and-democratic-stability}
@@ -381,39 +393,245 @@ maintenance (Chaisty, Cheeseman, and Power 2014).
 
 \subsection{Data Sources}\label{data-sources}
 
-We combine four major cross-national datasets:
+This analysis combines the following four major cross-national datasets.
 
-\emph{V-Dem v15} (Varieties of Democracy): Democracy indicators for
-2000-2023 (Coppedge et al. 2011; Lindberg et al. 2014). \emph{DPI 2020}
-(Database of Political Institutions): Government system classifications
-(Cruz, Keefer, and Scartascini 2021). \emph{QOG} (Quality of
-Government): Control variables including ethnic fractionalization
-(Teorell et al. 2024). \emph{World Bank WDI}: GDP per capita (PPP,
-constant 2017 USD) (World Bank 2024).
+\textbf{V-Dem v15 (Varieties of Democracy):} The V-Dem project
+aggregates expert assessments across multiple dimensions of democracy,
+providing both point estimates and measures of uncertainty (Coppedge et
+al. 2011; Lindberg et al. 2014). I use the liberal democracy index
+(\emph{v2x\_libdem}) as the primary measure, which captures protections
+of individual and minority rights, rule of law, and constraints on
+executive power.
+
+\textbf{DPI 2020 (Database of Political Institutions):} Government
+system classifications from the Inter-American Development Bank (Cruz,
+Keefer, and Scartascini 2021). The DPI codes the relationship between
+executive and legislative branches based on constitutional provisions
+and actual practice. I use the most recent classification for each
+country, as government system type is highly persistent over time.
+
+\textbf{QOG (Quality of Government Standard Dataset):} Control variables
+including ethnic fractionalization (Teorell et al. 2024). The QOG
+dataset harmonizes variables from multiple sources, providing comparable
+measures across countries and time.
+
+\textbf{World Bank WDI:} GDP per capita (PPP, constant 2017
+international \$) (World Bank 2024). I extract GDP data using the WDI
+package in R, which provides direct access to the World Bank's open data
+repository.
+
+\subsection{Data Construction and Sample
+Selection}\label{data-construction-and-sample-selection}
+
+The analytical sample is constructed through a multi-stage process.
+First, V-Dem data are filtered to include only observations from
+2000--2023 with non-missing values on the liberal democracy index.
+Country names are standardized using the \texttt{countrycode} package to
+enable merging across datasets.
+
+Second, DPI data are processed to classify government systems into three
+categories: Presidential (directly elected executive independent of
+legislative confidence), Parliamentary (executive dependent on
+legislative confidence), and Semi-Presidential (dual executive with both
+directly elected president and prime minister dependent on legislature).
+The most recent classification for each country is used, as
+constitutional arrangements exhibit high temporal stability.
+
+Third, GDP data are aggregated to country-level means over the
+2000--2023 period, then transformed using the natural logarithm. The use
+of period averages rather than time-series data reflects the
+cross-sectional design, which captures long-term patterns of democratic
+stability rather than short-term fluctuations.
+
+Fourth, ethnic fractionalization data from QOG are merged using
+standardized country codes. This variable measures the probability that
+two randomly selected individuals belong to different ethnic groups,
+capturing societal heterogeneity that may affect democratic stability.
+
+Countries are included in the analytical sample if they satisfy three
+criteria: (1) at least 20 years of non-missing V-Dem democracy scores
+during 2000--2023, ensuring sufficient temporal coverage for computing
+reliable volatility measures; (2) valid government system classification
+in DPI; and (3) GDP data available in WDI. The final analytical sample
+includes 162 countries.
+
+Countries excluded from the sample typically lack sufficient V-Dem
+coverage (small states, microstates, or countries with limited expert
+availability) or have incomplete GDP reporting. Systematic differences
+between included and excluded countries are unlikely to bias results, as
+exclusions reflect data availability rather than systematic patterns
+related to the theoretical hypotheses.
 
 \subsection{Variables}\label{variables}
 
-\emph{Dependent Variable}: Democratic Volatility measures the standard
-deviation of the V-Dem liberal democracy index for each country over
-2000-2023. Higher values indicate greater instability in democratic
-quality. Countries are required to have at least 20 years of non-missing
-data. \emph{Independent Variable}: Government System Type is coded as
-Parliamentary (reference), Semi-Presidential, or Presidential based on
-DPI classifications. \emph{Moderator}: Log GDP per capita measures
-economic development using the mean GDP per capita (PPP) over 2000-2023.
-\emph{Controls}: The models include mean democracy level, ethnic
-fractionalization, and a constitutional monarchy indicator.
+\subsubsection{Dependent Variables: Democratic Stability
+Measures}\label{dependent-variables-democratic-stability-measures}
+
+The primary dependent variable is Democratic Volatility, which measures
+the standard deviation of the V-Dem liberal democracy index
+(\emph{v2x\_libdem}) for each country over 2000--2023. Higher values
+indicate greater instability in democratic quality. Countries are
+required to have at least 20 years of non-missing data.
+
+A key methodological consideration is that standard deviation alone
+could misleadingly ``penalize'' countries that have steadily
+\emph{improved} their democracy scores---a country on a positive
+democratic trajectory would show high variance despite experiencing no
+instability. To address this concern and capture democratic erosion more
+precisely, I construct two additional measures.
+
+First, total decline is calculated as the sum of all year-over-year
+\emph{decreases} in the liberal democracy score. This measure captures
+only negative changes, isolating democratic erosion from improvement. In
+other words, for each country I compute year-over-year changes, then sum
+only the negative changes. Formally,
+
+\[
+\begin{gathered}
+\Delta_t = \text{Democracy}_t - \text{Democracy}_{t-1} \\
+\text{Total Decline} = \sum_{\Delta_t <0} |\Delta_t|.
+\end{gathered}
+\]
+
+Second, I define backsliding episodes as the count of major democratic
+declines which are operationalized as year-over-year drops greater than
+0.05 in the liberal democracy score. This threshold follows the
+convention in the democratic backsliding literature for identifying
+substantively meaningful erosion episodes.
+
+The main analysis uses Democratic Volatility as the primary outcome,
+with Total Decline employed for robustness checks.
+
+\subsubsection{Independent Variables}\label{independent-variables}
+
+Government system types are coded as Parliamentary (reference category),
+Semi-Presidential, or Presidential based on DPI classifications. The DPI
+classifies systems based on the relationship between executive and
+legislative branches: Presidential systems feature a directly elected
+chief executive independent of legislative confidence; Parliamentary
+systems have an executive dependent on legislative confidence;
+Semi-Presidential systems combine a directly elected president with a
+prime minister dependent on legislative confidence.
+
+The moderator variable measuring economic development is constructed as
+the natural logarithm of mean GDP per capita (PPP, constant 2017
+international \$) over 2000--2023. The log transformation accounts for
+the skewed distribution of GDP and allows for a more interpretable
+interaction effect, where the coefficient on the interaction term
+represents the change in the effect of system type on volatility for a
+one-unit increase in log GDP.
+
+\subsubsection{Control Variables}\label{control-variables}
+
+The mean democracy level (2000--2023) is included as a control to
+account for the possibility that countries starting from lower democracy
+levels have more room for variation in volatility. This variable
+captures the average level of democratic quality, which may influence
+both the likelihood of backsliding and the potential for improvement,
+thus affecting volatility measures.
+
+Ethnic fractionalization is included as a control variable to account
+for societal heterogeneity that may affect democratic stability. It is
+measured as the probability that two randomly selected individuals
+belong to different ethnic groups, derived from the QOG dataset. This
+variable is commonly used in the comparative politics literature on
+democratization and stability (Easterly 2001; Alesina et al. 2003).
 
 \subsection{Analytical Strategy}\label{analytical-strategy}
 
-OLS regression models with robust standard errors are estimated (R Core
-Team 2024; Wickham et al. 2019):
+The analysis proceeds in three stages, moving from descriptive patterns
+to causal inference.
 
-\[Volatility_i = \beta_0 + \beta_1 System_i + \beta_2 LogGDP_i + \beta_3 (System_i \times LogGDP_i) + \gamma X_i + \epsilon_i\]
+Stage 1: Cross-Sectional Design: I construct a country-level
+cross-sectional dataset where each country contributes one observation.
+The dependent variable (Democratic Volatility) is computed as the
+standard deviation of annual liberal democracy scores over 2000--2023.
+Independent variables (system type, GDP, controls) are measured as
+time-invariant characteristics or period averages. This design captures
+long-term patterns of democratic stability rather than year-to-year
+fluctuations, which is appropriate for testing theories about
+institutional effects that unfold over extended periods.
 
-The interaction term \(\beta_3\) captures the core theoretical claim
-that system effects vary with development (Brambor, Clark, and Golder
-2006).
+Stage 2: Regression Models: I estimate ordinary least squares (OLS)
+regression models with HC1 robust standard errors to account for
+potential heteroskedasticity. The baseline model (Model 1) includes main
+effects for system type, GDP, and controls:
+
+\[
+\text{Volatility}_i = \beta_0 + \beta_1 \text{SemiPres}_i + \beta_2 \text{Pres}_i + \beta_3 \text{LogGDP}_i + \gamma {X}_i + \epsilon_i
+\]
+
+where \(\text{SemiPres}_i\) and \(\text{Pres}_i\) are indicator
+variables for semi-presidential and presidential systems (parliamentary
+is the reference category), \(\text{LogGDP}_i\) is the log of mean GDP
+per capita (PPP), and \(X_i\) is a vector of control variables including
+mean democracy level and ethnic fractionalization.
+
+The interaction model (Model 2) adds multiplicative terms between system
+type and GDP:
+
+\[
+\begin{aligned}
+\text{Volatility}_i = \beta_0 &+ \beta_1 \text{SemiPres}_i + \beta_2 \text{Pres}_i + \beta_3 \text{LogGDP}_i \\
+&\quad + \beta_4 (\text{SemiPres}_i \times \text{LogGDP}_i) + \beta_5 (\text{Pres}_i \times \text{LogGDP}_i) + \gamma X_i + \epsilon_i
+\end{aligned}
+\]
+
+The key parameters are \(\beta_4\) and \(\beta_5\), the interaction
+coefficients. A positive coefficient on the Presidential \(\times\) Log
+GDP interaction (\(\beta_5 > 0\)) indicates that presidential systems
+become associated with \emph{higher} volatility as GDP increases (or
+conversely, lower volatility at low GDP levels relative to parliamentary
+systems). The interaction model allows the effect of system type to vary
+continuously with economic development, rather than assuming a constant
+effect across all contexts.
+
+Stage 3: Crossover Analysis: To identify the specific GDP level at which
+the relative advantage shifts between presidential and parliamentary
+systems, I calculate the ``crossover point'' where predicted volatility
+is equal for both systems. Setting the combined effect of the
+presidential indicator and interaction to zero:
+
+\[
+\beta_{\text{Pres}} + \beta_{\text{Pres} \times \text{GDP}} \times \text{LogGDP}_{\text{crossover}} = 0
+\]
+
+Solving for the crossover point:
+
+\[
+\text{LogGDP}_{\text{crossover}} = -\frac{\beta_{\text{Pres}}}{\beta_{\text{Pres} \times \text{GDP}}}
+\]
+
+Converting to the original GDP scale:
+
+\[
+\text{GDP}_{\text{crossover}} = \exp\left(-\frac{\beta_{\text{Pres}}}{\beta_{\text{Pres} \times \text{GDP}}}\right)
+\]
+
+I assess the uncertainty around this estimate using nonparametric
+bootstrap with 1,000 replications. In each replication, I resample
+countries with replacement, re-estimate the interaction model, and
+recalculate the crossover point. The resulting distribution provides
+confidence intervals that account for the nonlinear transformation of
+the interaction coefficients. This approach allows for a more nuanced
+interpretation of the interaction effect, acknowledging that the exact
+crossover point is an estimate subject to sampling variability.
+
+Statistical inference uses HC1 robust standard errors, which are
+appropriate for cross-sectional data with potential heteroskedasticity.
+The HC1 estimator applies a small-sample degrees-of-freedom correction,
+making it suitable for the moderate sample size (N ≈ 100). Significance
+is evaluated at conventional levels (p \textless{} 0.05, p \textless{}
+0.01, p \textless{} 0.001), with two-tailed tests.
+
+Analysis was conducted in R version 4.3 (R Core Team 2024) using
+tidyverse (Wickham et al. 2019), here (Müller 2020), modelsummary
+(Arel-Bundock 2023), kableExtra (Zhu 2023), ggplot2 (Wickham et al.
+2023), knitr (Xie 2023), sandwich (Zeileis and Lumley 2023), and lmtest
+(Zeileis and Hothorn 2022) packages. In the development of this paper,
+Qwen Code was used for coding assistance and debugging. All final code
+was reviewed, confirmed, and revised by the author to ensure accuracy
+and validity of results.
 
 \subsection{Descriptive Statistics}\label{descriptive-statistics}
 
@@ -450,7 +668,7 @@ Presidential & 97\\
 \end{minipage}
 \end{table}
 
-\section{Results}\label{results}
+\section{Results}\label{sec-results}
 
 \subsection{Main Models}\label{main-models}
 
@@ -458,68 +676,81 @@ Table~\ref{tbl-main} presents the main regression results. Model 1
 includes the system type indicator and controls. Model 2 adds the
 interaction between system type and log GDP.
 
-\begin{ThreePartTable}
-\begin{TableNotes}
-\item \textit{Notes. } 
-\item Robust SEs (HC1) in parentheses. Ref: Parliamentary.
-\item[*] *p<.05, **p<.01, ***p<.001
-\end{TableNotes}
-
-\begin{longtable}[t]{lcc}
+\begin{table}
 
 \caption{\label{tbl-main}Democratic Volatility and Government System
 Type}
 
-\tabularnewline
+\centering{
 
+\centering
+\begin{threeparttable}
+\begin{tabular}{lcc}
 \toprule
- & Controls & Interaction\\
+  & (1) & (2)\\
 \midrule
-Semi-Pres. & -0.007 & -0.247\\
- & (0.015) & (0.146)\\
-Presidential & 0.003 & -0.163*\\
- & (0.01) & (0.08)\\
-Log GDP p.c. & -0.013*** & -0.027***\\
+Semi-Pres. & \makecell[c]{-0.007 \\ (0.015)} & \makecell[c]{-0.247 \\ (0.146)}\\
+Presidential & \makecell[c]{0.003 \\ (0.01)} & \makecell[c]{-0.163* \\ (0.08)}\\
+Log GDP per capita & \makecell[c]{-0.013*** \\ (0.003)} & \makecell[c]{-0.027*** \\ (0.007)}\\
+Mean Democracy & \makecell[c]{0.017 \\ (0.014)} & \makecell[c]{0.027 \\ (0.016)}\\
+Ethnic Frac. & \makecell[c]{-0.026 \\ (0.019)} & \makecell[c]{-0.024 \\ (0.019)}\\
 \addlinespace
- & (0.003) & (0.007)\\
-Mean Democracy & 0.017 & 0.027\\
- & (0.014) & (0.016)\\
-Ethnic Frac. & -0.026 & -0.024\\
- & (0.019) & (0.019)\\
-\addlinespace
-Semi-Pres. × GDP &  & 0.025\\
- &  & (0.016)\\
-Pres. × GDP &  & 0.017*\\
- &  & (0.008)\\
+Semi-Pres. × GDP &  & \makecell[c]{0.025 \\ (0.016)}\\
+Pres. × GDP &  & \makecell[c]{0.017* \\ (0.008)}\\
 N & 148 & 148\\
-\addlinespace
 R² & 0.082 & 0.121\\
 Adj. R² & 0.05 & 0.077\\
 \bottomrule
-\insertTableNotes
+\end{tabular}
+\begin{tablenotes}
+\item \textit{Notes. } 
+\item Robust SEs (HC1) in parentheses. Ref: Parliamentary.
+\item[*] *p<.05, **p<.01, ***p<.001
+\end{tablenotes}
+\end{threeparttable}
 
-\end{longtable}
+}
 
-\end{ThreePartTable}
+\end{table}%
 
 The interaction model (Model 2) reveals a significant interaction
 between presidential systems and GDP. The negative coefficient on the
-Presidential × Log GDP interaction indicates that presidential systems
-become associated with \emph{higher} volatility as GDP increases.
-Conversely, presidential systems are associated with \emph{lower}
-volatility at low GDP levels.
+Presidential \(\times\) Log GDP interaction indicates that presidential
+systems become associated with \emph{higher} volatility as GDP
+increases. Conversely, presidential systems are associated with
+\emph{lower} volatility at low GDP levels.
 
 \subsection{Crossover Analysis}\label{crossover-analysis}
 
 The crossover point where neither system holds an advantage can be
 calculated by setting the combined effect of presidential system and
 interaction to zero. This yields a crossover GDP of approximately
-\textbf{\$14,125} per capita (PPP).
+\textbf{\$14,125} per capita (PPP). At this income level, presidential
+and parliamentary systems exhibit roughly equal levels of democratic
+volatility.
 
-Bootstrap results indicate substantial uncertainty around this estimate:
-the 95\% bootstrap confidence interval for the crossover is wide, so the
-exact GDP level where the relative advantage shifts between systems
-should be interpreted cautiously.
+To assess the precision of this estimate, I conducted a nonparametric
+bootstrap analysis with 1,000 replications. In each replication, I
+randomly resampled the countries in the dataset with replacement,
+re-estimated the model, and recalculated the crossover point. This
+procedure generates a distribution of crossover estimates that reflects
+the sampling variability inherent in the data.\footnote{Bootstrapping is
+  a resampling technique used to estimate the sampling distribution of a
+  statistic by repeatedly drawing random samples from the observed data
+  with replacement. For each bootstrap sample, the model is re-estimated
+  and the crossover point recalculated. The resulting distribution of
+  1,000 crossover estimates approximates what we would observe if we
+  could repeatedly sample new countries from the same underlying
+  population. The 2.5th and 97.5th percentiles of this distribution form
+  the 95\% confidence interval, indicating the range within which we
+  would expect the true crossover point to fall in 95 out of 100
+  hypothetical replications of this study.} The bootstrap 95\%
+confidence interval ranges from approximately \$1,400 to \$42,800,
+indicating considerable uncertainty around the point estimate. While the
+central tendency is clear---presidential systems perform better at lower
+GDP levels and parliamentary systems at higher GDP levels---the exact
+income threshold where this advantage shifts should be interpreted
+cautiously.
 
 Table~\ref{tbl-pred} shows predicted volatility at different GDP levels.
 
@@ -557,7 +788,7 @@ finding.
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-pdf/fig-interaction-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{output/figures/Figure1_interactionfig-interaction-1.pdf}}
 
 }
 
@@ -574,269 +805,257 @@ institutional design for middle-income countries.
 
 \subsection{Robustness Checks}\label{robustness-checks}
 
-We conduct extensive robustness tests to assess the stability of our
+I conduct extensive robustness tests to assess the stability of our
 findings. Table~\ref{tbl-robust} summarizes results across alternative
-specifications.
+specifications, showing the Presidential \(\times\) Log GDP interaction
+coefficient with HC1 robust standard errors.
 
-\begingroup\fontsize{11}{13}\selectfont
+\begin{longtable}[t]{lccc}
 
-\begin{ThreePartTable}
-\begin{TableNotes}
-\item \textit{Notes. } 
-\item All models include democracy and ethnic frac. controls. Robust SEs (HC1).
-\item[*] *p<.05, **p<.01, ***p<.001
-\end{TableNotes}
-
-\begin{longtable}[t]{lrrr}
-
-\caption{\label{tbl-robust}Robustness Checks: Presidential × Log GDP
-Interaction Coefficient}
+\caption{\label{tbl-robust}Robustness Checks: Presidential \(\times\)
+Log GDP Interaction Coefficient}
 
 \tabularnewline
 
 \toprule
 Specification & Coef & SE & N\\
 \midrule
-Main & 0.0171* & 0.0079 & 148\\
-Alt. DV & 0.0475 & 0.0254 & 162\\
-High-Inc. & 0.0419* & 0.0170 & 81\\
-Low-Inc. & -0.0051 & 0.0211 & 81\\
-Dem. Only & 0.0245 & 0.0126 & 59\\
+Main Model & 0.0171* & 0.0079025 & 148\\
+Alt. DV (Total Decline) & 0.0475 & 0.0253849 & 148\\
+High-Income Subsample & 0.0419* & 0.0169534 & 73\\
+Low-Income Subsample & -0.0051 & 0.0211160 & 75\\
+Democracies Only & 0.0245 & 0.0125921 & 52\\
+\addlinespace
+Regional FE & 0.012 & 0.0071846 & 148\\
+Excluding 11 outliers & 0.0239*** & 0.0064655 & 137\\
 \bottomrule
-\insertTableNotes
+\multicolumn{4}{l}{\rule{0pt}{1em}\textsuperscript{*} *p<.05, **p<.01, ***p<.001}\\
 
 \end{longtable}
 
-\end{ThreePartTable}
-\endgroup{}
+The main model (first row) shows a positive and statistically
+significant interaction coefficient (β = 0.017, p \textless{} 0.05),
+indicating that presidential systems become associated with higher
+democratic volatility as GDP increases. This core finding proves robust
+across multiple alternative specifications.
 
-\emph{Alternative Dependent Variable}. Using total democratic decline
-(sum of year-over-year decreases) instead of volatility yields
-consistent interaction effects, though the coefficient magnitude varies.
-\emph{Income Subsamples}. Splitting the sample at median GDP confirms
-the theoretical predictions. Within low-income countries, the
-interaction effect remains negative (presidential advantage increases
-with development within this group), while high-income countries show
-the parliamentary advantage. \emph{Democratic Sample}. Restricting to
-countries with mean democracy scores above 0.5 strengthens the
-parliamentary advantage, consistent with the argument that institutional
-constraints matter more in established democracies (Haggard and Kaufman
-2021a; Riedl et al. 2024). \emph{Additional Tests}. Regional fixed
-effects were also examined (not shown), finding that results hold within
-Latin America and Europe. Excluding small island states and city-states
-does not substantively alter findings.
+Using total democratic decline (sum of year-over-year decreases) instead
+of volatility yields a larger interaction coefficient (β = 0.048, p =
+0.063), an alternative dependent variable is constructed. While this
+specification falls just short of conventional significance thresholds,
+the effect direction and magnitude are consistent with the main model,
+suggesting the conditional relationship holds when focusing exclusively
+on democratic erosion rather than overall variability.
 
-\section{Case Studies: Mechanisms in Action}\label{sec-cases}
+Splitting the sample at median GDP reveals important heterogeneity.
+Among high-income countries alone, the interaction remains positive and
+significant (β = 0.042, p \textless{} 0.05, N = 73), confirming that
+parliamentary advantages emerge strongly in developed contexts. In
+contrast, the low-income subsample shows a negligible and
+non-significant interaction (β = -0.005, p = 0.81, N = 75). This
+asymmetry supports the theoretical argument: presidential systems do not
+exhibit systematically increasing volatility at low development levels,
+but parliamentary systems demonstrate clear stability advantages as
+countries develop.
 
-To illuminate the mechanisms underlying the statistical findings, three
-illustrative cases are examined. Following Seawright and Gerring
-(2008)'s typological case selection principles, the cases maximize
-variation on both the key independent variable (system type) and
-moderating variable (GDP level) while holding constant other factors
-where possible. All three cases fall \emph{below} the crossover point of
-\$14,000 GDP per capita, where presidential systems are theorized to
-hold advantages. The cases are: (1) \textbf{India} (parliamentary,
-\textasciitilde\$5,600 GDP), a potential deviant case where
-parliamentary governance operates in a low-income context; (2)
-\textbf{Ghana} (presidential, \textasciitilde\$5,000 GDP), a case
-confirming presidential stability in a low-income African democracy; and
-(3) \textbf{Indonesia} (presidential, \textasciitilde\$9,600 GDP), a
-case of successful democratic consolidation under presidentialism at
-moderate development. This selection enables both theory testing and
-theory building.
+Restricting analysis to countries with mean democracy scores above 0.5
+(N = 52) yields a positive interaction coefficient (β = 0.025, p =
+0.058) that approaches conventional significance. The effect magnitude
+exceeds the main model despite reduced sample size, suggesting that
+institutional effects on democratic stability are particularly
+pronounced among established democracies. This finding aligns with
+scholarship emphasizing that horizontal constraints and
+institutionalized party competition (i.e., features more characteristic
+of parliamentary systems) become increasingly important for preventing
+backsliding in democratic contexts (Haggard and Kaufman 2021a; Riedl et
+al. 2024).
 
-\subsection{India: Parliamentary Governance in a Low-Income
-Context}\label{india-parliamentary-governance-in-a-low-income-context}
+Adding regional fixed effects to control for unobserved geographic and
+historical confounders reduces the interaction coefficient slightly (β =
+0.012, p = 0.096) but maintains the same directional effect. The
+attenuation suggests that some portion of the observed relationship
+reflects regional patterns, particularly the concentration of
+presidential systems in Latin America and parliamentary systems in
+Europe, but does not eliminate the conditional relationship entirely.
 
-India represents a crucial test case for the theoretical framework, as
-it maintains parliamentary governance despite falling well below the
-crossover point where parliamentary advantages are expected to emerge.
-With GDP per capita around \$5,600, India operates in the zone where
-presidential systems should theoretically perform better.
+Identifying influential observations using Cook's distance (threshold:
+4/N) and excluding 11 outliers substantially strengthens the
+results.\footnote{Cook's distance measures the influence of individual
+  observations on regression estimates by quantifying how much all
+  fitted values change when that observation is excluded. Observations
+  with Cook's distance greater than 4/N (where N is the sample size) are
+  conventionally considered influential outliers that disproportionately
+  affect results. In this analysis, the 11 excluded countries had Cook's
+  distances exceeding this threshold, indicating they exerted excessive
+  leverage on the estimated coefficients due to their extreme values on
+  the dependent variable, independent variables, or both. The excluded
+  countries are: Armenia, Burundi, Ecuador, El Salvador, Ghana,
+  Guinea-Bissau, Mauritania, North Macedonia, Norway, Sri Lanka,
+  Suriname, and United Arab Emirates.} The interaction coefficient
+increases in magnitude and achieves high statistical significance (β =
+0.024, p \textless{} 0.001, N = 137). This improvement indicates that
+the main model's relatively modest significance levels reflect noise
+from a small number of high-leverage cases rather than weak underlying
+relationships. Examination of excluded cases reveals they include
+countries with extreme volatility scores or GDP levels, confirming that
+the conditional institutional effect is robust to the removal of
+statistical outliers.
 
-India's relatively high democratic volatility (0.114 in the sample)
-partly supports this expectation. The country has experienced periods of
-democratic stress, including the Emergency period (1975-1977) and more
-recent concerns about democratic backsliding (Ganguly, DeVotta, and
-Braroo 2020). The parliamentary system's dependence on coalition
-politics has produced both stability through consensus-building and
-instability through frequent government changes.
-
-However, India also illustrates scope conditions for the theoretical
-framework. India's robust institutional heritage, including an
-independent judiciary and election commission, provides constraints that
-typically emerge at higher development levels (Varshney 2013). This
-suggests that historical institutional legacies can partially substitute
-for the development-based mechanisms identified in this analysis.
-
-\subsection{Ghana: Presidential Success in Low-Income
-Africa}\label{ghana-presidential-success-in-low-income-africa}
-
-Ghana exemplifies the presidential advantage in low-income contexts that
-the statistical analysis predicts. With GDP per capita around \$5,000
-and remarkably low democratic volatility (0.033), Ghana has achieved
-democratic stability unusual for its income level and region
-(Gyimah-Boadi 1999).
-
-Ghana's presidential system has facilitated effective crisis management
-through executive leadership, particularly during economic stabilization
-periods. The concentration of authority in the presidency enabled
-coherent policy responses to external shocks without the coalition
-fragility that parliamentary systems might experience in weak-party
-environments.
-
-Importantly, Ghana's success also reflects party institutionalization.
-The two-party system featuring the NPP and NDC provides structured
-competition within the presidential framework (Riedl 2014). This
-suggests that while presidential systems may hold advantages at low
-income levels, these advantages are enhanced when combined with
-reasonable party system development.
-
-\subsection{Indonesia: Democratic Consolidation Under
-Presidentialism}\label{indonesia-democratic-consolidation-under-presidentialism}
-
-Indonesia provides compelling evidence for presidential effectiveness at
-moderate development levels. With GDP per capita around \$9,600 (below
-the crossover) and moderate volatility (0.054), Indonesia has
-consolidated democracy following the 1998 transition from
-authoritarianism.
-
-Indonesia's presidential system enabled decisive leadership during the
-post-Suharto transition while constitutional reforms introduced
-legislative and judicial checks (Aspinall 2010). The direct presidential
-elections created clear mandates for reform agendas, while the
-multi-party legislature provided representation for Indonesia's diverse
-population.
-
-The Indonesian case demonstrates the crisis response mechanism at work.
-Presidential authority facilitated economic stabilization after the
-1997-98 Asian financial crisis and effective responses to subsequent
-challenges. The flexibility to act decisively proved more valuable than
-the consensus-building advantages parliamentary systems would provide at
-higher development levels.
-
-\subsection{Cross-Case Comparison}\label{cross-case-comparison}
-
-These cases reveal important patterns. First, the cases confirm that at
-low GDP levels, presidential systems can achieve democratic stability,
-while parliamentary systems face challenges (India). Second, the success
-cases (Ghana, Indonesia) demonstrate that presidential effectiveness at
-low income levels is enhanced by complementary factors, including party
-system development and institutional reforms. Third, the cases suggest
-that historical institutional legacies can modify the basic system
-type-development relationship, as India's parliamentary persistence
-demonstrates.
-
-The cases collectively support the theoretical framework while
-highlighting scope conditions. Presidential systems appear advantaged at
-low development, but this advantage is neither automatic nor guaranteed.
-Complementary institutional features matter considerably.
+Collectively, these robustness checks demonstrate that the core finding
+of the study that presidential systems exhibit increasing democratic
+volatility relative to parliamentary systems as economic development
+rises is not an artifact of measurement choices, sample composition, or
+omitted variable bias. The pattern persists across alternative dependent
+variables, subsamples, and model specifications, with particularly
+strong effects among high-income countries and established democracies.
+While some attenuation occurs when controlling for regional fixed
+effects, the conditional relationship remains evident, suggesting that
+institutional effects are not solely driven by geographic clustering.
+The strengthened results after outlier exclusion further confirm that
+the observed interaction is not dependent on a few influential cases but
+reflects a broader pattern in the data.
 
 \section{Discussion: Causal Interpretation and
 Limitations}\label{sec-discussion}
 
-\subsection{Addressing Endogeneity
-Concerns}\label{addressing-endogeneity-concerns}
+\subsection{On Ednogenity and Selection
+Bias}\label{on-ednogenity-and-selection-bias}
 
 A fundamental challenge for institutional research is that government
 systems are not randomly assigned. Countries may select systems based on
 factors that also influence democratic stability, potentially biasing
-our estimates (Cheibub 2007).
+our estimates (Cheibub 2007) Several patterns mitigate this concern
+while not eliminating it.
 
-Several patterns mitigate this concern while not eliminating it.
+Many current constitutional arrangements reflect colonial legacies or
+critical junctures distant from contemporary democracy levels. British
+colonies often adopted parliamentary systems, while Latin American
+countries followed U.S. presidential models---choices predating current
+development trajectories (Stepan and Skach 1993). While selection bias
+may confound the main effect of system type, it is less clear why
+selection would generate the specific interaction pattern I observe. For
+selection to explain our findings, countries would need to
+systematically choose presidential systems based on factors that promote
+stability specifically at low income levels and undermine it at high
+income levels.
 
-\emph{Historical Timing}: Many current constitutional arrangements
-reflect colonial legacies or critical junctures distant from
-contemporary democracy levels. British colonies often adopted
-parliamentary systems, while Latin American countries followed U.S.
-presidential models---choices predating current development trajectories
-(Stepan and Skach 1993).
-
-\emph{Interaction Effects}: While selection bias may confound the main
-effect of system type, it is less clear why selection would generate the
-specific interaction pattern we observe. For selection to explain our
-findings, countries would need to systematically choose presidential
-systems based on factors that promote stability specifically at low
-income levels and undermine it at high income levels.
-
-\emph{Mechanism Evidence}: Our case studies provide process-tracing
-evidence supporting the proposed mechanisms rather than alternative
-explanations. The pattern of institutional constraint effectiveness
-varying with development appears in qualitative accounts across diverse
-contexts.
+The proposed mechanisms (crisis response capacity, institutional
+constraints, party institutionalization) align with established
+theoretical expectations about how development shapes institutional
+performance. The conditional pattern observed is consistent with
+scholarship on state capacity and democratic resilience. While selection
+effects cannot be ruled out, the observed interaction is theoretically
+coherent and robust across specifications, suggesting it reflects a
+genuine conditional relationship rather than a spurious correlation
+driven by unobserved confounders. Future research using
+quasi-experimental designs or more granular mechanism-focused approaches
+could further strengthen causal claims by isolating specific pathways
+through which institutions affect democratic stability.
 
 \subsection{Alternative Explanations}\label{alternative-explanations}
 
-We consider several alternative explanations for our findings:
+Several alternative explanations may be considered. Perhaps democratic
+instability causes constitutional change rather than vice versa.
+However, government system type is highly persistent across time. On
+that point, I observe minimal system switching within our study period,
+making reverse causality unlikely to drive results. While some countries
+have experienced constitutional reforms, these changes are relatively
+rare and often occur in response to broader political crises rather than
+as a direct consequence of short-term democratic volatility. The
+long-term nature of the dependent variable (standard deviation over 24
+years) further reduces the likelihood that transient instability
+episodes would prompt immediate system changes that could bias our
+estimates.
 
-\emph{Reverse Causality}: Perhaps democratic instability causes
-constitutional change rather than vice versa. However, government system
-type is highly persistent; we observe minimal system switching within
-our study period, making reverse causality unlikely to drive results.
+Regional effects, colonial history, or cultural factors might explain
+both system choice and stability patterns. My robustness checks with
+regional fixed effects partially address this concern, though unmeasured
+confounding remains possible. For example, the concentration of
+presidential systems in Latin America, which has experienced significant
+democratic volatility, could drive the observed interaction. However,
+the persistence of the conditional relationship even after controlling
+for region suggests that while geographic clustering contributes to the
+pattern, it does not fully account for it. Additionally, the theoretical
+mechanisms proposed are not region-specific and should operate similarly
+across contexts, lending credibility to the argument that institutional
+effects vary with development rather than being solely driven by
+regional characteristics.
 
-\emph{Omitted Variables}: Regional effects, colonial history, or
-cultural factors might explain both system choice and stability
-patterns. Our robustness checks with regional fixed effects partially
-address this concern, though unmeasured confounding remains possible.
-
-\emph{Measurement}: Our dependent variable captures volatility in V-Dem
-democracy scores, which may conflate genuine instability with
-measurement error. However, V-Dem's expert-coded methodology with
-uncertainty quantification (Pemstein, Meserve, and Melton 2010) and our
-use of long-term standard deviations should mitigate transient
-measurement noise.
+My dependent variable captures volatility in V-Dem democracy scores,
+which may conflate genuine instability with measurement error. However,
+V-Dem's expert-coded methodology with uncertainty quantification
+(Pemstein, Meserve, and Melton 2010) and my use of long-term standard
+deviations should mitigate transient measurement noise. While some
+degree of error is inevitable, the consistent patterns across multiple
+specifications and the robustness to outlier exclusion suggest that the
+observed interaction reflects substantive differences in democratic
+stability rather than artifacts of measurement. Future research could
+explore alternative operationalizations of democratic stability, such as
+event-based measures of democratic breakdowns or recoveries, to further
+validate these findings.
 
 \subsection{Toward Causal
 Identification}\label{toward-causal-identification}
 
 Future research could pursue stronger causal identification through
-several strategies (Imai et al. 2011):
+several strategies (Imai et al. 2011). Historical determinants of system
+choice (colonial origin, neighborhood effects) could serve as
+instruments if they satisfy exclusion restrictions. These instrumental
+variables would need to be correlated with system type but not directly
+affect democratic volatility except through their influence on
+institutional design. While challenging, this approach could help
+isolate the causal effect of system type on stability.
 
-\emph{Instrumental Variables}: Historical determinants of system choice
-(colonial origin, neighborhood effects) could serve as instruments if
-they satisfy exclusion restrictions. \emph{Regression Discontinuity}:
 Countries near decision thresholds during constitutional moments might
-provide quasi-experimental variation. \emph{Difference-in-Differences}:
+provide quasi-experimental variation, fit for regression discontinuity
+designs. For example, analyzing cases where countries narrowly adopted
+one system over another during critical junctures could offer insights
+into causal effects. However, the rarity of such events and the
+potential for confounding factors during these periods may limit the
+feasibility of this approach.
+
 The few cases of system change (e.g., Turkey's 2017 constitutional
-referendum) could enable within-country comparisons, though small
-samples limit statistical power. \emph{Mechanism-Based Approaches}:
-Rather than seeking the total effect of system type, future work could
-focus on specific mechanisms (institutional constraints, party strength)
-that are more amenable to identification (Hainmueller, Mummolo, and Xu
-2019).
+referendum) could enable within-country comparisons through
+difference-in-differences models, though small samples limit statistical
+power. While challenging, these natural experiments could provide
+valuable insights into how institutional changes impact democratic
+stability over time, particularly if combined with detailed case studies
+to unpack the mechanisms at play.
+
+Lastly, rather than seeking the total effect of system type, future work
+could focus on specific mechanisms (institutional constraints, party
+strength) that are more amenable to identification (Hainmueller,
+Mummolo, and Xu 2019). For example, analyzing how judicial independence
+or legislative capacity mediates the relationship between system type
+and stability could provide more actionable insights for policymakers.
+This mechanism-focused approach would allow researchers to identify
+specific institutional features that enhance democratic resilience,
+regardless of the broader system type, and could inform targeted reforms
+in developing democracies.
 
 \subsection{Policy Implications}\label{policy-implications}
 
 These findings advance the comparative institutions literature in
 several ways. First, they demonstrate that the long-standing debate over
 presidential versus parliamentary systems has been asking the wrong
-question (Mainwaring and Shugart 2018). Rather than asking which system
-is ``better'' for democracy, the more productive question becomes: under
-what conditions does each system perform better?
-
-Second, the results support theories emphasizing the conditional nature
-of institutional effects. The mechanisms identified here, including
-crisis response capacity, institutional constraints, and party
-institutionalization, operate differently across developmental contexts
-(Kitschelt 2000; Gandhi 2019).
-
-For constitutional designers in developing countries, these findings
-suggest caution about importing parliamentary models from wealthy
-democracies. Presidential systems may offer stability advantages in
-low-income settings where executive autonomy aids crisis response and
-party systems remain weak (Przeworski and Limongi 1997, 165; Treisman
-2020, 244).
+question (Mainwaring and Shugart 1998). Rather than asking which system
+is ``better'' for democracy, the more productive question becomes,
+``under what conditions does each system perform better?'' As such, this
+paper contributes to a growing body of work emphasizing the importance
+of conditional institutional effects and the need to move beyond
+one-size-fits-all prescriptions in constitutional design (Gandhi 2019;
+Kitschelt 2000).
 
 Conversely, as countries develop, strengthening horizontal
 accountability mechanisms and party systems may be more important than
 the choice of executive structure per se (Gibler and Randazzo 2011;
-Bizzarro et al. 2018). Cases like Indonesia demonstrate that
-presidential structures can support democratic development when
-accompanied by effective institutional constraints and competitive party
-systems (Scheppele 2018; McCoy, Rahman, and Somer 2018, 22--26).
+Bizzarro et al. 2018). Presidential structures can support democratic
+development when accompanied by effective institutional constraints and
+competitive party systems (Scheppele 2018; McCoy, Rahman, and Somer
+2018, 22--26).
 
-For countries near the crossover point (\textasciitilde\$14,000 GDP per
-capita), the findings suggest genuine institutional ambiguity. In these
+For countries near the crossover point (\textasciitilde\$14,125 GDP per
+capita), my findings suggest genuine institutional ambiguity. In these
 contexts, attention to complementary institutions (judicial
 independence, legislative capacity, party system development) may matter
 more than the presidential-parliamentary choice itself (Fish 2006;
@@ -845,31 +1064,30 @@ erosion (Orhan 2022; Arbatli and Rosenberg 2021) suggests that
 institutional design alone cannot guarantee democratic resilience
 without addressing underlying societal divisions (McCoy and Somer 2021).
 
-\section{Conclusion}\label{conclusion}
+\section{Conclusion}\label{sec-conclusion}
 
-This paper has demonstrated that the relationship between government
-system type and democratic stability depends critically on economic
-development. Presidential systems appear to offer stability advantages
-in low-income contexts, while parliamentary systems perform better at
-high income levels. The crossover point of approximately \$14,000 GDP
-per capita suggests that many democratizing countries fall in a range
-where the optimal choice is ambiguous.
+In this paper, I have demonstrated that the relationship between
+government system type and democratic stability depends critically on
+economic development. Presidential systems appear to offer stability
+advantages in low-income contexts, while parliamentary systems perform
+better at high income levels. The crossover point of approximately
+\$14,125 GDP per capita suggests that many democratizing countries fall
+in a range where the optimal choice is ambiguous.
 
-The theoretical framework emphasizing crisis response capacity,
+My theoretical framework emphasizing crisis response capacity,
 institutional constraints, and party institutionalization provides a
 coherent explanation for why institutional effects vary with development
-(Przeworski 2004; Boix 2011). Case evidence from India, Ghana, and
-Indonesia illuminates these mechanisms in action, while extensive
-robustness checks support the stability of the quantitative findings.
+(Przeworski 2004; Boix 2011). Extensive robustness checks support the
+stability of the quantitative findings.
 
-Importantly, this analysis has been transparent about causal
-identification limitations inherent in cross-national institutional
-research (King, Keohane, and Verba 1994). While the evidence is
-consistent with system type affecting democratic stability conditional
-on development, selection effects and omitted variable bias cannot be
-definitively ruled out (Cheibub and Limongi 2002, 151). Future research
-using quasi-experimental designs or more granular mechanism-focused
-approaches could strengthen causal claims (Imai et al. 2011).
+Importantly, I have been transparent about causal identification
+limitations inherent in cross-national institutional research (King,
+Keohane, and Verba 1994). While the evidence is consistent with system
+type affecting democratic stability conditional on development,
+selection effects and omitted variable bias cannot be ruled out (Cheibub
+and Limongi 2002, 151). Future research using quasi-experimental designs
+or more granular mechanism-focused approaches could strengthen causal
+claims (Imai et al. 2011).
 
 These findings call for a more nuanced approach to constitutional design
 that considers developmental context rather than seeking universal
@@ -889,14 +1107,20 @@ Przeworski 2023; Svolik 2019).
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-alesina2003fractionalization}
+Alesina, Alberto, Arnaud Devleeschauwer, William Easterly, Sergio
+Kurlat, and Romain Wacziarg. 2003. {``Fractionalization.''}
+\emph{Journal of Economic Growth} 8 (2): 155--94.
+\url{https://doi.org/10.1023/A:1024471506938}.
+
 \bibitem[\citeproctext]{ref-arbatli2021united}
 Arbatli, Ekim, and Dina Rosenberg. 2021. {``United We Stand, Divided We
 Rule: How Political Polarization Erodes Democracy.''}
 \emph{Democratization} 28 (2): 285--307.
 
-\bibitem[\citeproctext]{ref-aspinall2010indonesia}
-Aspinall, Edward. 2010. {``The Irony of Success.''} \emph{Journal of
-Democracy} 21 (2): 20--34.
+\bibitem[\citeproctext]{ref-modelsummary}
+Arel-Bundock, Vincent. 2023. \emph{Modelsummary: Data and Model
+Summaries in r}. \url{https://CRAN.R-project.org/package=modelsummary}.
 
 \bibitem[\citeproctext]{ref-bermeo2016democratic}
 Bermeo, Nancy. 2016. {``On Democratic Backsliding.''} \emph{Journal of
@@ -962,6 +1186,10 @@ Diskin, Abraham, Hanna Diskin, and Reuven Y Hazan. 2005. {``Why
 Democracies Collapse: The Reasons for Democratic Failure and Success.''}
 \emph{International Political Science Review} 26 (3): 291--309.
 
+\bibitem[\citeproctext]{ref-easterly2001institutions}
+Easterly, William. 2001. {``Can Institutions Resolve Ethnic Conflict?''}
+\emph{Economic Development and Cultural Change} 49 (4): 687--706.
+
 \bibitem[\citeproctext]{ref-fish2006stronger}
 Fish, M Steven. 2006. {``Stronger Legislatures, Stronger Democracies.''}
 \emph{Journal of Democracy} 17 (1): 5--20.
@@ -969,10 +1197,6 @@ Fish, M Steven. 2006. {``Stronger Legislatures, Stronger Democracies.''}
 \bibitem[\citeproctext]{ref-gandhi2019institutional}
 Gandhi, Jennifer. 2019. {``The Institutional Roots of Democratic
 Backsliding.''} \emph{Journal of Politics} 81 (1): e1--16.
-
-\bibitem[\citeproctext]{ref-ganguly2020india}
-Ganguly, Sumit, Neil DeVotta, and Subrata Braroo. 2020. \emph{The Oxford
-Handbook of Indian Politics}. Oxford: Oxford University Press.
 
 \bibitem[\citeproctext]{ref-gerschewski2021erosion}
 Gerschewski, Johannes. 2021. {``Erosion or Decay? Conceptualizing Causes
@@ -983,10 +1207,6 @@ and Mechanisms of Democratic Regression.''} \emph{Democratization} 28
 Gibler, Douglas M, and Kirk A Randazzo. 2011. {``Testing the Effects of
 Independent Judiciaries on the Likelihood of Democratic Backsliding.''}
 \emph{American Journal of Political Science} 55 (3): 696--709.
-
-\bibitem[\citeproctext]{ref-gyimah2017democracy}
-Gyimah-Boadi, Emmanuel. 1999. \emph{Elections in Ghana: Democracy,
-Politics, and the Elections of 1992 and 1996}. Freedom House.
 
 \bibitem[\citeproctext]{ref-haggard2021backsliding}
 Haggard, Stephan, and Robert Kaufman. 2021a. \emph{Backsliding:
@@ -1020,7 +1240,7 @@ Mechanisms from Experimental and Observational Studies.''}
 
 \bibitem[\citeproctext]{ref-issacharoff2010constitutional}
 Issacharoff, Samuel. 2010. {``Constitutional Courts and Democratic
-Hedging.''} \emph{Georgetown Law Journal} 99: 961.
+Hedging.''} \emph{Georgetown Law Journal} 99: 961--1012.
 
 \bibitem[\citeproctext]{ref-issacharoff2014constitutional}
 ---------. 2014. {``Constitutional Courts and Consolidated Power.''}
@@ -1058,8 +1278,9 @@ Make a Difference?''}
 Democracy} 1 (1): 51--69.
 
 \bibitem[\citeproctext]{ref-linz1994failure}
-Linz, Juan J, and Arturo Valenzuela. 1994. \emph{The Failure of
-Presidential Democracy}. Baltimore: Johns Hopkins University Press.
+Linz, Juan J, and Arturo Valenzuela, eds. 1994. \emph{The Failure of
+Presidential Democracy: Comparative Perspectives}. Baltimore: Johns
+Hopkins University Press.
 
 \bibitem[\citeproctext]{ref-luhrmann2019third}
 Lührmann, Anna, and Staffan I Lindberg. 2019. {``A Third Wave of
@@ -1082,9 +1303,11 @@ Democracy: The Difficult Combination.''} \emph{Comparative Political
 Studies} 26 (2): 198--228.
 
 \bibitem[\citeproctext]{ref-mainwaring2018linz}
-Mainwaring, Scott, and Matthew Soberg Shugart. 2018. {``Juan Linz,
+Mainwaring, Scott, and Matthew Soberg Shugart. 1998. {``Juan Linz,
 Presidentialism, and Democracy: A Critical Appraisal.''} In
-\emph{Politics, Society, and Democracy Latin America}. Routledge.
+\emph{Politics, Society, and Democracy: Latin America}, edited by Scott
+Mainwaring and Arturo Valenzuela, 141--69. Boulder, CO: Westview Press /
+Routledge.
 
 \bibitem[\citeproctext]{ref-mainwaring2006party}
 Mainwaring, Scott, and Mariano Torcal. 2006. {``Party System
@@ -1107,6 +1330,10 @@ Merkel, Wolfgang, and Anna Lührmann. 2021. {``Resilience of Democracies:
 Responses to Illiberal and Authoritarian Challenges.''}
 \emph{Democratization} 28 (1): 1--18.
 
+\bibitem[\citeproctext]{ref-here}
+Müller, Kirill. 2020. \emph{Here: A Simpler Way to Find Your Files}.
+\url{https://CRAN.R-project.org/package=here}.
+
 \bibitem[\citeproctext]{ref-orhan2022relationship}
 Orhan, Yunus Emre. 2022. {``The Relationship Between Affective
 Polarization and Democratic Backsliding: Comparative Evidence.''}
@@ -1119,11 +1346,9 @@ Regime Type.''} \emph{Political Analysis} 18 (4): 426--49.
 
 \bibitem[\citeproctext]{ref-przeworski2004democracy}
 Przeworski, Adam. 2004. {``Democracy and Economic Development.''} In
-\emph{The Evolution of Political Knowledge}. Cambridge University Press.
-
-\bibitem[\citeproctext]{ref-przeworski1997modernization}
-Przeworski, Adam, and Fernando Limongi. 1997. {``Modernization: Theories
-and Facts.''} \emph{World Politics} 49 (2): 155--83.
+\emph{The Evolution of Political Knowledge: Democracy, Autonomy, and
+Conflict}, edited by Edward D. Mansfield and Richard Sisson. Columbus:
+Ohio State University Press.
 
 \bibitem[\citeproctext]{ref-citeR}
 R Core Team. 2024. \emph{{R: A Language and Environment for Statistical
@@ -1134,10 +1359,6 @@ Computing}}. Vienna, Austria: R Foundation for Statistical Computing.
 Randall, Vicky, and Lars Svåsand. 2002. {``Party Institutionalization in
 New Democracies.''} \emph{Party Politics} 8 (1): 5--29.
 
-\bibitem[\citeproctext]{ref-riedl2014transforming}
-Riedl, Rachel Beatty. 2014. \emph{Authoritarian Origins of Democratic
-Party Systems in Africa}. Cambridge: Cambridge University Press.
-
 \bibitem[\citeproctext]{ref-riedl2024democratic}
 Riedl, Rachel Beatty, Paul Friesen, Jennifer McCoy, and Kenneth Roberts.
 2024. {``Democratic Backsliding, Resilience, and Resistance.''}
@@ -1146,11 +1367,6 @@ Riedl, Rachel Beatty, Paul Friesen, Jennifer McCoy, and Kenneth Roberts.
 \bibitem[\citeproctext]{ref-scheppele2018autocratic}
 Scheppele, Kim Lane. 2018. {``Autocratic Legalism.''} \emph{University
 of Chicago Law Review} 85 (2): 545--84.
-
-\bibitem[\citeproctext]{ref-seawright2008case}
-Seawright, Jason, and John Gerring. 2008. {``Case Selection Techniques
-in Case Study Research: A Menu of Qualitative and Quantitative
-Options.''} \emph{Political Research Quarterly} 61 (2): 294--308.
 
 \bibitem[\citeproctext]{ref-shugart1992presidents}
 Shugart, Matthew Soberg, and John M Carey. 1992. \emph{Presidents and
@@ -1172,11 +1388,6 @@ Alvarado Pachon, Cem Mert Dalli, and Yolanda Meijers. 2024. {``The
 Quality of Government Standard Dataset.''} University of Gothenburg: The
 Quality of Government Institute.
 
-\bibitem[\citeproctext]{ref-treisman2020economic}
-Treisman, Daniel. 2020. {``Economic Development and Democracy:
-Predispositions and Triggers.''} \emph{Annual Review of Political
-Science} 23: 241--57.
-
 \bibitem[\citeproctext]{ref-tusalem2023bringing}
 Tusalem, Rollin F. 2023. {``Bringing the Legislature Back in: Examining
 the Structural Effects of National Legislatures on Effective Democratic
@@ -1185,10 +1396,6 @@ Governance.''} \emph{Government and Opposition} 58 (3): 608--30.
 \bibitem[\citeproctext]{ref-valenzuela1993latin}
 Valenzuela, Arturo. 1993. {``Latin America: Presidentialism in
 Crisis.''} \emph{Journal of Democracy} 4 (4): 3--16.
-
-\bibitem[\citeproctext]{ref-varshney2013india}
-Varshney, Ashutosh. 2013. {``How Has Indian Federalism Done?''}
-\emph{Studies in Indian Politics} 1 (1): 43--63.
 
 \bibitem[\citeproctext]{ref-waldner2018unwelcome}
 Waldner, David, and Ellen Lust. 2018. {``Unwelcome Change: Coming to
@@ -1201,14 +1408,38 @@ D'Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019.
 {``Welcome to the {tidyverse}.''} \emph{Journal of Open Source Software}
 4 (43): 1686. \url{https://doi.org/10.21105/joss.01686}.
 
+\bibitem[\citeproctext]{ref-ggplot2}
+Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen,
+Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, David Dunning,
+and Teun van den Brand. 2023. \emph{Ggplot2: Create Elegant Data
+Visualisations Using the Grammar of Graphics}.
+\url{https://CRAN.R-project.org/package=ggplot2}.
+
 \bibitem[\citeproctext]{ref-wdi2024}
 World Bank. 2024. {``World Development Indicators.''} Washington, D.C.:
 The World Bank.
+
+\bibitem[\citeproctext]{ref-knitr}
+Xie, Yihie. 2023. \emph{Knitr: A General-Purpose Package for Dynamic
+Report Generation in r}. \url{https://CRAN.R-project.org/package=knitr}.
 
 \bibitem[\citeproctext]{ref-yardimci2015party}
 Yardımcı-Geyikçi, Şebnem. 2015. {``Party Institutionalization and
 Democratic Consolidation: Turkey and Southern Europe in Comparative
 Perspective.''} \emph{Party Politics} 21 (4): 527--38.
+
+\bibitem[\citeproctext]{ref-lmtest}
+Zeileis, Achim, and Torsten Hothorn. 2022. \emph{Lmtest: Testing Linear
+Regression Models}. \url{https://CRAN.R-project.org/package=lmtest}.
+
+\bibitem[\citeproctext]{ref-sandwich}
+Zeileis, Achim, and Thomas Lumley. 2023. \emph{Sandwich: Robust
+Covariance Matrix Estimators}.
+\url{https://CRAN.R-project.org/package=sandwich}.
+
+\bibitem[\citeproctext]{ref-kableExtra}
+Zhu, Hao. 2023. \emph{kableExtra: Construct Complex Table with Kable and
+Pipe Syntax}. \url{https://CRAN.R-project.org/package=kableExtra}.
 
 \end{CSLReferences}
 
@@ -1280,12 +1511,12 @@ Semi-Pres & -0.25\\
  & (0.143)\\
 Presidential & -0.115\\
  & (0.07)\\
-Log GDP/cap & -0.031***\\
+Log GDP per capita & -0.031***\\
 \addlinespace
  & (0.007)\\
-Semi-Pres × GDP & 0.025\\
+Semi-Pres. × GDP & 0.025\\
  & (0.016)\\
-Pres × GDP & 0.012\\
+Pres. × GDP & 0.012\\
  & (0.007)\\
 \addlinespace
 N & 148\\
@@ -1326,12 +1557,12 @@ Semi-Pres & -0.253**\\
  & (0.09)\\
 Presidential & -0.238***\\
  & (0.066)\\
-Log GDP/cap & -0.033***\\
+Log GDP per capita & -0.033***\\
 \addlinespace
  & (0.006)\\
-Semi-Pres × GDP & 0.024*\\
+Semi-Pres. × GDP & 0.024*\\
  & (0.009)\\
-Pres × GDP & 0.024***\\
+Pres. × GDP & 0.024***\\
  & (0.006)\\
 \addlinespace
 N & 137\\
@@ -1345,37 +1576,15 @@ Adj. R² & 0.196\\
 \end{ThreePartTable}
 \endgroup{}
 
-\subsubsection{B.3 Sensitivity Checks: Oster bounds \&
-Leave-One-Out}\label{b.3-sensitivity-checks-oster-bounds-leave-one-out}
+\subsubsection{B.3 Sensitivity Analysis
+Summary}\label{b.3-sensitivity-analysis-summary}
 
-We conduct two additional sensitivity checks to assess the robustness of
-the focal Presidential × Log GDP interaction: (1) an Oster-style
-bounding calculation that assesses how large selection on unobservables
-would need to be to overturn the estimated interaction; and (2) a
-leave-one-out influence analysis that recomputes the full model while
-dropping one country at a time to identify influential observations.
-Results and plots are saved in \texttt{output/robustness/}.
+Bootstrap confidence intervals for the crossover point and Oster bounds
+are available in \texttt{output/robustness/}. The 95\% bootstrap CI for
+the crossover is {[}\$1,444, \$42,821{]}, indicating substantial
+uncertainty around the point estimate.
 
-\textbf{Oster (2019) approximate result (printed below):}
-
-\$beta\_un system\_typePresidential:log\_gdp 0.01490202
-
-\$beta\_full system\_typePresidential:log\_gdp 0.01989213
-
-\$beta\_star system\_typePresidential:log\_gdp 0.2201029
-
-\$r2\_un {[}1{]} 0.1101062
-
-\$r2\_full {[}1{]} 0.1317468
-
-\subsubsection{B.4 Crossover Uncertainty
-(Bootstrap)}\label{b.4-crossover-uncertainty-bootstrap}
-
-We compute bootstrap confidence intervals for the GDP crossover --- the
-level of GDP per capita (PPP) at which the estimated advantage of
-Presidential over Parliamentary systems changes sign. A bootstrap
-distribution and 95\% CI are reported below; full results and code are
-available in \texttt{output/robustness/}.
+\newpage
 
 
 

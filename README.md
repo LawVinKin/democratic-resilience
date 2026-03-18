@@ -1,47 +1,20 @@
-# Parliamentary Resilience: Government Systems and Democratic Stability
+# Democratic Resilience
 
-## Summary
+This repository contains code and data for the paper:
 
-This repository accompanies an analysis of how government system types (Parliamentary, Presidential, Semi‑Presidential) relate to democratic stability across countries (2000–2023). The canonical paper examines resilience metrics derived from V-Dem democracy scores.
+**Economic Development and Democratic Stability in Presidential and Parliamentary Systems (2000–2023)**
 
-## Short repo guide
+This project analyzes how government system type and economic development affect democratic stability across 100+ countries. All code, data, and replication materials are included.
 
-- `data/` — raw and processed data. Analysis-ready files live in `data/02-analysis_data/`.
-- `scripts/` — numbered R scripts to reproduce the analysis. Run them in numeric order.
-- `output/` — generated tables, figures, and model objects.
-- `paper/` — Quarto manuscript and references.
+**To reproduce:**
+1. Install R (≥ 4.0) and Quarto
+2. Install required R packages
+3. Run:
+	- `Rscript scripts/01_data_processing.R`
+	- `Rscript scripts/02_analysis.R`
+	- `Rscript scripts/03_robustness.R`
+	- `quarto render paper/paper.qmd`
 
-For a complete run-order and file-level details, see `DOCS.md`.
+See the main paper in `paper/paper.qmd` and the codebook in `data/02-analysis_data/CODEBOOK.md` for details.
 
-## Essential notes
-
-- Key dependent variables include `volatility` (SD of democracy scores) and `total_decline` (sum of year-over-year declines). Exact definitions and preprocessing steps are in `scripts/02-clean_data.R`.
-- Main independent variable: `system_type` (Parliamentary, Semi‑Presidential, Presidential).
-- Robust standard errors: models use HC1-style robust SEs across tables for consistency.
-
-## Requirements
-
-Install the main R packages used in the analysis (example):
-
-```r
-install.packages(c(
-  "tidyverse", "readr", "readxl", "countrycode",
-  "WDI", "sandwich", "lmtest", "modelsummary",
-  "flextable", "officer"
-))
-```
-
-## Data sources
-
-- V-Dem v15 — https://v-dem.net
-- Database of Political Institutions (DPI)
-- Quality of Government (QOG) — https://qog.pol.gu.se
-- World Bank WDI
-
-## Where to look for more
-
-- Full documentation and the codebook: `DOCS.md`
-- Script-level processing details: `scripts/02-clean_data.R` and `scripts/03-model_data.R`
-
----
-Last updated: 2026-01-06
+License: MIT (code); data per original sources

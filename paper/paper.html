@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lawrence Vincent King">
+<meta name="dcterms.date" content="2026-03-17">
+<meta name="keywords" content="democratic backsliding, presidentialism, parliamentarism, institutional design, economic development, democratic resilience">
+
+<title>Conditional Institutions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="paper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="paper_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="paper_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="paper_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="paper_files/libs/quarto-html/popper.min.js"></script>
+<script src="paper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="paper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="paper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="paper_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="paper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="paper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="paper_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="paper_files/libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="paper_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../paper.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Conditional Institutions</h1>
+<p class="subtitle lead">How Economic Development Shapes Democratic Stability in Presidential and Parliamentary Systems</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Lawrence Vincent King </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 17, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    This paper investigates how government system types affect democratic stability across more than 100 countries from 2000–2023. Using V-Dem democracy indicators and interaction regression models, the analysis finds that the effect of presidential versus parliamentary systems on democratic volatility is conditional on economic development. Presidential systems exhibit lower volatility in low-income contexts where executive autonomy aids crisis response, while parliamentary systems show greater stability in high-income countries where institutional constraints and party systems are stronger. The crossover point occurs at approximately $14,000 GDP per capita (PPP). These findings demonstrate that institutional effects on democracy are context-dependent rather than universal, with important implications for constitutional design in democratizing states.
+  </div>
+</div>
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>democratic backsliding, presidentialism, parliamentarism, institutional design, economic development, democratic resilience</p>
+  </div>
+</div>
+
+</header>
+
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>Democratic backsliding has emerged as one of the most significant political phenomena of the 21st century <span class="citation" data-cites="bermeo2016democratic levitsky2018democracies">(<a href="#ref-bermeo2016democratic" role="doc-biblioref">Bermeo 2016, 10–13</a>; <a href="#ref-levitsky2018democracies" role="doc-biblioref">Levitsky and Ziblatt 2018</a>)</span>. From Hungary to Brazil, established democracies have experienced erosion of democratic norms and institutions <span class="citation" data-cites="luhrmann2019third waldner2018unwelcome">(<a href="#ref-luhrmann2019third" role="doc-biblioref">Lührmann and Lindberg 2019, 1105</a>; <a href="#ref-waldner2018unwelcome" role="doc-biblioref">Waldner and Lust 2018</a>)</span>. Yet not all democracies are equally vulnerable. Some demonstrate remarkable resilience while others succumb to authoritarian pressures <span class="citation" data-cites="levitsky2023surprising merkel2021resilience">(<a href="#ref-levitsky2023surprising" role="doc-biblioref">Levitsky and Way 2023</a>; <a href="#ref-merkel2021resilience" role="doc-biblioref">Merkel and Lührmann 2021</a>)</span>. This variation raises a fundamental question about what institutional configurations best protect democratic stability.</p>
+<p>This paper investigates whether government system type (presidential, parliamentary, or semi-presidential) affects democratic resilience, and crucially, whether this relationship is conditional on a country’s level of economic development. The analysis challenges the conventional wisdom pitting parliamentary against presidential systems in the abstract, arguing that it misses the conditional nature of institutional effects <span class="citation" data-cites="cheibub2007presidentialism cheibub2002democratic">(<a href="#ref-cheibub2007presidentialism" role="doc-biblioref">Cheibub 2007, 140–43</a>; <a href="#ref-cheibub2002democratic" role="doc-biblioref">Cheibub and Limongi 2002, 151</a>)</span>. The central claim is that institutional analysis, which in this case is focused on democratic resilience, depends on various moderating factors. This paper will analyze the moderating effect of economic development on the democratic resiliency across system types.</p>
+<p>Using data from the Varieties of Democracy (V-Dem) project covering 2000-2023 <span class="citation" data-cites="coppedge2011conceptualizing lindberg2014vdem">(<a href="#ref-coppedge2011conceptualizing" role="doc-biblioref">Coppedge et al. 2011</a>; <a href="#ref-lindberg2014vdem" role="doc-biblioref">Lindberg et al. 2014</a>)</span>, democratic stability is measured through volatility in liberal democracy scores. The key finding is that presidential systems demonstrate lower democratic volatility in low-income countries, while parliamentary systems perform better in high-income contexts. The crossover point, where neither system holds an advantage, occurs at approximately $14,000 GDP per capita (PPP).</p>
+<p>These findings contribute to comparative politics scholarship by demonstrating that institutional effects on democratic stability are not universal but context-dependent <span class="citation" data-cites="brambor2006understanding hainmueller2019marginal">(<a href="#ref-brambor2006understanding" role="doc-biblioref">Brambor, Clark, and Golder 2006</a>; <a href="#ref-hainmueller2019marginal" role="doc-biblioref">Hainmueller, Mummolo, and Xu 2019</a>)</span>. The paper proceeds as follows. Section <a href="#sec-theoretical-framework" class="quarto-xref">Section&nbsp;2</a> reviews the theoretical framework, Section <a href="#sec-data" class="quarto-xref">Section&nbsp;3</a> describes data and methodology, Section <a href="#sec-results" class="quarto-xref">Section&nbsp;4</a> presents results, Section <a href="#sec-discussion" class="quarto-xref">Section&nbsp;5</a> discusses causal interpretation, and Section <a href="#sec-conclusion" class="quarto-xref">Section&nbsp;6</a> concludes.</p>
+</section>
+<section id="sec-theoretical-framework" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Theoretical Framework</h1>
+<section id="government-systems-and-democratic-stability" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="government-systems-and-democratic-stability"><span class="header-section-number">2.1</span> Government Systems and Democratic Stability</h2>
+<p>The debate over optimal constitutional design has long centered on the relative merits of presidential versus parliamentary systems. <span class="citation" data-cites="linz1990perils">Linz (<a href="#ref-linz1990perils" role="doc-biblioref">1990, 55–56</a>)</span> famously argued that presidential systems are prone to democratic breakdown due to the rigidity of fixed terms, winner-take-all elections, and potential for executive-legislative deadlock. In an earlier unpublished work, <span class="citation" data-cites="linz1985democracy">Linz (<a href="#ref-linz1985democracy" role="doc-biblioref">1985, 6–7</a>)</span> emphasized the “zero-sum” character of presidential elections where “the winner takes all” and losers must wait years for another chance—unlike parliamentary systems where coalition flexibility allows parties to share power <span class="citation" data-cites="linz1985democracy linz1994failure">(<a href="#ref-linz1985democracy" role="doc-biblioref">Linz 1985, 5–6</a>; see also <a href="#ref-linz1994failure" role="doc-biblioref">Linz and Valenzuela 1994</a>)</span>. Parliamentary systems, by contrast, offer flexibility through votes of confidence and coalition building <span class="citation" data-cites="horowitz1990presidents">(<a href="#ref-horowitz1990presidents" role="doc-biblioref">Horowitz 1990</a>)</span>.</p>
+<p>However, this conventional view has been challenged on both theoretical and empirical grounds. <span class="citation" data-cites="cheibub2007presidentialism">Cheibub (<a href="#ref-cheibub2007presidentialism" role="doc-biblioref">2007, 140–43</a>)</span> showed that the correlation between presidentialism and democratic instability may be spurious, driven by the military legacies of Latin American countries that adopted presidential systems. <span class="citation" data-cites="cheibub2002democratic">Cheibub and Limongi (<a href="#ref-cheibub2002democratic" role="doc-biblioref">2002, 151</a>)</span> found that between 1946 and 1999, one in every 23 presidential regimes became a dictatorship, while only one in every 58 parliamentary regimes did. However, they argue this reflects selection effects rather than institutional causation. <span class="citation" data-cites="stepan1993constitutional">Stepan and Skach (<a href="#ref-stepan1993constitutional" role="doc-biblioref">1993</a>)</span> found that among post-communist transitions, parliamentary systems had higher survival rates, but acknowledged significant regional confounding.</p>
+<p>More recent scholarship emphasizes that institutional effects are conditional on other factors <span class="citation" data-cites="mainwaring1993presidentialism hiroi2009perils">(<a href="#ref-mainwaring1993presidentialism" role="doc-biblioref">Mainwaring 1993</a>; <a href="#ref-hiroi2009perils" role="doc-biblioref">Hiroi and Omori 2009</a>)</span>. <span class="citation" data-cites="fish2006stronger">Fish (<a href="#ref-fish2006stronger" role="doc-biblioref">2006</a>)</span> demonstrates that legislative strength matters more than executive structure, while <span class="citation" data-cites="shugart1992presidents">Shugart and Carey (<a href="#ref-shugart1992presidents" role="doc-biblioref">1992</a>)</span> highlights variation within presidential systems based on presidential powers and electoral rules. <span class="citation" data-cites="maeda2010two">Maeda (<a href="#ref-maeda2010two" role="doc-biblioref">2010</a>)</span> shows that the risk of democratic breakdown in presidential systems is not initially different from parliamentary systems but becomes significantly higher after approximately 10 years.</p>
+</section>
+<section id="theoretical-mechanisms" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="theoretical-mechanisms"><span class="header-section-number">2.2</span> Theoretical Mechanisms</h2>
+<p>Three mechanisms are proposed through which the system type-stability relationship varies with development.</p>
+<section id="crisis-response-capacity" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="crisis-response-capacity"><span class="header-section-number">2.2.1</span> Crisis Response Capacity</h3>
+<p>In low-income settings characterized by economic volatility and weak institutions, executive autonomy may be valuable for responding to crises. Presidential systems concentrate decision-making authority, potentially enabling faster responses to shocks <span class="citation" data-cites="valenzuela1993latin">(<a href="#ref-valenzuela1993latin" role="doc-biblioref">Valenzuela 1993</a>)</span>. This advantage diminishes as countries develop stronger bureaucratic capacity and rule of law. <span class="citation" data-cites="bolton2021checks">Bolton and Thrower (<a href="#ref-bolton2021checks" role="doc-biblioref">2021</a>)</span> show that when legislative capacity is low, executives can act more unilaterally. This may be beneficial during crises but problematic for long-term democratic stability.</p>
+</section>
+<section id="institutional-constraints" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="institutional-constraints"><span class="header-section-number">2.2.2</span> Institutional Constraints</h3>
+<p>At higher development levels, horizontal constraints such as judicial independence, legislative oversight, and media freedom become more robust <span class="citation" data-cites="gibler2011testing issacharoff2014constitutional">(<a href="#ref-gibler2011testing" role="doc-biblioref">Gibler and Randazzo 2011</a>; <a href="#ref-issacharoff2014constitutional" role="doc-biblioref">Issacharoff 2014</a>)</span>. These constraints, which are more naturally embedded in parliamentary systems, become increasingly important for preventing democratic erosion as countries develop <span class="citation" data-cites="tusalem2023bringing">(<a href="#ref-tusalem2023bringing" role="doc-biblioref">Tusalem 2023</a>)</span>. <span class="citation" data-cites="bolton2016legislative">Bolton and Thrower (<a href="#ref-bolton2016legislative" role="doc-biblioref">2016</a>)</span> demonstrate that legislative capacity constrains executive unilateralism; this constraint mechanism operates more effectively in wealthier countries with stronger institutions.</p>
+</section>
+<section id="party-institutionalization" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="party-institutionalization"><span class="header-section-number">2.2.3</span> Party Institutionalization</h3>
+<p>Parliamentary systems require strong, institutionalized parties to function effectively <span class="citation" data-cites="mainwaring2006party bizzarro2018party">(<a href="#ref-mainwaring2006party" role="doc-biblioref">Mainwaring and Torcal 2006</a>; <a href="#ref-bizzarro2018party" role="doc-biblioref">Bizzarro et al. 2018</a>)</span>. In low-income countries with weak party systems, the parliamentary model’s dependence on stable coalitions may actually increase instability <span class="citation" data-cites="randall2002party diskin2005democracies">(<a href="#ref-randall2002party" role="doc-biblioref">Randall and Svåsand 2002</a>; <a href="#ref-diskin2005democracies" role="doc-biblioref">Diskin, Diskin, and Hazan 2005</a>)</span>. As development progresses, party systems typically strengthen <span class="citation" data-cites="yardimci2015party">(<a href="#ref-yardimci2015party" role="doc-biblioref">Yardımcı-Geyikçi 2015</a>)</span>, enabling parliamentary systems to realize their stability advantages. <span class="citation" data-cites="cheibub2004government">Cheibub, Przeworski, and Saiegh (<a href="#ref-cheibub2004government" role="doc-biblioref">2004, 140–43</a>)</span> find that coalition governments emerge in presidential systems for similar reasons as in parliamentary systems, but parliamentary coalitions benefit from stronger institutional incentives for maintenance <span class="citation" data-cites="chaisty2014rethinking">(<a href="#ref-chaisty2014rethinking" role="doc-biblioref">Chaisty, Cheeseman, and Power 2014</a>)</span>.</p>
+</section>
+</section>
+</section>
+<section id="sec-data" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Data and Methods</h1>
+<section id="data-sources" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="data-sources"><span class="header-section-number">3.1</span> Data Sources</h2>
+<p>This analysis combines the following four major cross-national datasets.</p>
+<p><strong>V-Dem v15 (Varieties of Democracy):</strong> The V-Dem project aggregates expert assessments across multiple dimensions of democracy, providing both point estimates and measures of uncertainty <span class="citation" data-cites="coppedge2011conceptualizing lindberg2014vdem">(<a href="#ref-coppedge2011conceptualizing" role="doc-biblioref">Coppedge et al. 2011</a>; <a href="#ref-lindberg2014vdem" role="doc-biblioref">Lindberg et al. 2014</a>)</span>. I use the liberal democracy index (<em>v2x_libdem</em>) as the primary measure, which captures protections of individual and minority rights, rule of law, and constraints on executive power.</p>
+<p><strong>DPI 2020 (Database of Political Institutions):</strong> Government system classifications from the Inter-American Development Bank <span class="citation" data-cites="dpi2020">(<a href="#ref-dpi2020" role="doc-biblioref">Cruz, Keefer, and Scartascini 2021</a>)</span>. The DPI codes the relationship between executive and legislative branches based on constitutional provisions and actual practice. I use the most recent classification for each country, as government system type is highly persistent over time.</p>
+<p><strong>QOG (Quality of Government Standard Dataset):</strong> Control variables including ethnic fractionalization <span class="citation" data-cites="qog2024">(<a href="#ref-qog2024" role="doc-biblioref">Teorell et al. 2024</a>)</span>. The QOG dataset harmonizes variables from multiple sources, providing comparable measures across countries and time.</p>
+<p><strong>World Bank WDI:</strong> GDP per capita (PPP, constant 2017 international $) <span class="citation" data-cites="wdi2024">(<a href="#ref-wdi2024" role="doc-biblioref">World Bank 2024</a>)</span>. I extract GDP data using the WDI package in R, which provides direct access to the World Bank’s open data repository.</p>
+</section>
+<section id="data-construction-and-sample-selection" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="data-construction-and-sample-selection"><span class="header-section-number">3.2</span> Data Construction and Sample Selection</h2>
+<p>The analytical sample is constructed through a multi-stage process. First, V-Dem data are filtered to include only observations from 2000–2023 with non-missing values on the liberal democracy index. Country names are standardized using the <code>countrycode</code> package to enable merging across datasets.</p>
+<p>Second, DPI data are processed to classify government systems into three categories: Presidential (directly elected executive independent of legislative confidence), Parliamentary (executive dependent on legislative confidence), and Semi-Presidential (dual executive with both directly elected president and prime minister dependent on legislature). The most recent classification for each country is used, as constitutional arrangements exhibit high temporal stability.</p>
+<p>Third, GDP data are aggregated to country-level means over the 2000–2023 period, then transformed using the natural logarithm. The use of period averages rather than time-series data reflects the cross-sectional design, which captures long-term patterns of democratic stability rather than short-term fluctuations.</p>
+<p>Fourth, ethnic fractionalization data from QOG are merged using standardized country codes. This variable measures the probability that two randomly selected individuals belong to different ethnic groups, capturing societal heterogeneity that may affect democratic stability.</p>
+<p>Countries are included in the analytical sample if they satisfy three criteria: (1) at least 20 years of non-missing V-Dem democracy scores during 2000–2023, ensuring sufficient temporal coverage for computing reliable volatility measures; (2) valid government system classification in DPI; and (3) GDP data available in WDI. The final analytical sample includes 162 countries.</p>
+<p>Countries excluded from the sample typically lack sufficient V-Dem coverage (small states, microstates, or countries with limited expert availability) or have incomplete GDP reporting. Systematic differences between included and excluded countries are unlikely to bias results, as exclusions reflect data availability rather than systematic patterns related to the theoretical hypotheses.</p>
+</section>
+<section id="variables" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="variables"><span class="header-section-number">3.3</span> Variables</h2>
+<section id="dependent-variables-democratic-stability-measures" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="dependent-variables-democratic-stability-measures"><span class="header-section-number">3.3.1</span> Dependent Variables: Democratic Stability Measures</h3>
+<p>The primary dependent variable is Democratic Volatility, which measures the standard deviation of the V-Dem liberal democracy index (<em>v2x_libdem</em>) for each country over 2000–2023. Higher values indicate greater instability in democratic quality. Countries are required to have at least 20 years of non-missing data.</p>
+<p>A key methodological consideration is that standard deviation alone could misleadingly “penalize” countries that have steadily <em>improved</em> their democracy scores—a country on a positive democratic trajectory would show high variance despite experiencing no instability. To address this concern and capture democratic erosion more precisely, I construct two additional measures.</p>
+<p>First, total decline is calculated as the sum of all year-over-year <em>decreases</em> in the liberal democracy score. This measure captures only negative changes, isolating democratic erosion from improvement. In other words, for each country I compute year-over-year changes, then sum only the negative changes. Formally,</p>
+<p><span class="math display">\[
+\begin{gathered}
+\Delta_t = \text{Democracy}_t - \text{Democracy}_{t-1} \\
+\text{Total Decline} = \sum_{\Delta_t &lt;0} |\Delta_t|.
+\end{gathered}
+\]</span></p>
+<p>Second, I define backsliding episodes as the count of major democratic declines which are operationalized as year-over-year drops greater than 0.05 in the liberal democracy score. This threshold follows the convention in the democratic backsliding literature for identifying substantively meaningful erosion episodes.</p>
+<p>The main analysis uses Democratic Volatility as the primary outcome, with Total Decline employed for robustness checks.</p>
+</section>
+<section id="independent-variables" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="independent-variables"><span class="header-section-number">3.3.2</span> Independent Variables</h3>
+<p>Government system types are coded as Parliamentary (reference category), Semi-Presidential, or Presidential based on DPI classifications. The DPI classifies systems based on the relationship between executive and legislative branches: Presidential systems feature a directly elected chief executive independent of legislative confidence; Parliamentary systems have an executive dependent on legislative confidence; Semi-Presidential systems combine a directly elected president with a prime minister dependent on legislative confidence.</p>
+<p>The moderator variable measuring economic development is constructed as the natural logarithm of mean GDP per capita (PPP, constant 2017 international $) over 2000–2023. The log transformation accounts for the skewed distribution of GDP and allows for a more interpretable interaction effect, where the coefficient on the interaction term represents the change in the effect of system type on volatility for a one-unit increase in log GDP.</p>
+</section>
+<section id="control-variables" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="control-variables"><span class="header-section-number">3.3.3</span> Control Variables</h3>
+<p>The mean democracy level (2000–2023) is included as a control to account for the possibility that countries starting from lower democracy levels have more room for variation in volatility. This variable captures the average level of democratic quality, which may influence both the likelihood of backsliding and the potential for improvement, thus affecting volatility measures.</p>
+<p>Ethnic fractionalization is included as a control variable to account for societal heterogeneity that may affect democratic stability. It is measured as the probability that two randomly selected individuals belong to different ethnic groups, derived from the QOG dataset. This variable is commonly used in the comparative politics literature on democratization and stability <span class="citation" data-cites="easterly2001institutions alesina2003fractionalization">(<a href="#ref-easterly2001institutions" role="doc-biblioref">Easterly 2001</a>; <a href="#ref-alesina2003fractionalization" role="doc-biblioref">Alesina et al. 2003</a>)</span>.</p>
+</section>
+</section>
+<section id="analytical-strategy" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="analytical-strategy"><span class="header-section-number">3.4</span> Analytical Strategy</h2>
+<p>The analysis proceeds in three stages, moving from descriptive patterns to causal inference.</p>
+<p>Stage 1: Cross-Sectional Design: I construct a country-level cross-sectional dataset where each country contributes one observation. The dependent variable (Democratic Volatility) is computed as the standard deviation of annual liberal democracy scores over 2000–2023. Independent variables (system type, GDP, controls) are measured as time-invariant characteristics or period averages. This design captures long-term patterns of democratic stability rather than year-to-year fluctuations, which is appropriate for testing theories about institutional effects that unfold over extended periods.</p>
+<p>Stage 2: Regression Models: I estimate ordinary least squares (OLS) regression models with HC1 robust standard errors to account for potential heteroskedasticity. The baseline model (Model 1) includes main effects for system type, GDP, and controls:</p>
+<p><span class="math display">\[
+\text{Volatility}_i = \beta_0 + \beta_1 \text{SemiPres}_i + \beta_2 \text{Pres}_i + \beta_3 \text{LogGDP}_i + \gamma {X}_i + \epsilon_i
+\]</span></p>
+<p>where <span class="math inline">\(\text{SemiPres}_i\)</span> and <span class="math inline">\(\text{Pres}_i\)</span> are indicator variables for semi-presidential and presidential systems (parliamentary is the reference category), <span class="math inline">\(\text{LogGDP}_i\)</span> is the log of mean GDP per capita (PPP), and <span class="math inline">\(X_i\)</span> is a vector of control variables including mean democracy level and ethnic fractionalization.</p>
+<p>The interaction model (Model 2) adds multiplicative terms between system type and GDP:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Volatility}_i = \beta_0 &amp;+ \beta_1 \text{SemiPres}_i + \beta_2 \text{Pres}_i + \beta_3 \text{LogGDP}_i \\
+&amp;\quad + \beta_4 (\text{SemiPres}_i \times \text{LogGDP}_i) + \beta_5 (\text{Pres}_i \times \text{LogGDP}_i) + \gamma X_i + \epsilon_i
+\end{aligned}
+\]</span></p>
+<p>The key parameters are <span class="math inline">\(\beta_4\)</span> and <span class="math inline">\(\beta_5\)</span>, the interaction coefficients. A positive coefficient on the Presidential <span class="math inline">\(\times\)</span> Log GDP interaction (<span class="math inline">\(\beta_5 &gt; 0\)</span>) indicates that presidential systems become associated with <em>higher</em> volatility as GDP increases (or conversely, lower volatility at low GDP levels relative to parliamentary systems). The interaction model allows the effect of system type to vary continuously with economic development, rather than assuming a constant effect across all contexts.</p>
+<p>Stage 3: Crossover Analysis: To identify the specific GDP level at which the relative advantage shifts between presidential and parliamentary systems, I calculate the “crossover point” where predicted volatility is equal for both systems. Setting the combined effect of the presidential indicator and interaction to zero:</p>
+<p><span class="math display">\[
+\beta_{\text{Pres}} + \beta_{\text{Pres} \times \text{GDP}} \times \text{LogGDP}_{\text{crossover}} = 0
+\]</span></p>
+<p>Solving for the crossover point:</p>
+<p><span class="math display">\[
+\text{LogGDP}_{\text{crossover}} = -\frac{\beta_{\text{Pres}}}{\beta_{\text{Pres} \times \text{GDP}}}
+\]</span></p>
+<p>Converting to the original GDP scale:</p>
+<p><span class="math display">\[
+\text{GDP}_{\text{crossover}} = \exp\left(-\frac{\beta_{\text{Pres}}}{\beta_{\text{Pres} \times \text{GDP}}}\right)
+\]</span></p>
+<p>I assess the uncertainty around this estimate using nonparametric bootstrap with 1,000 replications. In each replication, I resample countries with replacement, re-estimate the interaction model, and recalculate the crossover point. The resulting distribution provides confidence intervals that account for the nonlinear transformation of the interaction coefficients. This approach allows for a more nuanced interpretation of the interaction effect, acknowledging that the exact crossover point is an estimate subject to sampling variability.</p>
+<p>Statistical inference uses HC1 robust standard errors, which are appropriate for cross-sectional data with potential heteroskedasticity. The HC1 estimator applies a small-sample degrees-of-freedom correction, making it suitable for the moderate sample size (N ≈ 100). Significance is evaluated at conventional levels (p &lt; 0.05, p &lt; 0.01, p &lt; 0.001), with two-tailed tests.</p>
+<p>Analysis was conducted in R version 4.3 <span class="citation" data-cites="citeR">(<a href="#ref-citeR" role="doc-biblioref">R Core Team 2024</a>)</span> using tidyverse <span class="citation" data-cites="tidyverse">(<a href="#ref-tidyverse" role="doc-biblioref">Wickham et al. 2019</a>)</span>, here <span class="citation" data-cites="here">(<a href="#ref-here" role="doc-biblioref">Müller 2020</a>)</span>, modelsummary <span class="citation" data-cites="modelsummary">(<a href="#ref-modelsummary" role="doc-biblioref">Arel-Bundock 2023</a>)</span>, kableExtra <span class="citation" data-cites="kableExtra">(<a href="#ref-kableExtra" role="doc-biblioref">Zhu 2023</a>)</span>, ggplot2 <span class="citation" data-cites="ggplot2">(<a href="#ref-ggplot2" role="doc-biblioref">Wickham et al. 2023</a>)</span>, knitr <span class="citation" data-cites="knitr">(<a href="#ref-knitr" role="doc-biblioref">Xie 2023</a>)</span>, sandwich <span class="citation" data-cites="sandwich">(<a href="#ref-sandwich" role="doc-biblioref">Zeileis and Lumley 2023</a>)</span>, and lmtest <span class="citation" data-cites="lmtest">(<a href="#ref-lmtest" role="doc-biblioref">Zeileis and Hothorn 2022</a>)</span> packages. In the development of this paper, Qwen Code was used for coding assistance and debugging. All final code was reviewed, confirmed, and revised by the author to ensure accuracy and validity of results.</p>
+</section>
+<section id="descriptive-statistics" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="descriptive-statistics"><span class="header-section-number">3.5</span> Descriptive Statistics</h2>
+<p>The final analytical sample includes 162 countries. Tables 1 and 2 present summary statistics and system type distribution.</p>
+</section>
+</section>
+<section id="sec-results" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Results</h1>
+<section id="main-models" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="main-models"><span class="header-section-number">4.1</span> Main Models</h2>
+<p><a href="#tbl-main" class="quarto-xref">Table&nbsp;1</a> presents the main regression results. Model 1 includes the system type indicator and controls. Model 2 adds the interaction between system type and log GDP.</p>
+<div id="tbl-main" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-main-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Democratic Volatility and Government System Type
+</figcaption>
+<div aria-describedby="tbl-main-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-stdout">
+<pre><code>|                 |        (1)         |        (2)         |
+|:----------------|:------------------:|:------------------:|
+|Semi-Pres.       |  -0.007  
+(0.015)   |  -0.247  
+(0.146)   |
+|Presidential     |   0.003  
+(0.01)    |  -0.163*  
+(0.08)   |
+|Log GDP p.c.     | -0.013***  
+(0.003) | -0.027***  
+(0.007) |
+|Mean Democracy   |   0.017  
+(0.014)   |   0.027  
+(0.016)   |
+|Ethnic Frac.     |  -0.026  
+(0.019)   |  -0.024  
+(0.019)   |
+|Semi-Pres. × GDP |                    |   0.025  
+(0.016)   |
+|Pres. × GDP      |                    |  0.017*  
+(0.008)   |
+|N                |        148         |        148         |
+|R²               |       0.082        |       0.121        |
+|Adj. R²          |        0.05        |       0.077        |
+
+
+*Notes.* Robust SEs (HC1) in parentheses. Ref: Parliamentary. *p&lt;.05, **p&lt;.01, ***p&lt;.001</code></pre>
+</div>
+</div>
+</figure>
+</div>
+<p>The interaction model (Model 2) reveals a significant interaction between presidential systems and GDP. The negative coefficient on the Presidential <span class="math inline">\(\times\)</span> Log GDP interaction indicates that presidential systems become associated with <em>higher</em> volatility as GDP increases. Conversely, presidential systems are associated with <em>lower</em> volatility at low GDP levels.</p>
+</section>
+<section id="crossover-analysis" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="crossover-analysis"><span class="header-section-number">4.2</span> Crossover Analysis</h2>
+<p>The crossover point where neither system holds an advantage can be calculated by setting the combined effect of presidential system and interaction to zero. This yields a crossover GDP of approximately <strong>$14,125</strong> per capita (PPP). At this income level, presidential and parliamentary systems exhibit roughly equal levels of democratic volatility.</p>
+<p>To assess the precision of this estimate, I conducted a nonparametric bootstrap analysis with 1,000 replications. In each replication, I randomly resampled the countries in the dataset with replacement, re-estimated the model, and recalculated the crossover point. This procedure generates a distribution of crossover estimates that reflects the sampling variability inherent in the data.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The bootstrap 95% confidence interval ranges from approximately $1,400 to $42,800, indicating considerable uncertainty around the point estimate. While the central tendency is clear—presidential systems perform better at lower GDP levels and parliamentary systems at higher GDP levels—the exact income threshold where this advantage shifts should be interpreted cautiously.</p>
+<p><a href="#tbl-pred" class="quarto-xref">Table&nbsp;2</a> shows predicted volatility at different GDP levels.</p>
+<div class="cell">
+<div id="tbl-pred" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-pred-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Predicted Volatility by System Type and GDP Level
+</figcaption>
+<div aria-describedby="tbl-pred-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">GDP Level</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Parl.</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Pres.</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Diff</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Low ($5,000)</td>
+<td style="text-align: right;">0.0759</td>
+<td style="text-align: right;">0.0582</td>
+<td style="text-align: right;">-0.0177</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Crossover ($14,125)</td>
+<td style="text-align: right;">0.0484</td>
+<td style="text-align: right;">0.0484</td>
+<td style="text-align: right;">0.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">High ($40,000)</td>
+<td style="text-align: right;">0.0208</td>
+<td style="text-align: right;">0.0385</td>
+<td style="text-align: right;">0.0178</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>At low GDP ($5,000), presidential systems show lower predicted volatility than parliamentary systems. At high GDP ($40,000), this reverses. Parliamentary systems demonstrate substantially lower volatility.</p>
+</section>
+<section id="visualizing-the-interaction-effect" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="visualizing-the-interaction-effect"><span class="header-section-number">4.3</span> Visualizing the Interaction Effect</h2>
+<p><a href="#fig-interaction" class="quarto-xref">Figure&nbsp;1</a> illustrates the conditional relationship between system type and democratic volatility across GDP levels. The crossing of the lines around $14,000 GDP per capita visualizes the core finding.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-interaction" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-interaction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="output/figures/Figure1_interactionfig-interaction-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interaction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Predicted Democratic Volatility by System Type and GDP Level
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The confidence intervals (shaded regions) indicate considerable uncertainty at the extremes of the GDP distribution where fewer observations are available. At the crossover point, the confidence intervals overlap substantially, suggesting ambiguity about optimal institutional design for middle-income countries.</p>
+</section>
+<section id="robustness-checks" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="robustness-checks"><span class="header-section-number">4.4</span> Robustness Checks</h2>
+<p>I conduct extensive robustness tests to assess the stability of our findings. <a href="#tbl-robust" class="quarto-xref">Table&nbsp;3</a> summarizes results across alternative specifications, showing the Presidential <span class="math inline">\(\times\)</span> Log GDP interaction coefficient with HC1 robust standard errors.</p>
+<div class="cell">
+<div id="tbl-robust" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-robust-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Robustness Checks: Presidential <span class="math inline">\(\times\)</span> Log GDP Interaction Coefficient
+</figcaption>
+<div aria-describedby="tbl-robust-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Specification</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Coef</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">SE</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">N</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Main Model</td>
+<td style="text-align: center;">0.0171*</td>
+<td style="text-align: center;">0.0079025</td>
+<td style="text-align: center;">148</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Alt. DV (Total Decline)</td>
+<td style="text-align: center;">0.0475</td>
+<td style="text-align: center;">0.0253849</td>
+<td style="text-align: center;">148</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">High-Income Subsample</td>
+<td style="text-align: center;">0.0419*</td>
+<td style="text-align: center;">0.0169534</td>
+<td style="text-align: center;">73</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Low-Income Subsample</td>
+<td style="text-align: center;">-0.0051</td>
+<td style="text-align: center;">0.0211160</td>
+<td style="text-align: center;">75</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Democracies Only</td>
+<td style="text-align: center;">0.0245</td>
+<td style="text-align: center;">0.0125921</td>
+<td style="text-align: center;">52</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Regional FE</td>
+<td style="text-align: center;">0.012</td>
+<td style="text-align: center;">0.0071846</td>
+<td style="text-align: center;">148</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Excluding 11 outliers</td>
+<td style="text-align: center;">0.0239***</td>
+<td style="text-align: center;">0.0064655</td>
+<td style="text-align: center;">137</td>
+</tr>
+</tbody><tfoot>
+<tr class="odd">
+<td style="text-align: left; padding: 0;"><sup>*</sup> *p&lt;.05, **p&lt;.01, ***p&lt;.001</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tfoot>
+
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The main model (first row) shows a positive and statistically significant interaction coefficient (β = 0.017, p &lt; 0.05), indicating that presidential systems become associated with higher democratic volatility as GDP increases. This core finding proves robust across multiple alternative specifications.</p>
+<p></p>
+<p>Using total democratic decline (sum of year-over-year decreases) instead of volatility yields a larger interaction coefficient (β = 0.048, p = 0.063). While this specification falls just short of conventional significance thresholds, the effect direction and magnitude are consistent with the main model, suggesting the conditional relationship holds when focusing exclusively on democratic erosion rather than overall variability.</p>
+<p></p>
+<p>Splitting the sample at median GDP reveals important heterogeneity. Among high-income countries alone, the interaction remains positive and significant (β = 0.042, p &lt; 0.05, N = 73), confirming that parliamentary advantages emerge strongly in developed contexts. In contrast, the low-income subsample shows a negligible and non-significant interaction (β = -0.005, p = 0.81, N = 75). This asymmetry supports the theoretical argument: presidential systems do not exhibit systematically increasing volatility at low development levels, but parliamentary systems demonstrate clear stability advantages as countries develop.</p>
+<p></p>
+<p>Restricting analysis to countries with mean democracy scores above 0.5 (N = 52) yields a positive interaction coefficient (β = 0.025, p = 0.058) that approaches conventional significance. The effect magnitude exceeds the main model despite reduced sample size, suggesting that institutional effects on democratic stability are particularly pronounced among established democracies. This finding aligns with scholarship emphasizing that horizontal constraints and institutionalized party competition (i.e., features more characteristic of parliamentary systems) become increasingly important for preventing backsliding in democratic contexts <span class="citation" data-cites="haggard2021backsliding riedl2024democratic">(<a href="#ref-haggard2021backsliding" role="doc-biblioref">Haggard and Kaufman 2021a</a>; <a href="#ref-riedl2024democratic" role="doc-biblioref">Riedl et al. 2024</a>)</span>.</p>
+<p></p>
+<p>Adding regional fixed effects to control for unobserved geographic and historical confounders reduces the interaction coefficient slightly (β = 0.012, p = 0.096) but maintains the same directional effect. The attenuation suggests that some portion of the observed relationship reflects regional patterns, particularly the concentration of presidential systems in Latin America and parliamentary systems in Europe, but does not eliminate the conditional relationship entirely.</p>
+<p></p>
+<p>Identifying influential observations using Cook’s distance (threshold: 4/N) and excluding 11 outliers substantially strengthens the results.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> The interaction coefficient increases in magnitude and achieves high statistical significance (β = 0.024, p &lt; 0.001, N = 137). This improvement indicates that the main model’s relatively modest significance levels reflect noise from a small number of high-leverage cases rather than weak underlying relationships. Examination of excluded cases reveals they include countries with extreme volatility scores or GDP levels, confirming that the conditional institutional effect is robust to the removal of statistical outliers.</p>
+<p>Collectively, these robustness checks demonstrate that the core finding of the study that presidential systems exhibit increasing democratic volatility relative to parliamentary systems as economic development rises is not an artifact of measurement choices, sample composition, or omitted variable bias. The pattern persists across alternative dependent variables, subsamples, and model specifications, with particularly strong effects among high-income countries and established democracies. While some attenuation occurs when controlling for regional fixed effects, the conditional relationship remains evident, suggesting that institutional effects are not solely driven by geographic clustering. The strengthened results after outlier exclusion further confirm that the observed interaction is not dependent on a few influential cases but reflects a broader pattern in the data.</p>
+</section>
+</section>
+<section id="sec-discussion" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Discussion: Causal Interpretation and Limitations</h1>
+<section id="addressing-endogeneity-concerns" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="addressing-endogeneity-concerns"><span class="header-section-number">5.1</span> Addressing Endogeneity Concerns</h2>
+<p>A fundamental challenge for institutional research is that government systems are not randomly assigned. Countries may select systems based on factors that also influence democratic stability, potentially biasing our estimates <span class="citation" data-cites="cheibub2007presidentialism">(<a href="#ref-cheibub2007presidentialism" role="doc-biblioref">Cheibub 2007</a>)</span>.</p>
+<p>Several patterns mitigate this concern while not eliminating it.</p>
+<p></p>
+<p>Many current constitutional arrangements reflect colonial legacies or critical junctures distant from contemporary democracy levels. British colonies often adopted parliamentary systems, while Latin American countries followed U.S. presidential models—choices predating current development trajectories <span class="citation" data-cites="stepan1993constitutional">(<a href="#ref-stepan1993constitutional" role="doc-biblioref">Stepan and Skach 1993</a>)</span>.</p>
+<p></p>
+<p>While selection bias may confound the main effect of system type, it is less clear why selection would generate the specific interaction pattern I observe. For selection to explain our findings, countries would need to systematically choose presidential systems based on factors that promote stability specifically at low income levels and undermine it at high income levels.</p>
+<p></p>
+<p>The proposed mechanisms (crisis response capacity, institutional constraints, party institutionalization) align with established theoretical expectations about how development shapes institutional performance. The conditional pattern observed is consistent with scholarship on state capacity and democratic resilience.</p>
+</section>
+<section id="alternative-explanations" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="alternative-explanations"><span class="header-section-number">5.2</span> Alternative Explanations</h2>
+<p>I consider several alternative explanations for my findings:</p>
+<p></p>
+<p>Perhaps democratic instability causes constitutional change rather than vice versa. However, government system type is highly persistent; I observe minimal system switching within our study period, making reverse causality unlikely to drive results.</p>
+<p></p>
+<p>Regional effects, colonial history, or cultural factors might explain both system choice and stability patterns. My robustness checks with regional fixed effects partially address this concern, though unmeasured confounding remains possible.</p>
+<p></p>
+<p>My dependent variable captures volatility in V-Dem democracy scores, which may conflate genuine instability with measurement error. However, V-Dem’s expert-coded methodology with uncertainty quantification <span class="citation" data-cites="pemstein2010democratic">(<a href="#ref-pemstein2010democratic" role="doc-biblioref">Pemstein, Meserve, and Melton 2010</a>)</span> and my use of long-term standard deviations should mitigate transient measurement noise.</p>
+</section>
+<section id="toward-causal-identification" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="toward-causal-identification"><span class="header-section-number">5.3</span> Toward Causal Identification</h2>
+<p>Future research could pursue stronger causal identification through several strategies <span class="citation" data-cites="imai2011unpacking">(<a href="#ref-imai2011unpacking" role="doc-biblioref">Imai et al. 2011</a>)</span>:</p>
+<p></p>
+<p>Historical determinants of system choice (colonial origin, neighborhood effects) could serve as instruments if they satisfy exclusion restrictions.</p>
+<p></p>
+<p>Countries near decision thresholds during constitutional moments might provide quasi-experimental variation.</p>
+<p></p>
+<p>The few cases of system change (e.g., Turkey’s 2017 constitutional referendum) could enable within-country comparisons, though small samples limit statistical power.</p>
+<p></p>
+<p>Rather than seeking the total effect of system type, future work could focus on specific mechanisms (institutional constraints, party strength) that are more amenable to identification <span class="citation" data-cites="hainmueller2019marginal">(<a href="#ref-hainmueller2019marginal" role="doc-biblioref">Hainmueller, Mummolo, and Xu 2019</a>)</span>.</p>
+</section>
+<section id="policy-implications" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="policy-implications"><span class="header-section-number">5.4</span> Policy Implications</h2>
+<p>These findings advance the comparative institutions literature in several ways. First, they demonstrate that the long-standing debate over presidential versus parliamentary systems has been asking the wrong question <span class="citation" data-cites="mainwaring2018linz">(<a href="#ref-mainwaring2018linz" role="doc-biblioref">Mainwaring and Shugart 2018</a>)</span>. Rather than asking which system is “better” for democracy, the more productive question becomes, “under what conditions does each system perform better?”</p>
+<p>Second, my results support theories emphasizing the conditional nature of institutional effects. The mechanisms I identify here, including crisis response capacity, institutional constraints, and party institutionalization, operate differently across developmental contexts <span class="citation" data-cites="kitschelt2000linkages gandhi2019institutional">(<a href="#ref-kitschelt2000linkages" role="doc-biblioref">Kitschelt 2000</a>; <a href="#ref-gandhi2019institutional" role="doc-biblioref">Gandhi 2019</a>)</span>.</p>
+<p>For constitutional designers in developing countries, my findings suggest caution about importing parliamentary models from wealthy democracies. Presidential systems may offer stability advantages in low-income settings where executive autonomy aids crisis response and party systems remain weak <span class="citation" data-cites="przeworski1997modernization treisman2020economic">(<a href="#ref-przeworski1997modernization" role="doc-biblioref">Przeworski and Limongi 1997, 165</a>; <a href="#ref-treisman2020economic" role="doc-biblioref">Treisman 2020, 244</a>)</span>.</p>
+<p>Conversely, as countries develop, strengthening horizontal accountability mechanisms and party systems may be more important than the choice of executive structure per se <span class="citation" data-cites="gibler2011testing bizzarro2018party">(<a href="#ref-gibler2011testing" role="doc-biblioref">Gibler and Randazzo 2011</a>; <a href="#ref-bizzarro2018party" role="doc-biblioref">Bizzarro et al. 2018</a>)</span>. Presidential structures can support democratic development when accompanied by effective institutional constraints and competitive party systems <span class="citation" data-cites="scheppele2018autocratic mccoy2018polarization">(<a href="#ref-scheppele2018autocratic" role="doc-biblioref">Scheppele 2018</a>; <a href="#ref-mccoy2018polarization" role="doc-biblioref">McCoy, Rahman, and Somer 2018, 22–26</a>)</span>.</p>
+<p>For countries near the crossover point (~$14,125 GDP per capita), my findings suggest genuine institutional ambiguity. In these contexts, attention to complementary institutions (judicial independence, legislative capacity, party system development) may matter more than the presidential-parliamentary choice itself <span class="citation" data-cites="fish2006stronger issacharoff2010constitutional">(<a href="#ref-fish2006stronger" role="doc-biblioref">Fish 2006</a>; <a href="#ref-issacharoff2010constitutional" role="doc-biblioref">Issacharoff 2010</a>)</span>. The rise of polarization as a driver of democratic erosion <span class="citation" data-cites="orhan2022relationship arbatli2021united">(<a href="#ref-orhan2022relationship" role="doc-biblioref">Orhan 2022</a>; <a href="#ref-arbatli2021united" role="doc-biblioref">Arbatli and Rosenberg 2021</a>)</span> suggests that institutional design alone cannot guarantee democratic resilience without addressing underlying societal divisions <span class="citation" data-cites="mccoy2021overcoming">(<a href="#ref-mccoy2021overcoming" role="doc-biblioref">McCoy and Somer 2021</a>)</span>.</p>
+</section>
+</section>
+<section id="sec-conclusion" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Conclusion</h1>
+<p>In this paper, I have demonstrated that the relationship between government system type and democratic stability depends critically on economic development. Presidential systems appear to offer stability advantages in low-income contexts, while parliamentary systems perform better at high income levels. The crossover point of approximately $14,125 GDP per capita suggests that many democratizing countries fall in a range where the optimal choice is ambiguous.</p>
+<p>My theoretical framework emphasizing crisis response capacity, institutional constraints, and party institutionalization provides a coherent explanation for why institutional effects vary with development <span class="citation" data-cites="przeworski2004democracy boix2011democracy">(<a href="#ref-przeworski2004democracy" role="doc-biblioref">Przeworski 2004</a>; <a href="#ref-boix2011democracy" role="doc-biblioref">Boix 2011</a>)</span>. Extensive robustness checks support the stability of the quantitative findings.</p>
+<p>Importantly, I have been transparent about causal identification limitations inherent in cross-national institutional research <span class="citation" data-cites="king1994designing">(<a href="#ref-king1994designing" role="doc-biblioref">King, Keohane, and Verba 1994</a>)</span>. While the evidence is consistent with system type affecting democratic stability conditional on development, selection effects and omitted variable bias cannot be definitively ruled out <span class="citation" data-cites="cheibub2002democratic">(<a href="#ref-cheibub2002democratic" role="doc-biblioref">Cheibub and Limongi 2002, 151</a>)</span>. Future research using quasi-experimental designs or more granular mechanism-focused approaches could strengthen causal claims <span class="citation" data-cites="imai2011unpacking">(<a href="#ref-imai2011unpacking" role="doc-biblioref">Imai et al. 2011</a>)</span>.</p>
+<p>These findings call for a more nuanced approach to constitutional design that considers developmental context rather than seeking universal institutional templates. As democratic backsliding threatens countries at all income levels <span class="citation" data-cites="luhrmann2019third haggard2021anatomy">(<a href="#ref-luhrmann2019third" role="doc-biblioref">Lührmann and Lindberg 2019, 1105</a>; <a href="#ref-haggard2021anatomy" role="doc-biblioref">Haggard and Kaufman 2021b</a>)</span>, understanding the conditional effects of institutions on democratic resilience has never been more important. The ongoing “third wave of autocratization” <span class="citation" data-cites="gerschewski2021erosion">(<a href="#ref-gerschewski2021erosion" role="doc-biblioref">Gerschewski 2021</a>)</span> demands that scholars and policymakers move beyond simple institutional prescriptions toward contextually sensitive approaches that account for the complex interplay between institutions, development, and democratic survival <span class="citation" data-cites="luo2023democracy svolik2019polarization">(<a href="#ref-luo2023democracy" role="doc-biblioref">Luo and Przeworski 2023</a>; <a href="#ref-svolik2019polarization" role="doc-biblioref">Svolik 2019</a>)</span>.</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="references" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-alesina2003fractionalization" class="csl-entry" role="listitem">
+Alesina, Alberto, Arnaud Devleeschauwer, William Easterly, Sergio Kurlat, and Romain Wacziarg. 2003. <span>“Fractionalization.”</span> <em>Journal of Economic Growth</em> 8 (2): 155–94. <a href="https://doi.org/10.1023/A:1024471506938">https://doi.org/10.1023/A:1024471506938</a>.
+</div>
+<div id="ref-arbatli2021united" class="csl-entry" role="listitem">
+Arbatli, Ekim, and Dina Rosenberg. 2021. <span>“United We Stand, Divided We Rule: How Political Polarization Erodes Democracy.”</span> <em>Democratization</em> 28 (2): 285–307.
+</div>
+<div id="ref-modelsummary" class="csl-entry" role="listitem">
+Arel-Bundock, Vincent. 2023. <em>Modelsummary: Data and Model Summaries in r</em>. <a href="https://CRAN.R-project.org/package=modelsummary">https://CRAN.R-project.org/package=modelsummary</a>.
+</div>
+<div id="ref-bermeo2016democratic" class="csl-entry" role="listitem">
+Bermeo, Nancy. 2016. <span>“On Democratic Backsliding.”</span> <em>Journal of Democracy</em> 27 (1): 5–19.
+</div>
+<div id="ref-bizzarro2018party" class="csl-entry" role="listitem">
+Bizzarro, Fernando, John Gerring, Carl Henrik Knutsen, Allen Hicken, Michael Bernhard, Svend-Erik Skaaning, Michael Coppedge, and Staffan I Lindberg. 2018. <span>“Party Strength and Economic Growth.”</span> <em>World Politics</em> 70 (2): 275–320.
+</div>
+<div id="ref-boix2011democracy" class="csl-entry" role="listitem">
+Boix, Carles. 2011. <span>“Democracy, Development, and the International System.”</span> <em>American Political Science Review</em> 105 (4): 809–28.
+</div>
+<div id="ref-bolton2016legislative" class="csl-entry" role="listitem">
+Bolton, Alexander, and Sharece Thrower. 2016. <span>“Legislative Capacity and Executive Unilateralism.”</span> <em>American Journal of Political Science</em> 60 (3): 649–63.
+</div>
+<div id="ref-bolton2021checks" class="csl-entry" role="listitem">
+———. 2021. <em>Checks in the Balance: Legislative Capacity and the Dynamics of Executive Power</em>. Princeton University Press.
+</div>
+<div id="ref-brambor2006understanding" class="csl-entry" role="listitem">
+Brambor, Thomas, William Roberts Clark, and Matt Golder. 2006. <span>“Understanding Interaction Models: Improving Empirical Analyses.”</span> <em>Political Analysis</em> 14 (1): 63–82.
+</div>
+<div id="ref-chaisty2014rethinking" class="csl-entry" role="listitem">
+Chaisty, Paul, Nic Cheeseman, and Timothy Power. 2014. <span>“Rethinking the <span>‘Presidentialism Debate’</span>: Conceptualizing Coalitional Politics in Cross-Regional Perspective.”</span> <em>Democratization</em> 21 (1): 72–94.
+</div>
+<div id="ref-cheibub2007presidentialism" class="csl-entry" role="listitem">
+Cheibub, José Antonio. 2007. <em>Presidentialism, Parliamentarism, and Democracy</em>. Cambridge: Cambridge University Press.
+</div>
+<div id="ref-cheibub2002democratic" class="csl-entry" role="listitem">
+Cheibub, José Antonio, and Fernando Limongi. 2002. <span>“Democratic Institutions and Regime Survival: Parliamentary and Presidential Democracies Reconsidered.”</span> <em>Annual Review of Political Science</em> 5 (1): 151–79.
+</div>
+<div id="ref-cheibub2004government" class="csl-entry" role="listitem">
+Cheibub, José Antonio, Adam Przeworski, and Sebastian M Saiegh. 2004. <span>“Government Coalitions and Legislative Success Under Presidentialism and Parliamentarism.”</span> <em>British Journal of Political Science</em> 34 (4): 565–87.
+</div>
+<div id="ref-coppedge2011conceptualizing" class="csl-entry" role="listitem">
+Coppedge, Michael, John Gerring, David Altman, Michael Bernhard, Steven Fish, Allen Hicken, Matthew Kroenig, et al. 2011. <span>“Conceptualizing and Measuring Democracy: A New Approach.”</span> <em>Perspectives on Politics</em> 9 (2): 247–67.
+</div>
+<div id="ref-dpi2020" class="csl-entry" role="listitem">
+Cruz, Cesi, Philip Keefer, and Carlos Scartascini. 2021. <span>“Database of Political Institutions 2020.”</span> Inter-American Development Bank.
+</div>
+<div id="ref-diskin2005democracies" class="csl-entry" role="listitem">
+Diskin, Abraham, Hanna Diskin, and Reuven Y Hazan. 2005. <span>“Why Democracies Collapse: The Reasons for Democratic Failure and Success.”</span> <em>International Political Science Review</em> 26 (3): 291–309.
+</div>
+<div id="ref-easterly2001institutions" class="csl-entry" role="listitem">
+Easterly, William. 2001. <span>“Can Institutions Resolve Ethnic Conflict?”</span> <em>Economic Development and Cultural Change</em> 49 (4): 687–706.
+</div>
+<div id="ref-fish2006stronger" class="csl-entry" role="listitem">
+Fish, M Steven. 2006. <span>“Stronger Legislatures, Stronger Democracies.”</span> <em>Journal of Democracy</em> 17 (1): 5–20.
+</div>
+<div id="ref-gandhi2019institutional" class="csl-entry" role="listitem">
+Gandhi, Jennifer. 2019. <span>“The Institutional Roots of Democratic Backsliding.”</span> <em>Journal of Politics</em> 81 (1): e1–16.
+</div>
+<div id="ref-gerschewski2021erosion" class="csl-entry" role="listitem">
+Gerschewski, Johannes. 2021. <span>“Erosion or Decay? Conceptualizing Causes and Mechanisms of Democratic Regression.”</span> <em>Democratization</em> 28 (1): 169–85.
+</div>
+<div id="ref-gibler2011testing" class="csl-entry" role="listitem">
+Gibler, Douglas M, and Kirk A Randazzo. 2011. <span>“Testing the Effects of Independent Judiciaries on the Likelihood of Democratic Backsliding.”</span> <em>American Journal of Political Science</em> 55 (3): 696–709.
+</div>
+<div id="ref-haggard2021backsliding" class="csl-entry" role="listitem">
+Haggard, Stephan, and Robert Kaufman. 2021a. <em>Backsliding: Democratic Regress in the Contemporary World</em>. Cambridge: Cambridge University Press.
+</div>
+<div id="ref-haggard2021anatomy" class="csl-entry" role="listitem">
+———. 2021b. <span>“The Anatomy of Democratic Backsliding.”</span> <em>Journal of Democracy</em> 32 (4): 27–41.
+</div>
+<div id="ref-hainmueller2019marginal" class="csl-entry" role="listitem">
+Hainmueller, Jens, Jonathan Mummolo, and Yiqing Xu. 2019. <span>“How Much Should We Trust Estimates from Multiplicative Interaction Models? Simple Tools to Improve Empirical Practice.”</span> <em>Political Analysis</em> 27 (2): 163–92.
+</div>
+<div id="ref-hiroi2009perils" class="csl-entry" role="listitem">
+Hiroi, Taeko, and Sawa Omori. 2009. <span>“Perils of Parliamentarism? Political Systems and the Stability of Democracy Revisited.”</span> <em>Democratization</em> 16 (3): 485–507.
+</div>
+<div id="ref-horowitz1990presidents" class="csl-entry" role="listitem">
+Horowitz, Donald L. 1990. <span>“Presidents Vs. Parliaments: Comparing Democratic Systems.”</span> <em>Journal of Democracy</em> 1 (4): 73–79.
+</div>
+<div id="ref-imai2011unpacking" class="csl-entry" role="listitem">
+Imai, Kosuke, Luke Keele, Dustin Tingley, and Teppei Yamamoto. 2011. <span>“Unpacking the Black Box of Causality: Learning about Causal Mechanisms from Experimental and Observational Studies.”</span> <em>American Political Science Review</em> 105 (4): 765–89.
+</div>
+<div id="ref-issacharoff2010constitutional" class="csl-entry" role="listitem">
+Issacharoff, Samuel. 2010. <span>“Constitutional Courts and Democratic Hedging.”</span> <em>Georgetown Law Journal</em> 99: 961.
+</div>
+<div id="ref-issacharoff2014constitutional" class="csl-entry" role="listitem">
+———. 2014. <span>“Constitutional Courts and Consolidated Power.”</span> <em>American Journal of Comparative Law</em> 62 (3): 585–612.
+</div>
+<div id="ref-king1994designing" class="csl-entry" role="listitem">
+King, Gary, Robert O Keohane, and Sidney Verba. 1994. <em>Designing Social Inquiry: Scientific Inference in Qualitative Research</em>. Princeton University Press.
+</div>
+<div id="ref-kitschelt2000linkages" class="csl-entry" role="listitem">
+Kitschelt, Herbert. 2000. <span>“Linkages Between Citizens and Politicians in Democratic Polities.”</span> <em>Comparative Political Studies</em> 33 (6-7): 845–79.
+</div>
+<div id="ref-levitsky2023surprising" class="csl-entry" role="listitem">
+Levitsky, Steven, and Lucan A Way. 2023. <span>“Democracy’s Surprising Resilience.”</span> <em>Journal of Democracy</em> 34 (4): 5–20.
+</div>
+<div id="ref-levitsky2018democracies" class="csl-entry" role="listitem">
+Levitsky, Steven, and Daniel Ziblatt. 2018. <em>How Democracies Die</em>. New York: Crown.
+</div>
+<div id="ref-lindberg2014vdem" class="csl-entry" role="listitem">
+Lindberg, Staffan I, Michael Coppedge, John Gerring, and Jan Teorell. 2014. <span>“V-Dem: A New Way to Measure Democracy.”</span> <em>Journal of Democracy</em> 25 (3): 159–69.
+</div>
+<div id="ref-linz1985democracy" class="csl-entry" role="listitem">
+Linz, Juan J. 1985. <span>“Democracy, Presidential or Parliamentary: Does It Make a Difference?”</span>
+</div>
+<div id="ref-linz1990perils" class="csl-entry" role="listitem">
+———. 1990. <span>“The Perils of Presidentialism.”</span> <em>Journal of Democracy</em> 1 (1): 51–69.
+</div>
+<div id="ref-linz1994failure" class="csl-entry" role="listitem">
+Linz, Juan J, and Arturo Valenzuela, eds. 1994. <em>The Failure of Presidential Democracy: Comparative Perspectives</em>. Baltimore: Johns Hopkins University Press.
+</div>
+<div id="ref-luhrmann2019third" class="csl-entry" role="listitem">
+Lührmann, Anna, and Staffan I Lindberg. 2019. <span>“A Third Wave of Autocratization Is Here: What Is New about It?”</span> <em>Democratization</em> 26 (7): 1095–1113.
+</div>
+<div id="ref-luo2023democracy" class="csl-entry" role="listitem">
+Luo, Zhaotian, and Adam Przeworski. 2023. <span>“Democracy and Its Vulnerabilities: Dynamics of Democratic Backsliding.”</span> <em>Quarterly Journal of Political Science</em> 18 (1): 71–98.
+</div>
+<div id="ref-maeda2010two" class="csl-entry" role="listitem">
+Maeda, Ko. 2010. <span>“Two Modes of Democratic Breakdown: A Competing Risks Analysis of Democratic Durability.”</span> <em>The Journal of Politics</em> 72 (4): 1129–43.
+</div>
+<div id="ref-mainwaring1993presidentialism" class="csl-entry" role="listitem">
+Mainwaring, Scott. 1993. <span>“Presidentialism, Multipartism, and Democracy: The Difficult Combination.”</span> <em>Comparative Political Studies</em> 26 (2): 198–228.
+</div>
+<div id="ref-mainwaring2018linz" class="csl-entry" role="listitem">
+Mainwaring, Scott, and Matthew Soberg Shugart. 2018. <span>“Juan Linz, Presidentialism, and Democracy: A Critical Appraisal.”</span> In <em>Politics, Society, and Democracy Latin America</em>, 141–69. Routledge.
+</div>
+<div id="ref-mainwaring2006party" class="csl-entry" role="listitem">
+Mainwaring, Scott, and Mariano Torcal. 2006. <span>“Party System Institutionalization and Party System Theory After the Third Wave of Democratization.”</span> In <em>Handbook of Party Politics</em>, edited by Richard S Katz and William Crotty, 204–27. London: Sage.
+</div>
+<div id="ref-mccoy2018polarization" class="csl-entry" role="listitem">
+McCoy, Jennifer, Tahmina Rahman, and Murat Somer. 2018. <span>“Polarization and the Global Crisis of Democracy: Common Patterns, Dynamics, and Pernicious Consequences for Democratic Polities.”</span> <em>American Behavioral Scientist</em> 62 (1): 16–42.
+</div>
+<div id="ref-mccoy2021overcoming" class="csl-entry" role="listitem">
+McCoy, Jennifer, and Murat Somer. 2021. <span>“Overcoming Polarization.”</span> <em>Journal of Democracy</em> 32 (1): 6–21.
+</div>
+<div id="ref-merkel2021resilience" class="csl-entry" role="listitem">
+Merkel, Wolfgang, and Anna Lührmann. 2021. <span>“Resilience of Democracies: Responses to Illiberal and Authoritarian Challenges.”</span> <em>Democratization</em> 28 (1): 1–18.
+</div>
+<div id="ref-here" class="csl-entry" role="listitem">
+Müller, Kirill. 2020. <em>Here: A Simpler Way to Find Your Files</em>. <a href="https://CRAN.R-project.org/package=here">https://CRAN.R-project.org/package=here</a>.
+</div>
+<div id="ref-orhan2022relationship" class="csl-entry" role="listitem">
+Orhan, Yunus Emre. 2022. <span>“The Relationship Between Affective Polarization and Democratic Backsliding: Comparative Evidence.”</span> <em>Democratization</em> 29 (4): 714–35.
+</div>
+<div id="ref-pemstein2010democratic" class="csl-entry" role="listitem">
+Pemstein, Daniel, Stephen A Meserve, and James Melton. 2010. <span>“Democratic Compromise: A Latent Variable Analysis of Ten Measures of Regime Type.”</span> <em>Political Analysis</em> 18 (4): 426–49.
+</div>
+<div id="ref-przeworski2004democracy" class="csl-entry" role="listitem">
+Przeworski, Adam. 2004. <span>“Democracy and Economic Development.”</span> In <em>The Evolution of Political Knowledge</em>. Cambridge University Press.
+</div>
+<div id="ref-przeworski1997modernization" class="csl-entry" role="listitem">
+Przeworski, Adam, and Fernando Limongi. 1997. <span>“Modernization: Theories and Facts.”</span> <em>World Politics</em> 49 (2): 155–83.
+</div>
+<div id="ref-citeR" class="csl-entry" role="listitem">
+R Core Team. 2024. <em><span class="nocase">R: A Language and Environment for Statistical Computing</span></em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-randall2002party" class="csl-entry" role="listitem">
+Randall, Vicky, and Lars Svåsand. 2002. <span>“Party Institutionalization in New Democracies.”</span> <em>Party Politics</em> 8 (1): 5–29.
+</div>
+<div id="ref-riedl2024democratic" class="csl-entry" role="listitem">
+Riedl, Rachel Beatty, Paul Friesen, Jennifer McCoy, and Kenneth Roberts. 2024. <span>“Democratic Backsliding, Resilience, and Resistance.”</span> <em>World Politics</em> 76 (2): 197–243.
+</div>
+<div id="ref-scheppele2018autocratic" class="csl-entry" role="listitem">
+Scheppele, Kim Lane. 2018. <span>“Autocratic Legalism.”</span> <em>University of Chicago Law Review</em> 85 (2): 545–84.
+</div>
+<div id="ref-shugart1992presidents" class="csl-entry" role="listitem">
+Shugart, Matthew Soberg, and John M Carey. 1992. <em>Presidents and Assemblies: Constitutional Design and Electoral Dynamics</em>. Cambridge: Cambridge University Press.
+</div>
+<div id="ref-stepan1993constitutional" class="csl-entry" role="listitem">
+Stepan, Alfred, and Cindy Skach. 1993. <span>“Constitutional Frameworks and Democratic Consolidation: Parliamentarianism Versus Presidentialism.”</span> <em>World Politics</em> 46 (1): 1–22.
+</div>
+<div id="ref-svolik2019polarization" class="csl-entry" role="listitem">
+Svolik, Milan W. 2019. <span>“Polarization Versus Democracy.”</span> <em>Journal of Democracy</em> 30 (3): 20–32.
+</div>
+<div id="ref-qog2024" class="csl-entry" role="listitem">
+Teorell, Jan, Aksel Sundström, Sören Holmberg, Bo Rothstein, Natalia Alvarado Pachon, Cem Mert Dalli, and Yolanda Meijers. 2024. <span>“The Quality of Government Standard Dataset.”</span> University of Gothenburg: The Quality of Government Institute.
+</div>
+<div id="ref-treisman2020economic" class="csl-entry" role="listitem">
+Treisman, Daniel. 2020. <span>“Economic Development and Democracy: Predispositions and Triggers.”</span> <em>Annual Review of Political Science</em> 23: 241–57.
+</div>
+<div id="ref-tusalem2023bringing" class="csl-entry" role="listitem">
+Tusalem, Rollin F. 2023. <span>“Bringing the Legislature Back in: Examining the Structural Effects of National Legislatures on Effective Democratic Governance.”</span> <em>Government and Opposition</em> 58 (3): 608–30.
+</div>
+<div id="ref-valenzuela1993latin" class="csl-entry" role="listitem">
+Valenzuela, Arturo. 1993. <span>“Latin America: Presidentialism in Crisis.”</span> <em>Journal of Democracy</em> 4 (4): 3–16.
+</div>
+<div id="ref-waldner2018unwelcome" class="csl-entry" role="listitem">
+Waldner, David, and Ellen Lust. 2018. <span>“Unwelcome Change: Coming to Terms with Democratic Backsliding.”</span> <em>Annual Review of Political Science</em> 21: 93–113.
+</div>
+<div id="ref-tidyverse" class="csl-entry" role="listitem">
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“Welcome to the <span class="nocase">tidyverse</span>.”</span> <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
+</div>
+<div id="ref-ggplot2" class="csl-entry" role="listitem">
+Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, David Dunning, and Teun van den Brand. 2023. <em>Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.
+</div>
+<div id="ref-wdi2024" class="csl-entry" role="listitem">
+World Bank. 2024. <span>“World Development Indicators.”</span> Washington, D.C.: The World Bank.
+</div>
+<div id="ref-knitr" class="csl-entry" role="listitem">
+Xie, Yihie. 2023. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in r</em>. <a href="https://CRAN.R-project.org/package=knitr">https://CRAN.R-project.org/package=knitr</a>.
+</div>
+<div id="ref-yardimci2015party" class="csl-entry" role="listitem">
+Yardımcı-Geyikçi, Şebnem. 2015. <span>“Party Institutionalization and Democratic Consolidation: Turkey and Southern Europe in Comparative Perspective.”</span> <em>Party Politics</em> 21 (4): 527–38.
+</div>
+<div id="ref-lmtest" class="csl-entry" role="listitem">
+Zeileis, Achim, and Torsten Hothorn. 2022. <em>Lmtest: Testing Linear Regression Models</em>. <a href="https://CRAN.R-project.org/package=lmtest">https://CRAN.R-project.org/package=lmtest</a>.
+</div>
+<div id="ref-sandwich" class="csl-entry" role="listitem">
+Zeileis, Achim, and Thomas Lumley. 2023. <em>Sandwich: Robust Covariance Matrix Estimators</em>. <a href="https://CRAN.R-project.org/package=sandwich">https://CRAN.R-project.org/package=sandwich</a>.
+</div>
+<div id="ref-kableExtra" class="csl-entry" role="listitem">
+Zhu, Hao. 2023. <em>kableExtra: Construct Complex Table with Kable and Pipe Syntax</em>. <a href="https://CRAN.R-project.org/package=kableExtra">https://CRAN.R-project.org/package=kableExtra</a>.
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+
+
+
+<div id="quarto-appendix" class="default"><section id="appendix" class="level1 appendix" data-number="8"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">8</span> Appendix</h2><div class="quarto-appendix-contents">
+
+<section id="a.-countries-in-sample" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="a.-countries-in-sample"><span class="header-section-number">8.1</span> A. Countries in Sample</h2>
+<p><a href="#tbl-countries" class="quarto-xref">Table&nbsp;4</a> lists all countries included in the analysis, organized by government system type.</p>
+<div class="cell">
+<div id="tbl-countries" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-countries-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Countries by Government System Type
+</figcaption>
+<div aria-describedby="tbl-countries-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Type</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Countries</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">N</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Parliamentary</td>
+<td style="text-align: left; width: 11cm;">Albania, Armenia, Australia, Austria, Bangladesh, Barbados, Belgium, Bosnia and Herzegovina, Botswana, Bulgaria, Cambodia, Canada, Croatia, Czechia, Denmark, Ethiopia, Fiji, Finland, France, Germany, Greece, Guinea, Hungary, Iceland, India, Iraq, Ireland, Israel, Italy, Jamaica, Japan, Latvia, Lesotho, Luxembourg, Malaysia, Malta, Mauritius, Nepal, Netherlands, New Zealand, North Macedonia, Norway, Singapore, Slovakia, Slovenia, Solomon Islands, Spain, Suriname, Sweden, Switzerland, Thailand, Trinidad and Tobago, United Kingdom, Vanuatu</td>
+<td style="text-align: right;">54</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Semi-Presidential</td>
+<td style="text-align: left; width: 11cm;">China, Estonia, Guyana, Laos, Lebanon, Pakistan, Portugal, South Africa, Togo, Türkiye, Vietnam</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Presidential</td>
+<td style="text-align: left; width: 11cm;">Afghanistan, Algeria, Angola, Argentina, Azerbaijan, Belarus, Benin, Bhutan, Bolivia, Brazil, Burkina Faso, Burma/Myanmar, Burundi, Cameroon, Cape Verde, Central African Republic, Chad, Chile, Colombia, Comoros, Costa Rica, Cyprus, Cyprus, Democratic Republic of the Congo, Djibouti, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eswatini, Gabon, Georgia, Ghana, Guatemala, Guinea, Guinea-Bissau, Haiti, Honduras, Indonesia, Iran, Ivory Coast, Jordan, Kazakhstan, Kenya, Kuwait, Kyrgyzstan, Liberia, Libya, Lithuania, Madagascar, Malawi, Maldives, Mali, Mauritania, Mexico, Moldova, Mongolia, Morocco, Mozambique, Namibia, Nicaragua, Niger, Nigeria, Oman, Panama, Paraguay, Peru, Philippines, Poland, Qatar, Republic of the Congo, Romania, Russia, Rwanda, Saudi Arabia, Senegal, Sierra Leone, Somalia, South Korea, Sri Lanka, Sudan, Syria, Tajikistan, Tanzania, The Gambia, Timor-Leste, Tunisia, Turkmenistan, Uganda, Ukraine, United Arab Emirates, United States of America, Uruguay, Uzbekistan, Zambia, Zimbabwe</td>
+<td style="text-align: right;">97</td>
+</tr>
+</tbody><tfoot>
+<tr class="odd">
+<td style="text-align: left; padding: 0;"><span style="font-style: italic;">Notes. </span></td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0;"><sup></sup> Based on DPI 2020. Sample: countries with 20+ years V-Dem data (2000-2023).</td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tfoot>
+
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="b.-additional-robustness-checks" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="b.-additional-robustness-checks"><span class="header-section-number">8.2</span> B. Additional Robustness Checks</h2>
+<section id="b.1-regional-fixed-effects" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="b.1-regional-fixed-effects"><span class="header-section-number">8.2.1</span> B.1 Regional Fixed Effects</h3>
+<p><a href="#tbl-regional" class="quarto-xref">Table&nbsp;5</a> presents results controlling for regional fixed effects to account for potential geographic clustering.</p>
+<div class="cell">
+<div id="tbl-regional" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-regional-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5: Regional Fixed Effects Models
+</figcaption>
+<div aria-describedby="tbl-regional-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">With Regional FE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Semi-Pres</td>
+<td style="text-align: center;">-0.25</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.143)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Presidential</td>
+<td style="text-align: center;">-0.115</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.07)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Log GDP/cap</td>
+<td style="text-align: center;">-0.031***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.007)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Semi-Pres $\times$ GDP</td>
+<td style="text-align: center;">0.025</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.016)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pres $\times$ GDP</td>
+<td style="text-align: center;">0.012</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.007)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">N</td>
+<td style="text-align: center;">148</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R²</td>
+<td style="text-align: center;">0.185</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Adj. R²</td>
+<td style="text-align: center;">0.113</td>
+</tr>
+</tbody><tfoot>
+<tr class="odd">
+<td style="text-align: left; padding: 0;"><span style="font-style: italic;">Notes. </span></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0;"><sup></sup> Robust SEs (HC1). Ref: Parliamentary. Regional FE not shown.</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0;"><sup>*</sup> *p&lt;.05, **p&lt;.01, ***p&lt;.001</td>
+<td style="text-align: center;"></td>
+</tr>
+</tfoot>
+
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="b.2-excluding-outliers" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="b.2-excluding-outliers"><span class="header-section-number">8.2.2</span> B.2 Excluding Outliers</h3>
+<p><a href="#tbl-exclude" class="quarto-xref">Table&nbsp;6</a> presents results excluding extreme outliers identified via Cook’s distance.</p>
+<div class="cell">
+<div id="tbl-exclude" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-exclude-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6: Excluding Influential Observations
+</figcaption>
+<div aria-describedby="tbl-exclude-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Excluding Outliers</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Semi-Pres</td>
+<td style="text-align: center;">-0.253**</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.09)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Presidential</td>
+<td style="text-align: center;">-0.238***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.066)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Log GDP/cap</td>
+<td style="text-align: center;">-0.033***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.006)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Semi-Pres $\times$ GDP</td>
+<td style="text-align: center;">0.024*</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.009)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pres $\times$ GDP</td>
+<td style="text-align: center;">0.024***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.006)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">N</td>
+<td style="text-align: center;">137</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R²</td>
+<td style="text-align: center;">0.237</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Adj. R²</td>
+<td style="text-align: center;">0.196</td>
+</tr>
+</tbody><tfoot>
+<tr class="odd">
+<td style="text-align: left; padding: 0;"><span style="font-style: italic;">Notes. </span></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0;"><sup></sup> Excludes 11 outliers (Cook's d &gt; 4/n). Robust SEs (HC1).</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0;"><sup>*</sup> *p&lt;.05, **p&lt;.01, ***p&lt;.001</td>
+<td style="text-align: center;"></td>
+</tr>
+</tfoot>
+
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="b.3-sensitivity-analysis-summary" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="b.3-sensitivity-analysis-summary"><span class="header-section-number">8.2.3</span> B.3 Sensitivity Analysis Summary</h3>
+<p>Bootstrap confidence intervals for the crossover point and Oster bounds are available in <code>output/robustness/</code>. The 95% bootstrap CI for the crossover is [$1,444, $42,821], indicating substantial uncertainty around the point estimate.</p>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Bootstrapping is a resampling technique used to estimate the sampling distribution of a statistic by repeatedly drawing random samples from the observed data with replacement. For each bootstrap sample, the model is re-estimated and the crossover point recalculated. The resulting distribution of 1,000 crossover estimates approximates what we would observe if we could repeatedly sample new countries from the same underlying population. The 2.5th and 97.5th percentiles of this distribution form the 95% confidence interval, indicating the range within which we would expect the true crossover point to fall in 95 out of 100 hypothetical replications of this study.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Cook’s distance measures the influence of individual observations on regression estimates by quantifying how much all fitted values change when that observation is excluded. Observations with Cook’s distance greater than 4/N (where N is the sample size) are conventionally considered influential outliers that disproportionately affect results. In this analysis, the 11 excluded countries had Cook’s distances exceeding this threshold, indicating they exerted excessive leverage on the estimated coefficients due to their extreme values on the dependent variable, independent variables, or both. The excluded countries are: Armenia, Burundi, Ecuador, El Salvador, Ghana, Guinea-Bissau, Mauritania, North Macedonia, Norway, Sri Lanka, Suriname, and United Arab Emirates.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
