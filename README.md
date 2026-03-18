@@ -1,10 +1,6 @@
-# Democratic Resilience
+# Economic Development and Democratic Stability in Presidential and Parliamentary Systems (2000–2023)
 
-This repository contains code and data for the paper:
-
-**Economic Development and Democratic Stability in Presidential and Parliamentary Systems (2000–2023)**
-
-This project analyzes how government system type and economic development affect democratic stability across 100+ countries. All code, data, and replication materials are included.
+This repository contains code and data for the aforementioned paper. The project analyzes how government system type and economic development affect democratic stability across 100+ countries. All code, data, and replication materials are included.
 
 **To reproduce:**
 1. Install R (≥ 4.0) and Quarto
