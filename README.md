@@ -1,6 +1,6 @@
 # Parliamentary Resilience: Government Systems and Democratic Stability
 
-## Quick summary
+## Summary
 
 This repository accompanies an analysis of how government system types (Parliamentary, Presidential, Semi‑Presidential) relate to democratic stability across countries (2000–2023). The canonical paper examines resilience metrics derived from V-Dem democracy scores.
 
@@ -45,6 +45,3 @@ install.packages(c(
 
 ---
 Last updated: 2026-01-06
-
-Current Date and Time (UTC - YYYY-MM-DD HH:MM:SS formatted): 2026-01-06 20:57:37
-Current User's Login: LawVinKin
